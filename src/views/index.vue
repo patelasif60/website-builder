@@ -325,7 +325,7 @@ export default {
     return {
       autoFolders: true,
       isLoggedInUser: false,
-      pluginsPath : '/home/software/AllProjects/FlowzBuilder/src/assets/plugins',
+      pluginsPath : '/home/software/HarshPatel/project/FlowzBuilder/src/assets/plugins',
       directoryTree: [],
       currentFile : null,
       defaultProps: {
@@ -1070,6 +1070,29 @@ export default {
                   '<script src="./../assets/client-plugins/client-my-cart-plugin.js"><\/script>\n'+
                   '<script src="./../assets/client-plugins/image-gradient-animation.js"><\/script>\n'+
                   '<script src="./../assets/client-plugins/progress-bars.js"><\/script>\n'+
+                  '<script src="./../assets/client-plugins/form.js"><\/script>\n'+
+                  '<script src="./../assets/client-plugins/checkbox.js"><\/script>\n'+
+                  '<script src="./../assets/client-plugins/radiobutton.js"><\/script>\n'+
+                  '<script src="./../assets/client-plugins/selectValue.js"><\/script>\n'+
+                  '<script src="./../assets/client-plugins/input.js"><\/script>\n'+
+                  '<script src="./../assets/client-plugins/productlistCategories.js"><\/script>\n'+
+                  '<script src="./../assets/client-plugins/wishlist.js"><\/script>\n'+
+                  '<script src="./../assets/client-plugins/shoppingcart.js"><\/script>\n'+
+                  '<script src="https://s3-us-west-2.amazonaws.com/airflowbucket1/flowz-builder/key-innovation/js/jquery-1.11.2.min.js"><\/script>\n'+
+                  '<script src="https://s3-us-west-2.amazonaws.com/airflowbucket1/flowz-builder/key-innovation/js/jquery-migrate-1.2.1.js><\/script>\n'+
+                  '<script src="https://s3-us-west-2.amazonaws.com/airflowbucket1/flowz-builder/key-innovation/js/jquery.bxslider.min.js"><\/script>\n'+
+                  '<script src="https://s3-us-west-2.amazonaws.com/airflowbucket1/flowz-builder/key-innovation/js/bootstrap.js><\/script>\n'+
+                  '<script src="https://s3-us-west-2.amazonaws.com/airflowbucket1/flowz-builder/key-innovation/js/bootstrap-multiselect.js"><\/script>\n'+
+                  '<script src="https://s3-us-west-2.amazonaws.com/airflowbucket1/flowz-builder/key-innovation/js/owl.carousel.js"><\/script>\n'+
+                  '<script type="text/javascript" src="https://s3-us-west-2.amazonaws.com/airflowbucket1/flowz-builder/key-innovation/js/slide-menu.js"><\/script>\n' + 
+                  '<script type="text/javascript" src="https://s3-us-west-2.amazonaws.com/airflowbucket1/flowz-builder/key-innovation/js/responsive-tabs.js"><\/script>\n' + 
+                  '<script type="text/javascript" src="https://s3-us-west-2.amazonaws.com/airflowbucket1/flowz-builder/key-innovation/js/ion.rangeSlider.min.js"><\/script>\n' + 
+                  '<script type="text/javascript" src="https://s3-us-west-2.amazonaws.com/airflowbucket1/flowz-builder/key-innovation/js/script.js"><\/script>\n' + 
+                  '<script type="text/javascript" src="https://s3-us-west-2.amazonaws.com/airflowbucket1/flowz-builder/key-innovation/js/jquery.zoom.js"><\/script>\n' + 
+                  '<script type="text/javascript" src="https://s3-us-west-2.amazonaws.com/airflowbucket1/flowz-builder/key-innovation/javascript/product_detail.js"><\/script>\n' + 
+                  '<script type="text/javascript" src="https://s3-us-west-2.amazonaws.com/airflowbucket1/flowz-builder/key-innovation/javascript/owl_carousel_slider.js"><\/script>\n' + 
+                  '<script type="text/javascript" src="https://s3-us-west-2.amazonaws.com/airflowbucket1/flowz-builder/key-innovation/javascript/thum_slider.js"><\/script>\n' +
+
                   // '<script src="https://s3-us-west-2.amazonaws.com/airflowbucket1/flowz-builder/js/client1.js"><\/script>\n'+
                   '<script src="./../main-files/main.js"><\/script>\n'+
                   '</body>\n</html>';
@@ -1104,6 +1127,28 @@ export default {
                       '<script src="./../assets/client-plugins/client-my-cart-plugin.js"><\/script>\n'+
                       '<script src="./../assets/client-plugins/image-gradient-animation.js"><\/script>\n'+
                       '<script src="./../assets/client-plugins/progress-bars.js"><\/script>\n'+
+                      '<script src="./../assets/client-plugins/form.js"><\/script>\n'+
+                  '<script src="./../assets/client-plugins/checkbox.js"><\/script>\n'+
+                  '<script src="./../assets/client-plugins/radiobutton.js"><\/script>\n'+
+                  '<script src="./../assets/client-plugins/selectValue.js"><\/script>\n'+
+                  '<script src="./../assets/client-plugins/input.js"><\/script>\n'+
+                  '<script src="./../assets/client-plugins/productlistCategories.js"><\/script>\n'+
+                  '<script src="./../assets/client-plugins/wishlist.js"><\/script>\n'+
+                  '<script src="./../assets/client-plugins/shoppingcart.js"><\/script>\n'+
+                  '<script src="https://s3-us-west-2.amazonaws.com/airflowbucket1/flowz-builder/key-innovation/js/jquery-1.11.2.min.js"><\/script>\n'+
+                  '<script src="https://s3-us-west-2.amazonaws.com/airflowbucket1/flowz-builder/key-innovation/js/jquery-migrate-1.2.1.js><\/script>\n'+
+                  '<script src="https://s3-us-west-2.amazonaws.com/airflowbucket1/flowz-builder/key-innovation/js/jquery.bxslider.min.js"><\/script>\n'+
+                  '<script src="https://s3-us-west-2.amazonaws.com/airflowbucket1/flowz-builder/key-innovation/js/bootstrap.js><\/script>\n'+
+                  '<script src="https://s3-us-west-2.amazonaws.com/airflowbucket1/flowz-builder/key-innovation/js/bootstrap-multiselect.js"><\/script>\n'+
+                  '<script src="https://s3-us-west-2.amazonaws.com/airflowbucket1/flowz-builder/key-innovation/js/owl.carousel.js"><\/script>\n'+
+                  '<script type="text/javascript" src="https://s3-us-west-2.amazonaws.com/airflowbucket1/flowz-builder/key-innovation/js/slide-menu.js"><\/script>\n' +
+                  '<script type="text/javascript" src="https://s3-us-west-2.amazonaws.com/airflowbucket1/flowz-builder/key-innovation/js/responsive-tabs.js"><\/script>\n' + 
+                  '<script type="text/javascript" src="https://s3-us-west-2.amazonaws.com/airflowbucket1/flowz-builder/key-innovation/js/ion.rangeSlider.min.js"><\/script>\n' + 
+                  '<script type="text/javascript" src="https://s3-us-west-2.amazonaws.com/airflowbucket1/flowz-builder/key-innovation/js/script.js"><\/script>\n' +
+                  '<script type="text/javascript" src="https://s3-us-west-2.amazonaws.com/airflowbucket1/flowz-builder/key-innovation/js/jquery.zoom.js"><\/script>\n' + 
+                  '<script type="text/javascript" src="https://s3-us-west-2.amazonaws.com/airflowbucket1/flowz-builder/key-innovation/javascript/product_detail.js"><\/script>\n' + 
+                  '<script type="text/javascript" src="https://s3-us-west-2.amazonaws.com/airflowbucket1/flowz-builder/key-innovation/javascript/owl_carousel_slider.js"><\/script>\n' +
+                  '<script type="text/javascript" src="https://s3-us-west-2.amazonaws.com/airflowbucket1/flowz-builder/key-innovation/javascript/thum_slider.js"><\/script>\n' + 
                       // '<script src="https://s3-us-west-2.amazonaws.com/airflowbucket1/flowz-builder/js/client1.js"><\/script>\n'+
                       '<script src="./../main-files/main.js"><\/script>\n'+
                       '</body>\n</html>';
@@ -1140,6 +1185,28 @@ export default {
                       '<script src="./../assets/client-plugins/client-my-cart-plugin.js"><\/script>\n'+
                       '<script src="./../assets/client-plugins/image-gradient-animation.js"><\/script>\n'+
                       '<script src="./../assets/client-plugins/progress-bars.js"><\/script>\n'+
+                      '<script src="./../assets/client-plugins/form.js"><\/script>\n'+
+                  '<script src="./../assets/client-plugins/checkbox.js"><\/script>\n'+
+                  '<script src="./../assets/client-plugins/radiobutton.js"><\/script>\n'+
+                  '<script src="./../assets/client-plugins/selectValue.js"><\/script>\n'+
+                  '<script src="./../assets/client-plugins/input.js"><\/script>\n'+
+                  '<script src="./../assets/client-plugins/productlistCategories.js"><\/script>\n'+
+                  '<script src="./../assets/client-plugins/wishlist.js"><\/script>\n'+
+                  '<script src="./../assets/client-plugins/shoppingcart.js"><\/script>\n'+
+                  '<script src="https://s3-us-west-2.amazonaws.com/airflowbucket1/flowz-builder/key-innovation/js/jquery-1.11.2.min.js"><\/script>\n'+
+                  '<script src="https://s3-us-west-2.amazonaws.com/airflowbucket1/flowz-builder/key-innovation/js/jquery-migrate-1.2.1.js><\/script>\n'+
+                  '<script src="https://s3-us-west-2.amazonaws.com/airflowbucket1/flowz-builder/key-innovation/js/jquery.bxslider.min.js"><\/script>\n'+
+                  '<script src="https://s3-us-west-2.amazonaws.com/airflowbucket1/flowz-builder/key-innovation/js/bootstrap.js><\/script>\n'+
+                  '<script src="https://s3-us-west-2.amazonaws.com/airflowbucket1/flowz-builder/key-innovation/js/bootstrap-multiselect.js"><\/script>\n'+
+                  '<script src="https://s3-us-west-2.amazonaws.com/airflowbucket1/flowz-builder/key-innovation/js/owl.carousel.js"><\/script>\n'+
+                  '<script type="text/javascript" src="https://s3-us-west-2.amazonaws.com/airflowbucket1/flowz-builder/key-innovation/js/slide-menu.js"><\/script>\n'
+                  '<script type="text/javascript" src="https://s3-us-west-2.amazonaws.com/airflowbucket1/flowz-builder/key-innovation/js/responsive-tabs.js"><\/script>\n' + 
+                  '<script type="text/javascript" src="https://s3-us-west-2.amazonaws.com/airflowbucket1/flowz-builder/key-innovation/js/ion.rangeSlider.min.js"><\/script>\n' +
+                  '<script type="text/javascript" src="https://s3-us-west-2.amazonaws.com/airflowbucket1/flowz-builder/key-innovation/js/script.js"><\/script>\n'+
+                  '<script type="text/javascript" src="https://s3-us-west-2.amazonaws.com/airflowbucket1/flowz-builder/key-innovation/js/jquery.zoom.js"><\/script>\n' +
+                  '<script type="text/javascript" src="https://s3-us-west-2.amazonaws.com/airflowbucket1/flowz-builder/key-innovation/javascript/product_detail.js"><\/script>\n'+
+                  '<script type="text/javascript" src="https://s3-us-west-2.amazonaws.com/airflowbucket1/flowz-builder/key-innovation/javascript/owl_carousel_slider.js"><\/script>\n'+
+                  '<script type="text/javascript" src="https://s3-us-west-2.amazonaws.com/airflowbucket1/flowz-builder/key-innovation/javascript/thum_slider.js"><\/script>\n'+
                       // '<script src="https://s3-us-west-2.amazonaws.com/airflowbucket1/flowz-builder/js/client1.js"><\/script>\n'+
                       '<script src="./../main-files/main.js"><\/script>\n'+
                       '</body>\n</html>';
@@ -1747,7 +1814,10 @@ export default {
       // });
 
       console.log('Now creating essential files...');
-      this.createEssentialFiles(newFolderName);
+       let self = this;
+        setTimeout(function(){
+          self.createEssentialFiles(newFolderName);
+        },1000);
     },
 
     // Create necessary files for project
@@ -1995,6 +2065,89 @@ export default {
       });
         
 
+      // Product Listing Plugin  [KeyInnovation]
+      let categoryList = newFolderName + '/assets/client-plugins/productlistCategories.js';
+      let categoriesData = '';
+      axios.get(config.baseURL + '/flows-dir-listing/0?path=' + this.pluginsPath + '/js/productlistCategories.js', {
+          
+      })
+      .then((response) => {
+        categoriesData = response.data;
+        let ProjectName = newFolderName.replace('/var/www/html/websites/', '')
+        categoriesData = categoriesData.replace('setNameHere', ProjectName);
+        
+        axios.post(config.baseURL + '/flows-dir-listing', {
+            filename : categoryList,
+            text : categoriesData,
+            type : 'file'
+        })
+        .then((res) => {
+          console.log(categoryList + ' file created');
+        })
+        .catch((e) => {
+            console.log(e)
+        })
+      })
+      .catch((e) => {
+          console.log(e)
+      });
+
+      
+      // wishlistData Plugin [KeyInnovation]
+      let wishlist = newFolderName + '/assets/client-plugins/wishlist.js';
+      let wishlistData = '';
+      axios.get(config.baseURL + '/flows-dir-listing/0?path=' + this.pluginsPath + '/js/wishlist.js', {
+          
+      })
+      .then((response) => {
+        wishlistData = response.data;
+        let ProjectName = newFolderName.replace('/var/www/html/websites/', '')
+        wishlistData = wishlistData.replace('setNameHere', ProjectName);
+        
+        axios.post(config.baseURL + '/flows-dir-listing', {
+            filename : wishlist,
+            text : wishlistData,
+            type : 'file'
+        })
+        .then((res) => {
+          console.log(wishlist + ' file created');
+        })
+        .catch((e) => {
+            console.log(e)
+        })
+      })
+      .catch((e) => {
+          console.log(e)
+      });
+
+
+      // shoppingCardData Plugin [KeyInnovation]
+      let shoppingcart = newFolderName + '/assets/client-plugins/shoppingcart.js';
+      let shoppingCardData = '';
+      axios.get(config.baseURL + '/flows-dir-listing/0?path=' + this.pluginsPath + '/js/shoppingcart.js', {
+          
+      })
+      .then((response) => {
+        shoppingCardData = response.data;
+        let ProjectName = newFolderName.replace('/var/www/html/websites/', '')
+        shoppingCardData = shoppingCardData.replace('setNameHere', ProjectName);
+        
+        axios.post(config.baseURL + '/flows-dir-listing', {
+            filename : shoppingcart,
+            text : shoppingCardData,
+            type : 'file'
+        })
+        .then((res) => {
+          console.log(shoppingcart + ' file created');
+        })
+        .catch((e) => {
+            console.log(e)
+        })
+      })
+      .catch((e) => {
+          console.log(e)
+      });
+
       // Product Detail Plugin
       let productDetailPlugin = newFolderName + '/assets/client-plugins/client-product-detail-plugin.js';
       axios.get(config.baseURL + '/flows-dir-listing/0?path=' + this.pluginsPath + '/js/product-detail-plugin-cleaned.js', {
@@ -2139,6 +2292,122 @@ export default {
       .catch((e) => {
           console.log(e)
       });
+
+      // Form js 
+      let FormJs = newFolderName + '/assets/client-plugins/form.js';
+      axios.get(config.baseURL + '/flows-dir-listing/0?path=' + this.pluginsPath + '/js/form.js', {
+          
+      })
+      .then((res) => {
+        let formData = res.data;
+        axios.post(config.baseURL + '/flows-dir-listing', {
+            filename : FormJs,
+            text : formData,
+            type : 'file'
+        })
+        .then((res) => {
+          console.log(FormJs + ' file created');    
+        })
+        .catch((e) => {
+            console.log(e)
+        })
+      })
+      .catch((e) => {
+          console.log(e)
+      });
+
+      // checkbox js 
+      let CheckBox = newFolderName + '/assets/client-plugins/checkbox.js';
+      axios.get(config.baseURL + '/flows-dir-listing/0?path=' + this.pluginsPath + '/js/checkbox.js', {
+          
+      })
+      .then((res) => {
+        let checkboxData = res.data;
+        axios.post(config.baseURL + '/flows-dir-listing', {
+            filename : CheckBox,
+            text : checkboxData,
+            type : 'file'
+        })
+        .then((res) => {
+          console.log(CheckBox + ' file created');    
+        })
+        .catch((e) => {
+            console.log(e)
+        })
+      })
+      .catch((e) => {
+          console.log(e)
+      });
+
+      // input js 
+      let input = newFolderName + '/assets/client-plugins/input.js';
+      axios.get(config.baseURL + '/flows-dir-listing/0?path=' + this.pluginsPath + '/js/input.js', {
+          
+      })
+      .then((res) => {
+        let inputData = res.data;
+        axios.post(config.baseURL + '/flows-dir-listing', {
+            filename : input,
+            text : inputData,
+            type : 'file'
+        })
+        .then((res) => {
+          console.log(input + ' file created');    
+        })
+        .catch((e) => {
+            console.log(e)
+        })
+      })
+      .catch((e) => {
+          console.log(e)
+      });
+
+      // radiobutton js 
+      let radiobutton = newFolderName + '/assets/client-plugins/radiobutton.js';
+      axios.get(config.baseURL + '/flows-dir-listing/0?path=' + this.pluginsPath + '/js/radiobutton.js', {
+          
+      })
+      .then((res) => {
+        let radiobuttonData = res.data;
+        axios.post(config.baseURL + '/flows-dir-listing', {
+            filename : radiobutton,
+            text : radiobuttonData,
+            type : 'file'
+        })
+        .then((res) => {
+          console.log(radiobutton + ' file created');    
+        })
+        .catch((e) => {
+            console.log(e)
+        })
+      })
+      .catch((e) => {
+          console.log(e)
+      });
+
+      // selectValue js 
+      let selectValue = newFolderName + '/assets/client-plugins/selectValue.js';
+      axios.get(config.baseURL + '/flows-dir-listing/0?path=' + this.pluginsPath + '/js/selectValue.js', {
+          
+      })
+      .then((res) => {
+        let selectValueData = res.data;
+        axios.post(config.baseURL + '/flows-dir-listing', {
+            filename : selectValue,
+            text : selectValueData,
+            type : 'file'
+        })
+        .then((res) => {
+          console.log(selectValue + ' file created');    
+        })
+        .catch((e) => {
+            console.log(e)
+        })
+      })
+      .catch((e) => {
+          console.log(e)
+      });
+
 
       // Template
       let template1 = newFolderName + '/Templates/template1.html';
@@ -2553,7 +2822,7 @@ export default {
                 break;
             case 'GridManager':
                 this.$refs.contentComponent.getHtml();
-                newContent = this.$store.state.content;
+                newContent = '<html><head></head><body>' + this.$store.state.content + '</body></html>';
                 // this.saveLayoutFile();
                 break;
         }

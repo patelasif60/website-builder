@@ -64,8 +64,12 @@
                     global_col: [{ callback: self.test_callback, loc: 'top' }]
                 }
             }).data('gridmanager');
-            
-            $("#gm-canvas").empty().append(this.$store.state.content)
+            // let content_html = "<html><head>"
+            // $("#gm-canvas").append($('<div/>').text(content_html))
+            console.log("$(\"#gm-canvas\").contents()",$("#gm-canvas").contents());
+
+            $("#gm-canvas").append(this.$store.state.content)
+           // $(this.$store.state.content).insertAfter("#gm-canvas")
             $(".gm-edit-mode").click().click();
 
         },

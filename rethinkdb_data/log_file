@@ -1,0 +1,34 @@
+2017-11-16T09:35:42.143838968 0.082337s notice: Recursively removing directory /home/software/HarshPatel/project/FlowzBuilder/rethinkdb_data/tmp
+2017-11-16T09:35:42.159766397 0.098265s notice: Initializing directory /home/software/HarshPatel/project/FlowzBuilder/rethinkdb_data
+2017-11-16T09:35:42.159887621 0.098385s info: Creating a default database for your convenience. (This is because you ran 'rethinkdb' without 'create', 'serve', or '--join', and the directory '/home/software/HarshPatel/project/FlowzBuilder/rethinkdb_data' did not already exist or is empty.)
+2017-11-16T09:35:42.159905298 0.098403s notice: Running rethinkdb 2.3.5 (GCC 5.4.0)...
+2017-11-16T09:35:42.161748819 0.100248s notice: Running on Linux 4.4.0-98-generic x86_64
+2017-11-16T09:35:42.161790892 0.100288s notice: Loading data from directory /home/software/HarshPatel/project/FlowzBuilder/rethinkdb_data
+2017-11-16T09:35:42.243080052 0.181579s info: Automatically using cache size of 6457 MB
+2017-11-16T09:35:42.244390755 0.182888s notice: Listening for intracluster connections on port 29015
+2017-11-16T09:35:42.250501567 0.188999s notice: Listening for client driver connections on port 28015
+2017-11-16T09:35:42.250634577 0.189132s notice: Listening for administrative HTTP connections on port 8081
+2017-11-16T09:35:42.250636655 0.189134s notice: Listening on cluster addresses: 127.0.0.1, 127.0.1.1, ::1
+2017-11-16T09:35:42.250638980 0.189136s notice: Listening on driver addresses: 127.0.0.1, 127.0.1.1, ::1
+2017-11-16T09:35:42.250640639 0.189138s notice: Listening on http addresses: 127.0.0.1, 127.0.1.1, ::1
+2017-11-16T09:35:42.250642581 0.189140s notice: To fully expose RethinkDB on the network, bind to all addresses by running rethinkdb with the `--bind all` command line option.
+2017-11-16T09:35:42.250644691 0.189142s notice: Server ready, "OBLAP_85_fds" 8c178396-57a5-4f28-9c38-47e3ab59b977
+2017-11-16T09:35:43.730172844 1.668671s notice: A newer version of the RethinkDB server is available: 2.3.6. You can read the changelog at <https://github.com/rethinkdb/rethinkdb/releases>.
+2017-11-16T11:37:48.957911310 7326.896410s info: Table 2ea72bc5-8be0-4ba0-b697-589c5fe2e875: Starting a new Raft election for term 1.
+2017-11-16T11:37:48.959461379 7326.897960s info: Table 2ea72bc5-8be0-4ba0-b697-589c5fe2e875: Added replica on this server.
+2017-11-16T11:37:48.974004919 7326.912503s info: Table 2ea72bc5-8be0-4ba0-b697-589c5fe2e875: This server is Raft leader for term 1. Latest log index is 0.
+2017-11-17T10:09:58.519663628 0.129110s notice: Running rethinkdb 2.3.5 (GCC 5.4.0)...
+2017-11-17T10:09:58.528311215 0.137756s notice: Running on Linux 4.4.0-98-generic x86_64
+2017-11-17T10:09:58.528391500 0.137833s notice: Loading data from directory /home/software/HarshPatel/project/FlowzBuilder/rethinkdb_data
+2017-11-17T10:09:58.571279699 0.180723s info: Automatically using cache size of 5647 MB
+2017-11-17T10:09:58.572832475 0.182273s notice: Listening for intracluster connections on port 29015
+2017-11-17T10:09:58.604384634 0.213826s notice: Listening for client driver connections on port 28015
+2017-11-17T10:09:58.604732135 0.214173s notice: Listening for administrative HTTP connections on port 8081
+2017-11-17T10:09:58.604736357 0.214177s notice: Listening on cluster addresses: 127.0.0.1, 127.0.1.1, ::1
+2017-11-17T10:09:58.604738094 0.214179s notice: Listening on driver addresses: 127.0.0.1, 127.0.1.1, ::1
+2017-11-17T10:09:58.604739922 0.214181s notice: Listening on http addresses: 127.0.0.1, 127.0.1.1, ::1
+2017-11-17T10:09:58.604748363 0.214189s notice: To fully expose RethinkDB on the network, bind to all addresses by running rethinkdb with the `--bind all` command line option.
+2017-11-17T10:09:58.604750238 0.214191s notice: Server ready, "OBLAP_85_fds" 8c178396-57a5-4f28-9c38-47e3ab59b977
+2017-11-17T10:10:00.179732564 1.789174s info: Table 2ea72bc5-8be0-4ba0-b697-589c5fe2e875: Starting a new Raft election for term 2.
+2017-11-17T10:10:00.194682714 1.804124s info: Table 2ea72bc5-8be0-4ba0-b697-589c5fe2e875: This server is Raft leader for term 2. Latest log index is 3.
+2017-11-17T10:10:00.649032136 2.258474s notice: A newer version of the RethinkDB server is available: 2.3.6. You can read the changelog at <https://github.com/rethinkdb/rethinkdb/releases>.
