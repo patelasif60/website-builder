@@ -35,6 +35,14 @@
 <style>
   div.jsoneditor{
     min-height: 700px;
-    margin-bottom: 100px;
+    margin-bottom: 80px;
+  }
+
+  .ace_editor{
+    height: 700px !important;
+  }
+
+  textarea.jsoneditor-text{
+    height: 700px;
   }
 </style>

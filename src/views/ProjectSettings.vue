@@ -5,6 +5,10 @@
     <div class="page-buttons">
       <el-button type="primary" size="small" @click="saveProjectSettings">Save Settings</el-button>
       <el-button type="info" size="small" @click="publishMetalsmith">Publish Website</el-button>
+      <el-tooltip class="item" effect="dark" content="Download Config.json" placement="top-start">
+        <el-button type="warning" size="small" @click="downloadConfigFile"><i class="fa fa-download"></i></el-button>
+      </el-tooltip>
+      
       <!-- <el-button type="danger" @click="cancelSettings">Cancel</el-button> -->
     </div>
 
@@ -246,6 +250,57 @@
       </div>
       <!-- Global Variable section ends -->
 
+      <!-- Ecommerce Global Variable section -->
+      <!-- <div class="well">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="row">
+              <div class="col-md-4">
+                <h3>Ecommerce Variables</h3>
+              </div>
+            </div>
+            <hr>
+            <el-form ref="form" :model="form">
+              <div v-for="(n, index) in ecommerceVariables">
+                <el-form-item>
+                  <div class="row">
+
+                    <!-- Enter Variable ID --
+                    <div class="col-md-2">
+                      <el-input placeholder="Variable Class" v-model="n.variableClass"></el-input>
+                    </div>
+
+                    <!-- If type is Text or HTML --
+                    <div class="col-md-9" style="margin: 0; padding-left: 10px">
+                      <!-- <el-input type="textarea" :rows="5" placeholder="Variable Value" v-model="n.variableValue"></el-input> --
+                      <el-select v-model="n.variableValue" placeholder="Select">
+                        <el-option
+                          v-for="item in partialsList"
+                          :key="item.value"
+                          :label="item.label"
+                          :value="item.value">
+                        </el-option>
+                      </el-select>
+                    </div>
+                    
+                    <!-- Delete Variable --
+                    <div class="col-md-1">
+                      <el-button class="pull-right" type="danger" @click="deleteEcommerceVariable(index)" icon="delete"></el-button>      
+                    </div>
+                  </div>
+                </el-form-item>
+              </div>
+              <!-- Ends V-FOR looping -->
+              
+              <!-- Create new variable --
+              <el-button type="primary" @click="addNewEcommerceVariable">New Variable</el-button>
+
+            </el-form>
+          </div>
+        </div>
+      </div> -->
+      <!-- Global Variable section ends -->
+
       <!-- List of Commits Section -->
       <div class="well">
         <div class="row">
@@ -268,11 +323,11 @@
                 >
               </el-table-column>
 
-              <!-- <el-table-column
+              <el-table-column
                 prop="commitSHA"
                 label="Commit SHA"
                 >
-              </el-table-column> -->
+              </el-table-column>
               
               <el-table-column
                 label="Revert To Commit"
@@ -365,11 +420,13 @@ export default {
 
       globalVariables: [],
       globalCssVariables: [],
+      ecommerceVariables: [],
       imageInputIsDisabled: false,
-      uploadedVariableJsonData: ''
-      // fileData:{
-      //   url: 'urlHere'
-      // }
+      uploadedVariableJsonData: '',
+      layoutOptions: [],
+      partialsList: [],
+      selectedPartial: '',
+
     }
   },
   component: {
@@ -390,12 +447,11 @@ export default {
       var reader = new FileReader();
       reader.readAsDataURL(file.target.files[0]);
       reader.onload = await function(e) {
-          console.log('Image Result:', e.target.result);
           $('[name = '+currentImageVariableIndex+']').attr('src', e.target.result);
           // browser completed reading file - display it
           globalFileData = e.target.result;
           
-          axios.post( scope.baseURL + '/image-upload', {
+          axios.post( config.baseURL + '/image-upload', {
               filename : scope.folderUrl + '/assets/' + imageName,
               text : globalFileData,
               type : 'file'
@@ -420,9 +476,13 @@ export default {
     },
 
     addNewCssVariable() {
-      console.log('Global Css Vars:', this.globalCssVariables)
       let newVariable = { variableName: '', variableType: '', variableValue: ''};
       this.globalCssVariables.push(newVariable);
+    },
+
+    addNewEcommerceVariable() {
+      let newVariable = { variableClass: '', variableValue: ''};
+      this.ecommerceVariables.push(newVariable);
     },
 
     deleteVariable(deleteIndex) {
@@ -431,6 +491,10 @@ export default {
 
     deleteCssVariable(deleteIndex) {
       this.globalCssVariables.splice(deleteIndex, 1);
+    },
+
+    deleteEcommerceVariable(deleteIndex) {
+      this.ecommerceVariables.splice(deleteIndex, 1);
     },
 
     downloadGlobalVariables() {
@@ -442,12 +506,19 @@ export default {
       let jsonData = new Blob([textToSave], {type: "application/json;charset=utf-8"});
     
       fileSaver.saveAs(jsonData, saveFileName);
-      // console.log(exportVariables);
     },
 
-    // uploadGlobalVariables(fileData){
-    //   console.log('Uploading Global Variables...');
-    // },
+    downloadConfigFile() {
+      this.saveProjectSettings();
+      let exportConfigFile = this.settings;
+
+      let textToSave = JSON.stringify(exportConfigFile);
+      let saveFileName = 'config.json';
+      let jsonData = new Blob([textToSave], {type: "application/json;charset=utf-8"});
+    
+      fileSaver.saveAs(jsonData, saveFileName);
+    },
+
 
     uploadImage(fileData, fileBlob) {
       
@@ -468,7 +539,7 @@ export default {
 
     saveProjectSettings() {
       
-      let ProjectSettings = [{ "RepositoryId" : this.newRepoId, "ProjectName": this.repoName, "BrandName": this.form.brandName, "BrandLogoName": this.form.brandLogoName, "ProjectLayout": '',"ProjectHeader":this.form.selectedHeader,"ProjectFooter":this.form.selectedFooter,"ProjectSEOTitle":this.form.seoTitle,"ProjectSEOKeywords": this.form.seoTitle,"ProjectSEODescription":this.form.seoDesc}, { "GlobalVariables": this.globalVariables, "GlobalCssVariables": this.globalCssVariables }];
+      let ProjectSettings = [{ "RepositoryId" : this.newRepoId, "ProjectName": this.repoName, "BrandName": this.form.brandName, "BrandLogoName": this.form.brandLogoName, "ProjectLayout": '',"ProjectHeader":this.form.selectedHeader,"ProjectFooter":this.form.selectedFooter,"ProjectSEOTitle":this.form.seoTitle,"ProjectSEOKeywords": this.form.seoKeywords,"ProjectSEODescription":this.form.seoDesc}, { "GlobalVariables": this.globalVariables, "GlobalCssVariables": this.globalCssVariables, "EcommerceVariables": this.ecommerceVariables, }];
 
       this.settings[1].projectSettings = ProjectSettings;
 
@@ -515,7 +586,6 @@ export default {
     },
 
     commitProject() {
-      console.log('Publish Website');
       this.$store.state.currentIndex = 0;
 
       // Push repository changes
@@ -543,24 +613,18 @@ export default {
       var partialstotal = []
       for (let i = 0; i < rawConfigs[1].pageSettings.length; i++) {
 
-        console.log("i:", i)
-
         var partials = ''
-        console.log("rawConfigs[1].pageSettings[i].PageName:", rawConfigs[1].pageSettings[i].PageName)
 
         let responseConfigLoop = await axios.get(config.baseURL + '/flows-dir-listing/0?path=' + folderUrl + '/assets/config.json');
 
         var rawSettings = JSON.parse(responseConfigLoop.data);
         var nameF = rawSettings[1].pageSettings[i].PageName.split('.')[0]
-        console.log("page name:", nameF)
         var Layout = ''
         var partialsPage = [];
         Layout = rawSettings[1].pageSettings[i].PageLayout
         partialsPage = rawSettings[1].pageSettings[i].partials
-        console.log("partialsPage:", partialsPage)
-        console.log("layout name:", Layout)
         var responseMetal = ''
-        console.log("value of responseMetal:", responseMetal)
+
         responseMetal = "var Metalsmith=require('metalsmith');\nvar markdown=require('metalsmith-markdown');\nvar layouts=require('metalsmith-layouts');\nvar permalinks=require('metalsmith-permalinks');\nvar fs=require('fs');\nvar Handlebars=require('handlebars');\n Metalsmith(__dirname)\n.metadata({\ntitle: \"Demo Title\",\ndescription: \"Some Description\",\ngenerator: \"Metalsmith\",\nurl: \"http://www.metalsmith.io/\"})\n.source('')\n.destination('" + folderUrl + "/public')\n.clean(false)\n.use(markdown())\n.use(layouts({engine:'handlebars',directory:'" + folderUrl + "/Layout'}))\n.build(function(err,files)\n{if(err){\nconsole.log(err)\n}});"
         var index = responseMetal.search('.source')
 
@@ -568,35 +632,27 @@ export default {
         var indexPartial = responseMetal.search("('handlebars')");
         for (var x = 0; x < partialsPage.length; x++) {
           let key = Object.keys(partialsPage[x])[0];
-          console.log("key :", key)
+
           let value = partialsPage[x]
           let key2 = key;
-          console.log("value:", value[key2])
           key = key.trim();
           if (value[key2].match('html')) {
-            console.log("inside html if")
             key = key.split('.')[0]
-            var temp = "Handlebars.registerPartial('" + key + "', fs.readFileSync('" + folderUrl + "/" + key + "/" + value[key2] + "').toString())\n"
+            var temp = "Handlebars.registerPartial('" + key + "', fs.readFileSync('" + folderUrl + "/Partials/" + key + "/" + value[key2] + "').toString())\n"
           } else if (value[key2].match('hbs')) {
-            console.log("inside hbs if")
             key = key.split('.')[0]
-            var temp = "Handlebars.registerPartial('" + key + "', fs.readFileSync('" + folderUrl + "/" + key + "/" + value[key2] + "').toString())\n"
+            var temp = "Handlebars.registerPartial('" + key + "', fs.readFileSync('" + folderUrl + "/Partials/" + key + "/" + value[key2] + "').toString())\n"
           } else {
-            console.log("inside else")
-            var temp = "Handlebars.registerPartial('" + key + "', fs.readFileSync('" + folderUrl + "/" + key + "/" + value[key2] + ".html').toString())\n"
+            var temp = "Handlebars.registerPartial('" + key + "', fs.readFileSync('" + folderUrl + "/Partials/" + key + "/" + value[key2] + ".html').toString())\n"
           }
 
           partials = partials + temp;
 
         }
-        console.log("partials of metalsmith:", partials);
 
         responseMetal = responseMetal.substr(0, indexPartial + 15) + partials + responseMetal.substr(indexPartial + 15);
 
         var mainMetal = folderUrl + '/assets/metalsmith.js'
-        console.log("final metalsmith file ready for api call:", responseMetal);
-        console.log("@@@@@@@@@@@@@@@@@:")
-        console.log("mainMetal:", mainMetal)
         var value = true;
         await axios.post( config.baseURL + '/flows-dir-listing', {
             filename: mainMetal,
@@ -609,7 +665,8 @@ export default {
                 type: 'folder'
               })
               .then(async(res) => {
-                console.log(res)
+                console.log(res);
+                console.log('Current URL:', this.$store.state.fileUrl.replace(/\\/g, "\/"));
                 var rawContent = await axios.get(config.baseURL + '/flows-dir-listing/0?path=' + this.$store.state.fileUrl.replace(/\\/g, "\/") + '/Pages/' + nameF + '.html');
 
                 // newContent = newContent.data;
@@ -648,7 +705,7 @@ export default {
                   '<script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"><\/script>\n'+
                   '<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">\n'+
                   "<link rel='stylesheet' href='./../main-files/main.css'/>\n"+
-                  rawContent +
+                  rawContent.data +
                   '<script src="./../assets/client-plugins/global-variables-plugin.js"><\/script>\n'+
                   '<script src="./../assets/client-plugins/client-navbar-plugin.js"><\/script>\n'+
                   '<script src="./../assets/client-plugins/client-product-listing-plugin.js"><\/script>\n'+
@@ -663,7 +720,7 @@ export default {
                   '<script src="./../main-files/main.js"><\/script>\n'+
                   '</body>\n</html>';
 
-                  if (this.form.Layout == 'Blank') {
+                  if (Layout == 'Blank') {
                     if (newContent.match('---')) {
                       let substr = newContent.substr(newContent.search('---'), newContent.search('<'))
                       console.log("substr:" + substr)
@@ -682,7 +739,7 @@ export default {
                       '<script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"><\/script>\n'+
                       '<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">\n'+
                       "<link rel='stylesheet' href='./../main-files/main.css'/>\n"+
-                      rawContent +
+                      rawContent.data +
                       '<script src="./../assets/client-plugins/global-variables-plugin.js"><\/script>\n'+
                       '<script src="./../assets/client-plugins/client-navbar-plugin.js"><\/script>\n'+
                       '<script src="./../assets/client-plugins/client-product-listing-plugin.js"><\/script>\n'+
@@ -699,7 +756,7 @@ export default {
                     }
 
                   } else {
-                    let tempValueLayout = '---\nlayout: ' + this.form.Layout + '.layout\n---\n';
+                    let tempValueLayout = '---\nlayout: ' + Layout + '.layout\n---\n';
 
                     if (newContent.match('---')) {
                       let substr = newContent.substr(newContent.search('---'), newContent.search('<'))
@@ -718,7 +775,7 @@ export default {
                       '<script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"><\/script>\n'+
                       '<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">\n'+
                       "<link rel='stylesheet' href='./../main-files/main.css'/>\n"+
-                      rawContent +
+                      rawContent.data +
                       '<script src="./../assets/client-plugins/global-variables-plugin.js"><\/script>\n'+
                       '<script src="./../assets/client-plugins/client-navbar-plugin.js"><\/script>\n'+
                       '<script src="./../assets/client-plugins/client-product-listing-plugin.js"><\/script>\n'+
@@ -754,10 +811,8 @@ export default {
                             type: 'file'
                           })
                           .then(async(res) => {
-                            console.log('Now previewing: ' + this.$store.state.fileUrl.replace(/\\/g, "\/"))
                             let previewFile = this.$store.state.fileUrl.replace(/\\/g, "\/");
                             previewFile = folderUrl.replace('/var/www/html', '');
-                            console.log(previewFile.replace('Pages' + nameF, ''));
                             await axios.delete(config.baseURL + '/flows-dir-listing/0?filename=' + folderUrl + '/Preview')
                               .then((res) => {
                                 console.log(res);
@@ -802,7 +857,7 @@ export default {
 
       }
 
-      window.open('http://localhost' + folderUrl.replace('var/www/html/', '') + '/public/');
+      window.open(config.ipAddress + folderUrl.replace('var/www/html/', '') + '/public/');
 
     },
 
@@ -877,7 +932,7 @@ export default {
     },
 
     exportWebsite(){
-      window.open('http://162.209.122.250/' + this.$session.get('username') + '/' + this.repoName + '/repository/archive.zip?ref=master');
+      window.open(config.ipAddress + this.$session.get('username') + '/' + this.repoName + '/repository/archive.zip?ref=master');
     },
 
     cancelSettings(){
@@ -899,9 +954,12 @@ export default {
         this.form.seoKeywords = this.settings[1].projectSettings[0].ProjectSEOKeywords;
         this.form.seoDesc = this.settings[1].projectSettings[0].ProjectSEODescription;
         this.globalVariables = this.settings[1].projectSettings[1].GlobalVariables;
-        console.log(JSON.stringify(this.globalVariables));
         this.globalCssVariables = this.settings[1].projectSettings[1].GlobalCssVariables;
-        console.log(JSON.stringify(this.globalCssVariables));
+        this.ecommerceVariables = this.settings[1].projectSettings[1].EcommerceVariables;
+
+
+
+        console.log(this.ecommerceVariables);
 
         if(this.globalVariables == undefined){
           this.globalVariables = []
@@ -909,9 +967,27 @@ export default {
         if(this.globalCssVariables == undefined){
           this.globalCssVariables = []
         }
+        if(this.ecommerceVariables == undefined){
+          this.ecommerceVariables = []
+        }
+
+        console.log(this.ecommerceVariables);
 
         this.form.Header = this.settings[2].layoutOptions[0].headers;
         this.form.Footer = this.settings[2].layoutOptions[0].footers;
+
+
+        // Get all partials
+        this.layoutOptions = this.settings[2].layoutOptions[0];
+        this.layoutOptions = Object.keys(_.omit(this.layoutOptions, ['Layout', 'Header', 'Footer', 'Sidebar', 'Menu']));
+
+        for (var i = 0; i <= this.layoutOptions.length; i++) {
+          let value = {
+            'value' : this.layoutOptions[i].toLowerCase(),
+            'label' : this.layoutOptions[i]
+          }
+          this.partialsList.push(value);
+        }
 
         // Set Brand Logo Name
         if(this.form.brandLogoName != ''){
@@ -1186,7 +1262,7 @@ h1{
   bottom: 7px;
   right: 50px;
   margin-top: 17.5px;
-  z-index: 3
+  z-index: 10
 }
 
 @media(max-width: 680px){
