@@ -3397,6 +3397,141 @@ grapesjs.plugins.add('product-plugin', function (editor, options) {
         category: 'Testimonials Section'
     });
 
+    //Custom Form form Component
+    bm.add('Header', {
+        label: 'Header',
+        content: '<div><link href="https://s3-us-west-2.amazonaws.com/airflowbucket1/flowz-builder/key-innovation/css/base.css" rel="stylesheet" type="text/css"/> <div id="js-fix-header-controller"> <div class="ob-header"> <div class="main-logo-part"> <div class="ob-top-menu"> <div class="container"> <div class="slidemenu shop-menu"> <ul class="header-loging"> <li class="header-login-text"> <a href="#home"> <span class="login-text"><span>Home</span></span> </a> </li><li class="dropdown cart-popup header-login-text"> <a href="#" class="dropdown-toggle" data-toggle="dropdown"> <span class="fa fa-shopping-cart"></span> <span class="login-text"><span>Cart</span> (0)</span> </a> <div class="dropdown-menu dropdown-menu-arrow hidden-xs"> <div class="inner-box"> <div class="header-dropdown"><i class="fa fa-heart"></i>Min ønskeliste<a href="javascript:void(0);" class="close-model fa fa-close" data-toggle="tooltip" data-placement="left" data-original-title="Lukk"></a></div><div id="js-wish-list-queue-list"> <div class="empty-list-dropdown"> <h2><i class="fa fa-heart fa-fw"></i><br>Ønskelisten er tom.</h2> <small> Hvis varer i ønskelisten mangler , <a href="/no_no/login">logg inn</a> til kontoen din for å se dem. </small> </div></div></div></div></li><li class="dropdown cart-popup header-login-text"> <a href="#" class="dropdown-toggle" data-toggle="dropdown"> <span class="fa fa-shopping-cart"></span> <span class="login-text"><span>Wish list</span> (0)</span> </a> <div class="dropdown-menu dropdown-menu-arrow hidden-xs"> <div class="inner-box"> <div class="header-dropdown"><i class="fa fa-heart"></i>My wish list<a href="javascript:void(0);" class="close-model fa fa-close" data-toggle="tooltip" data-placement="left" data-original-title="Lukk"></a></div><div id="js-wish-list-queue-list"> <div class="empty-list-dropdown"> <h2><i class="fa fa-heart fa-fw"></i><br><font><font>The wish list is empty.</font></font></h2> <small><font><font class=""> If your wishlist missing, </font></font><a href="/no_no/login"><font><font class="">login</font></font></a><font><font class=""> to your account to view them. </font></font></small> </div></div></div></div></li><li class="dropdown cart-popup header-login-text"> <a href="#" class="dropdown-toggle" data-toggle="dropdown"> <span class="fa fa-shopping-cart"></span> <span class="login-text"><span>Cart</span> (0)</span> </a> <div class="dropdown-menu dropdown-menu-arrow hidden-xs"> <div class="inner-box"> <div class="header-dropdown"><i class="fa fa-retweet fa-fw"></i>compare<a href="javascript:void(0);" class="close-model fa fa-close" data-toggle="tooltip" data-placement="left" data-original-title="Lukk"></a></div><div id="js-compare-product-queue-list"> <div class="empty-list-dropdown"> <h2><i class="fa fa-retweet fa-fw"></i><br>Comparative list is empty. </h2> <small> If items in comparison missing, <a href="/no_no/login">login</a> to your account to view them. </small> </div></div></div></div></li><li class="dropdown login-col header-login-text"> <a href="#" class="dropdown-toggle" data-toggle="dropdown"> <span class="fa fa-sign-in"></span> <span class="login-text"><span>LOGIN</span></span> </a> <div class="dropdown-menu dropdown-menu-arrow"> <div class="inner-box"> <a href="javascript:void(0)" class="close-model fa fa-close" data-toggle="tooltip" data-placement="left" data-original-title="Close"></a> <h2 class="title-login"><i class="fa fa-sign-in"></i> Login</h2> <form action="#"> <input type="text" placeholder="Enter Your E-mail Address" class="form-control" required/> <ul class="error-message"> <li class="red js-login-error">Email Address OR Password are invalid!</li></ul> <input type="password" placeholder="Enter Your Passowrd" class="form-control" required/> <div class="row"> <div class="col-sm-6"> <div class="check-box"> <div class="pull-left"> <input type="checkbox" id="c145" name="cc"> <label for="c145"><span></span></label> </div><label for="c145" id="c145">Remember me</label> </div></div><div class="col-sm-6 text-right"> <a href="javascript:void(0)" class="js_forgot">Forgot password?</a> </div></div><input type="submit" class="btn login-btn" value="LogIn"/> <div class="forgot-passwd js-forgot-passwd" style="display: none;"> <h3>Forgot your Password?</h3> <p>Enter your Email Address here to receive a link to change password.</p><div> <input type="text" placeholder="E-mail" class="form-control"/> </div><a href="javascript:void(0)" class="send-email">SEND Email</a> </div></form> <div class="log-bottom"> <p class="pull-left">Not Registered?</p><a href="#" class="red pull-right">Create an account</a> <div class="clearfix"></div></div><div class="clear"></div></div></div></li><li class="dropdown login-col header-login-text user_logintext"> <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown"> <span class="fa fa-user"></span> <span class="login-text"><span>Welcome User ! <i class="fa fa-caret-down"></i></span></span> </a> <div class="dropdown-menu dropdown-menu-arrow user-dropdown"> <div class="inner-box"> <ul> <li><a href="#">My Account</a></li><li><a href="#">Change Password</a></li><li><a href="#">Logout</a></li></ul> </div></div></li></ul> <div class="clearfix"></div></div></div></div><div class="ob-logo-block"> <div class="container"> <div class="row"> <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 logo-col"> <a href="#"><img src="https://s3-us-west-2.amazonaws.com/airflowbucket1/flowz-builder/imgs/img_logo.png" alt=""></a> </div><div class="col-lg-9 col-md-9 col-sm-9 col-xs-9 pull-right"> <div class="support-col"> <a href="mailto:info@keyinnovation.com"> <i></i> <span>BOOK a CONSULT</span> <em>For Ideas and Help</em> </a> </div><div class="call-text"> <i></i> <span>604 589 5268</span> <em>Call Us: Speak with a Rep!</em> </div><form action=""> <div class="header-search-col"> <input type="text" placeholder="Product Search..."> <input type="submit" value=""> </div></form> </div></div></div></div></div></div><div class="ob-menu ui-menu-nav menu-option-3"> <div class="container"> <div class="navbar2 navbar-default menu-box" role="navigation" id="mainmenu-nav"> <div class="navbar-header2"> <a class="navbar-toggle"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </a> </div><div id="mainmenu"> <ul class="nav navbar-nav ui-navigation"> <li><a href="javascript:void();">Bags</a></li><li><a href="javascript:void();">Drinkware</a></li><li><a href="javascript:void();">Writing & Stationary</a></li><li><a href="javascript:void();">Technology</a></li><li><a href="javascript:void();">Office </a></li><li><a href="javascript:void();">Tradeshow & Events</a></li><li><a href="javascript:void();">Home & Kitchen </a></li><li><a href="javascript:void();">Outdoor & Fun </a></li><li><a href="javascript:void();">Awards & Awareness </a></li><li><a href="javascript:void();">Food & Wine </a></li><li><a href="javascript:void();">Golf</a></li><li><a href="javascript:void();">Wellness & Safety</a></li><li><a href="javascript:void();">Auto & Tools</a></li><li><a href="javascript:void();">Other</a></li></ul> </div></div></div></div></div></header></div>',
+        attributes: {
+            class: 'fa fa-list-alt',
+            title: 'Header',
+        },
+        category: 'Key-Innovation'
+    });
+
+    //Custom Form form Component
+    bm.add('WishList', {
+        label: 'WishList',
+        content: '<WishList><div id="WishList"><link href="https://s3-us-west-2.amazonaws.com/airflowbucket1/flowz-builder/key-innovation/css/base.css" rel="stylesheet" type="text/css"/><div class="container"> <div class="innerpage row account-innerpage"> <div class="col-sm-8 col-md-9 col-lg-9 col-xs-12"> <div class="ob-account-right"> <div class="breadcrumb"> <ul> <li><a href="#">Home</a><i class="fa fa-angle-right fa-fw"> </i></li><li><a href="#">My Account</a><i class="fa fa-angle-right fa-fw"></i></li><li>My wishlist</li></ul> </div><div class="ob-myaccount-mywishlist"> <div class="myaccount-title"> <h2><i class="fa fa-heart"></i>my wishlist</h2> </div></div><div class="ob-product-compare-list js-compare" style="display:none;"> <div class="compare-images"> <div class="col-sm-6 col-md-6 col-lg-3 compare-img-col"> <div class="compare-img-wrap"> <a data-original-title="Remove" class="close closeTab" href="javascript:void(0)"><i class="fa fa-times-circle fa-fw"> </i></a> <div class="product-compare-img"> <img src="images/compare-img1.png" class="img-responsive" alt=""/> </div><p>Berkeley Shore Club Polo</p></div></div><div class="col-sm-6 col-md-6 col-lg-3 compare-img-col"> <div class="compare-img-wrap"> <a data-original-title="Remove" class="close closeTab" href="javascript:void(0)"><i class="fa fa-times-circle fa-fw"> </i></a> <div class="product-compare-img"> <img src="images/compare-img2.png" class="img-responsive" alt=""/> </div><p>Elevate Calgary ladies polo D</p></div></div><div class="col-sm-6 col-md-6 col-lg-3 compare-img-col"> <div class="compare-img-wrap"> <a data-original-title="Remove" class="close closeTab" href="javascript:void(0)"><i class="fa fa-times-circle fa-fw"> </i></a> <div class="product-compare-img"> <img alt="" src="images/compare-img3.png" class="img-responsive"/> </div><p>Clique Gibson <br>Polo H</p></div></div><div class="col-sm-6 col-md-6 col-lg-3 compare-img-col"> <div class="compare-img-wrap"> <a data-original-title="Remove" class="close closeTab" href="javascript:void(0)"><i class="fa fa-times-circle fa-fw"> </i></a> <div class="product-compare-img"> <img src="images/compare-img4.png" class="img-responsive" alt=""/> </div><p>Now tou can add more product</p></div></div></div><div class="compare-btn-wrap"> <div class="btn-cart"> <a class="btn-search pull-right ui-link" href="#"><i class="fa fa-retweet fa-fw"> </i>Compare</a> </div><a data-original-title="Remove" class="close js-closeTab ui-btn" href="javascript:void(0)"><i class="fa fa-times-circle fa-fw"> </i></a> </div><div class="clearfix"></div></div><div class="clearfix"></div><div class="ob-product-block left-wishlist-block"> <?php //include_once ( \'include/product-search-block.php\'); ?><!-- <div class="ob-sort-block"> <div class="show-product"> Showing 9 products <i class="fa fa-question-circle fa-fw"> </i> </div><div class="sort-product"> <div class="sort"> Sort By : <div class="sort-style"> <select id="combo-02"> <option value="volvo">Best Match</option> <option value="volvo">Name</option> <option value="saab">Price</option> <option value="mercedes">Item Code</option> </select> </div></div>--><!-- <div class="compare"> <a href="javascript:void(0)" class="js-pro-compare"><i class="fa fa-retweet fa-fw"></i> Compare</a> </div>--><!-- <div class="clearfix"></div></div><div class="view-product"> View : <a class="product-grid-btn js-product-grid-btn active" href="javascript:void(0)" data-toggle="tooltip" data-placement="top" data-original-title="Grid View"><i class="fa fa-th fa-fw"> </i></a> <a class="product-list-btn js-product-list-btn " href="javascript:void(0)" data-toggle="tooltip" data-placement="top" data-original-title="List View"><i class="fa fa-th-list fa-fw"> </i></a> </div><div class="clearfix"></div>--> </div></div><div class="ob-product-grid js-product-grid"> <div class="row"> <div class="col-sm-12 col-md-6 col-lg-4 col-xs-12 product-wrap"> <div class="pro-box"> <div class="pro-image"> <div class="product-rating-top-block"> <div class="rating"><i class="fa fa-star-o"></i><i class="fa fa-star-o"></i><i class="fa fa-star-o"></i><i class="fa fa-star-o"></i><i class="fa fa-star-o"></i> </div></div><div class="product-flag-block delete-wishlist-block"> <div class="sales"> <div class="product-label f-new"> <h2 class="logo"><i class="fa fa-archive"></i>New</h2> </div></div></div><div class="clearfix"></div><div class="product-img-blk"><a href="#"><img src="http://placehold.it/200x150" class="img-responsive center-block" alt=""></a></div><div class="product-quickview hidden-xs"> <a class="pav-colorbox glyphicon cboxElement" href="" data-target="#quick_view_product" data-toggle="modal"> <i class="fa fa-eye"></i> </a> </div></div><div class="pro-desc"> <a href="#" class="item-title"> Name of Product </a> <div class="item-code"> Item code : P742.041 </div><div class="item-price"><span>As low as</span> $9.30 </div><div class="ve-code"> Ex. Vat: sp2007 </div><div class="clearfix"></div><div class="pro-button"> <ul> <li><a href="#" data-toggle="tooltip" data-placement="top" title="Add to cart"><i class="fa fa-shopping-cart fa-fw"> </i> Add to cart</a> </li><li><a class="js-pro-compare" href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Compare"><i class="fa fa-retweet fa-fw"> </i></a> </li></ul> <div class="clearfix"></div></div></div><div class="clearfix"></div><a class="product-delete-btn quick-delete wishlist-delete-record" data-toggle="tooltip" data-placement="top" data-original-title="Remove"> <i class="fa fa-trash-o"></i></a> </div></div><!-- <div class="col-sm-12 col-md-6 col-lg-4 col-xs-12 product-wrap"> <div class="pro-box"> <div class="pro-image"> <div class="product-rating-top-block"> <div class="rating"><i class="fa fa-star-o"></i><i class="fa fa-star-o"></i><i class="fa fa-star-o"></i><i class="fa fa-star-o"></i><i class="fa fa-star-o"></i> </div></div>--><!-- <div class="col-sm-12 col-md-12 col-lg-12 col-xs-12"> <div class="product-loding-block"> <h2><i class="fa fa-circle-o-notch fa-spin"></i> Wait a momment...it\'s loading!</h2> </div></div>--> </div></div></div></div></div></div></div></WishList>',
+        attributes: {
+            class: 'fa fa-list-alt',
+            title: 'WishList',
+        },
+        category: 'Key-Innovation'
+    });
+
+
+    //Custom Form form Component
+    bm.add('Footer', {
+        label: 'Footer',
+        content: '<div><link href="https://s3-us-west-2.amazonaws.com/airflowbucket1/flowz-builder/key-innovation/css/base.css" rel="stylesheet" type="text/css"/><div class="middle-footer"> <div class="container"> <div class="row"> <div class="col-lg-3 col-md-3 col-sm-4 col-xs-12"> <div class="common-title"> <h3 class="footer-heading">My Account</h3> </div><div class="clearfix"></div><ul class="list-unstyled footer-link"> <li><a href="javascript:void(0);">My Account</a></li><li><a href="javascript:void(0);">Order Status</a></li><li><a href="javascript:void(0);">Upload Artwork</a></li></ul> </div><div class="col-lg-3 col-md-3 col-sm-4 col-xs-12"> <div class="common-title"> <h3 class="footer-heading">ABOUT US</h3> </div><div class="clearfix"></div><ul class="list-unstyled footer-link"> <li><a href="#">home</a></li><li><a href="#">our story</a></li><li><a href="#">Our People</a></li><li><a href="#">Our Work</a></li></ul> </div><div class="col-lg-3 col-md-3 col-sm-4 col-xs-12"> <div class="common-title"> <h3 class="footer-heading">INFORMATION</h3> </div><div class="clearfix"></div><ul class="list-unstyled footer-link"> <li><a href="javascript:void(0);">RESOURCES AND BLOG</a></li><li><a href="javascript:void(0);">CUSTOMER REVIEWS</a></li><li><a href="javascript:void(0);">PRIVACY POLICY</a></li><li><a href="#">Artwork Guide</a></li><li><a href="javascript:void(0);">TERMS & CONDITIONS</a></li></ul> </div><div class="col-lg-3 col-md-3 col-sm-12 col-xs-12"> <div class="common-title"> <h3 class="footer-heading">Contact Details</h3> </div><div class="clearfix"></div><ul class="footer-contact-detail footer-link"> <li class="phone-number">(604) 589 5268</li><li class="email-contact"><a href="mailto:info@keypromo.com">info@keypromo.com</a></li><li class="address-contact"><a target="_blank" href="https://www.google.co.in/maps/place/Key+Innovations/@49.168376,-122.8023117,17z/data=!3m1!4b1!4m5!3m4!1s0x5485d75059c9ae91:0x6208491ffef7bdfd!8m2!3d49.168376!4d-122.800123!6m1!1e1">Key Innovations Inc.<br>#13, 15243 - 91 Avenue <br>Surrey BC V3R 9K2</a></li></ul> </div></div><div class="social-icon-box"> <div class="pull-left"> <ul> <li class="social-icon"> <a href="#"><i class="fb-icon strip-icon"></i></a> </li><li class="social-icon"> <a href="#"><i class="twitter-icon strip-icon"></i></a> </li><li class="social-icon"> <a href="#"><i class="g-plus-icon strip-icon"></i></a> </li><li class="social-icon"> <a href="#"><i class="in-icon strip-icon"></i></a> </li><li class="social-icon"> <a href="#"><i class="yt-icon strip-icon"></i></a> </li><li class="social-icon"> <a href="#"><i class="instagram-icon strip-icon"></i></a> </li><li class="social-icon"> <a href="#"><i class="gpl-icon strip-icon"></i></a> </li></ul> </div><div class="pull-right"> <p class="newslatter">GET DEALS AND IDEAS FROM US</p><form class="form-inline news-box" role="form"> <div class="form-group"> <input type="email" class="form-control" id="exampleInputEmail2" placeholder="Enter your email Address"> </div><button type="submit" class="btn btn-default">SUBSCRIBE</button> </form> </div><div class="clearfix"></div></div></div></div><div class="bottom-footer"> <div class="container"> <span class="pull-left">Powered by : <a href="https://www.officebeacon.com/" target="_blank"><img src="images/officebeacon-light.png" alt=""></a></span> <span class="col-xs-8 text-center">Copyright © 2017 Key Innovations Inc. All rights reserved</span> </div></div><div class="modal fade model-popup-black" id="track-order" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;"> <div class="modal-dialog track-popup-block"> <div class="modal-content track-info-block"> <a href="#" class="close" data-dismiss="modal" aria-label="Close"><i class="fa fa-times"></i></a> <div class="modal-header"> <h1 class="modal-title"><i class="fa fa-truck"></i> Track your Order</h1> </div><div class="modal-body"> <div class="row"> <div class="col-xs-12"> <div class="col-sm-6 col-lg-6 col-xs-12 track-border"> <div class="view-stauts-block"> <form action="#"> <div class="form-group"> <label class="checkout-label" for="LastName">Email</label> <input type="text" class="input" tabindex="1"> <small class="form-note">Enter Email ID used to place the order</small> </div><div class="form-group"> <label class="checkout-label" for="LastName">Order ID</label> <input type="text" class="input" tabindex="1"> </div><div class="btn-view-status"> <input type="submit" class="btn btn-default" value="View Order Status" tabindex="17"> </div></form> </div></div><div class="col-sm-6 col-lg-6 col-xs-12"> <div class="track-login-block"> <div class="track-to-login"> <h2>Login And Do More</h2> <ul class="track-guide"> <li><i class="fa fa-star"></i>Track individual Orders</li><li><i class="fa fa-star"></i>View your entire Order history</li><li><i class="fa fa-star"></i>Conveniently review products and Re-Order</li><li><i class="fa fa-star"></i>Receive special &amp; selected category newsletters.</li></ul> </div><div class="btn-track-signin"> <a href="#" class="btn btn-default track-login"><i class="fa fa-sign-out"></i> Login</a> </div></div></div></div></div></div></div></div></div><div class="modal fade model-popup-black " id="saved-search-popup" tabindex="-1" role="dialog" aria-hidden="true"> <div class="modal-dialog"> <div class="modal-content"> <a href="#" class="close" data-dismiss="modal" aria-label="Close">&times;</a> <div class="modal-header"> <h1 class="modal-title" ><i class="fa fa-search"></i>SAVE SEARCH</h1> </div><div class="modal-body"> <div class="row"> <div class="col-sm-12 form-group">Enter your search name<span class="red">*</span> <input type="text" value="" class="" id="js_search_name" required="required" name="js_search_name"><ul class="error-message" id="save_error"><li></li></ul><br><br><br><input type="button" value="submit" data-attribute="" class="js_search_name"></div></div></div></div></div></div>=<div class="ob-mask fade js-mask"></div></div>',
+        attributes: {
+            class: 'fa fa-list-alt',
+            title: 'Footer',
+        },
+        category: 'Key-Innovation'
+    });
+
+
+    // E-comm WishList
+    bm.add('WishList_Button', {
+        label: 'WishList_Button',
+        content: {
+            script: "",
+            content: '<div><a href=""><i class="fa fa-heart"> Add to Wishlist</i></a></div>'
+        },
+        attributes: {
+            class: 'fa fa-heart',
+            title: 'WishList_Button',
+        },
+        category: 'Ecommerce Component'
+    });
+
+    // E-comm Add to cart
+    bm.add('cartButton', {
+        label: 'cartButton',
+        content: {
+            script: "",
+            content: '<div><a href=""><i class="fa fa-shopping-cart">Add to cart </i></a></div>'
+        },
+        attributes: {
+            class: 'fa fa-shopping-cart',
+            title: 'cartButton',
+        },
+        category: 'Ecommerce Component'
+    });
+
+
+    // E-comm Add to cart
+    bm.add('CompareButton', {
+        label: 'CompareButton',
+        content: {
+            script: "",
+            content: '<div><a href=""><a href=""><i class="fa fa-retweet">Add to Compare</i></a></div>'
+        },
+        attributes: {
+            class: 'fa fa-retweet',
+            title: 'CompareButton',
+        },
+        category: 'Ecommerce Component'
+    });
+
+    // E-comm Add to cart
+    bm.add('More_Details', {
+        label: 'More_Details',
+        content: {
+            script: "",
+            content: '<div><a href=""><i class="fa fa-list-alt">More details</i></a></div>'
+        },
+        attributes: {
+            class: 'fa fa-list-alt',
+            title: 'More_Details',
+        },
+        category: 'Ecommerce Component'
+    });
+
+    // E-comm Image
+    bm.add('image_ecomm', {
+        label: 'image_ecomm',
+        content: {
+            script: "",
+            content: '<div><img src="http://placehold.it/200x150" class="img-responsive center-block" alt=""></div>'
+        },
+        attributes: {
+            class: 'fa fa-picture-o',
+            title: 'Image',
+        },
+        category: 'Ecommerce Component'
+    });
+
+    // E-comm Name
+    bm.add('Name', {
+        label: 'Name',
+        content: {
+            script: "",
+            content: '<div><p>ProductName</p></div>'
+        },
+        attributes: {
+            class: 'fa fa-pencil-square',
+            title: 'Name',
+        },
+        category: 'Ecommerce Component'
+    });
+
+
+    // E-comm ProductList
+    bm.add('ProductList', {
+        label: 'ProductList',
+        content: {
+            script: "",
+            content: '<div class="col-md-3" style="border: 1px solid black; min-height:40px">  </div>'
+        },
+        attributes: {
+            class: 'fa fa-list',
+            title: 'ProductList',
+        },
+        category: 'Ecommerce Component'
+    });
+
 
 
     // Get DomComponents module
