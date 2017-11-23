@@ -3405,7 +3405,7 @@ grapesjs.plugins.add('product-plugin', function (editor, options) {
             class: 'fa fa-list-alt',
             title: 'Header',
         },
-        category: 'Key-Innovation'
+        category: 'Ecommerce Compoent'
     });
 
     //Custom Form form Component
@@ -3416,7 +3416,7 @@ grapesjs.plugins.add('product-plugin', function (editor, options) {
             class: 'fa fa-list-alt',
             title: 'WishList',
         },
-        category: 'Key-Innovation'
+        category: 'Ecommerce Compoent'
     });
 
 
@@ -3428,7 +3428,7 @@ grapesjs.plugins.add('product-plugin', function (editor, options) {
             class: 'fa fa-list-alt',
             title: 'Footer',
         },
-        category: 'Key-Innovation'
+        category: 'Ecommerce Compoent'
     });
 
 
@@ -3443,7 +3443,7 @@ grapesjs.plugins.add('product-plugin', function (editor, options) {
             class: 'fa fa-heart',
             title: 'WishList_Button',
         },
-        category: 'Ecommerce Component'
+        category: 'Ecommerce Compoent'
     });
 
     // E-comm Add to cart
@@ -3457,7 +3457,7 @@ grapesjs.plugins.add('product-plugin', function (editor, options) {
             class: 'fa fa-shopping-cart',
             title: 'cartButton',
         },
-        category: 'Ecommerce Component'
+        category: 'Ecommerce Compoent'
     });
 
 
@@ -3472,7 +3472,7 @@ grapesjs.plugins.add('product-plugin', function (editor, options) {
             class: 'fa fa-retweet',
             title: 'CompareButton',
         },
-        category: 'Ecommerce Component'
+        category: 'Ecommerce Compoent'
     });
 
     // E-comm Add to cart
@@ -3486,7 +3486,7 @@ grapesjs.plugins.add('product-plugin', function (editor, options) {
             class: 'fa fa-list-alt',
             title: 'More_Details',
         },
-        category: 'Ecommerce Component'
+        category: 'Ecommerce Compoent'
     });
 
     // E-comm Image
@@ -3500,7 +3500,7 @@ grapesjs.plugins.add('product-plugin', function (editor, options) {
             class: 'fa fa-picture-o',
             title: 'Image',
         },
-        category: 'Ecommerce Component'
+        category: 'Ecommerce Compoent'
     });
 
     // E-comm Name
@@ -3514,23 +3514,23 @@ grapesjs.plugins.add('product-plugin', function (editor, options) {
             class: 'fa fa-pencil-square',
             title: 'Name',
         },
-        category: 'Ecommerce Component'
+        category: 'Ecommerce Compoent'
     });
 
 
     // E-comm ProductList
-    bm.add('ProductList', {
-        label: 'ProductList',
-        content: {
-            script: "",
-            content: '<div class="col-md-3" style="border: 1px solid black; min-height:40px">  </div>'
-        },
-        attributes: {
-            class: 'fa fa-list',
-            title: 'ProductList',
-        },
-        category: 'Ecommerce Component'
-    });
+    // bm.add('ProductList', {
+    //     label: 'ProductList',
+    //     content: {
+    //         script: "",
+    //         content: '<div class="col-md-3" style="border: 1px solid black; min-height:40px">  </div>'
+    //     },
+    //     attributes: {
+    //         class: 'fa fa-list',
+    //         title: 'ProductList',
+    //     },
+    //     category: 'Ecommerce Component'
+    // });
 
 
 
