@@ -962,6 +962,19 @@ grapesjs.plugins.add('product-plugin', function (editor, options) {
         category: 'Special Component'
     });
 
+
+    // Full Home Page Layout
+    bm.add('ReUseVueComponent', {
+        label: 'ReUseVue Component',
+        content: '<ReUseVueComponent style="display: block; width: 100%; min-height:20px"><div style="border:solid black 2px"></div></ReUseVueComponent>',
+        attributes: {
+            class: 'fa fa-home',
+            title: 'ReUseVue Component'
+        },
+        category: 'Special Component'
+    });
+
+
     bm.add('progressBar', {
         label: 'Progress Bar',
         content: '<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"><progressBar style="display: block; width: 100%; padding: 5px"><div class="progress"><div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width:40%"> 40%</div></div></progressBar>',
@@ -4286,14 +4299,15 @@ grapesjs.plugins.add('product-plugin', function (editor, options) {
             request.setRequestHeader("Content-type", "application/json");
             request.send();
             resp = JSON.parse(request.responseText);
-
+            console.log("resp", resp)
             for (let index = 0; index < resp.length; index++) {
                 request.open("POST", 'http://localhost:3030/get-directory-list?folderUrl=' + folderUrl + '/' + "Partials/" + resp[i], false);
                 request.setRequestHeader("Content-type", "application/json");
                 request.send();
                 resp2 = JSON.parse(request.responseText);
             }
-
+            console.log("resp2",resp2)
+           
             if (resp.length != 0 && resp[i] != "Menu") {
                 if (resp2.length >= 2) {
                     for (let j = 0; j < resp2.length; j++) {
@@ -4351,8 +4365,16 @@ grapesjs.plugins.add('product-plugin', function (editor, options) {
                     label = $(this.options[this.selectedIndex]).closest('optgroup').prop('label');
                     selected_value = $("#Div1 option:selected").text();
                     let model = editor.getSelected();
-                    model.components("");
-                    model.components("{{> " + label + " id='" + selected_value + ".html' }}");
+                    var split_selected_value = selected_value.split(".");
+                    if (split_selected_value[1] == "html") {
+                        model.components("");
+                        model.components("{{> " + label + " id='" + selected_value + " }}");
+                    } else if (split_selected_value[1] == "vue"){
+                        // let string = "component"
+                        //let string = '{component :is="' + split_selected_value[0] + '"}' + selected_value + '{/component}'
+                        //model.components('{component :is="' + split_selected_value[0] + '"}' + selected_value + '{/component}');
+                        model.components('<component :is="' + split_selected_value[0] + '">' + selected_value + '</component>');
+                    }
                 });
             },
             defaults: Object.assign({}, defaultModel.prototype.defaults, {
@@ -4384,8 +4406,192 @@ grapesjs.plugins.add('product-plugin', function (editor, options) {
     });
 
 
+    // ReUseVue Component
+    // var storedTemplates = JSON.parse(localStorage.getItem("listOfTempaltes"));
+    var folderUrl = localStorage.getItem("folderUrl");
+
+    configFileUrl = 'http://localhost:3030/flows-dir-listing/0?path=' + folderUrl + '/assets/config.json';
+    $.getJSON(configFileUrl, function (data) {
+        var configData = JSON.parse(data);
+        console.log('Config Data:', configData);
+        storedTemplates = Object.keys(configData[2].layoutOptions[0]);
+    });
+
+    var partialOptionsVue = {};
+
+    setTimeout(function () {
+        for (var i = 0; i < storedTemplates.length; i++) {
+            console.log("value...", storedTemplates[i])
+            if (storedTemplates[i] == 'Layout' || storedTemplates[i] == 'pages' || storedTemplates[i] == '.git' || storedTemplates[i] == 'main-files' || storedTemplates[i] == 'assets') {
+                storedTemplates.splice(i, 1)
+            }
+        }
 
 
+        // let arr_to_print = []
+        // var folderUrl = localStorage.getItem("folderUrl");
+        for (var i = 0; i <= storedTemplates.length - 1; i++) {
+            var request = new XMLHttpRequest();
+            console.log("folderUrl", folderUrl)
+            request.open("POST", 'http://localhost:3030/get-directory-list?folderUrl=' + folderUrl + '/' + "Partials", false);
+            request.setRequestHeader("Content-type", "application/json");
+            request.send();
+            resp = JSON.parse(request.responseText);
+            console.log("resp", resp)
+            for (let index = 0; index < resp.length; index++) {
+                request.open("POST", 'http://localhost:3030/get-directory-list?folderUrl=' + folderUrl + '/' + "Partials/" + resp[i], false);
+                request.setRequestHeader("Content-type", "application/json");
+                request.send();
+                resp2 = JSON.parse(request.responseText);
+            }
+            //for (let k = 0; k < resp2.length; k++) {
+                //console.log("resp2[k]",resp2[k])
+                //var split_selected_value = resp2[k].split(".");
+                //if (split_selected_value[1] == "vue") {
+                    if (resp.length != 0 && resp[i] != "Menu") {
+                        console.log("resp",resp)
+                        let counter = 0;
+                        if (resp2.length >= 2) {
+                                for (let j = 0; j < resp2.length; j++) {
+                                    var split_selected_value = resp2[j].split(".");
+                                    if (split_selected_value[1] == "vue") {
+                                        console.log("inside")
+                                        if (counter == 0) {
+                                            partialOptionsVue[resp[i]] = [{ 'name': resp2[j] }]
+                                        } else {
+                                            partialOptionsVue[resp[i]].push({ 'name': resp2[j] })
+                                        }
+                                }
+                            } 
+                        }   else {
+                            var resp3 = resp2.toString();
+                            var substring = "vue";
+                            if (resp3.indexOf(substring) !== -1) {
+                                partialOptionsVue[resp[i]] = [{ 'name': resp2 }]
+                            }
+                        }
+                    }
+                //}
+            //}
+        }
+    }, 1000);
+
+
+    editor.TraitManager.addType('customConent2', {
+
+        /**
+         * Returns the input element
+         * @return {HTMLElement}
+         */
+        getInputEl: function () {
+            if (!this.inputEl) {
+                var input = document.createElement('select');
+                input.setAttribute("id", "Div1");
+                input.setAttribute("name", "Div1");
+                input.setAttribute("style", "background:#363636");
+                $.each(partialOptionsVue, function (key, value) {
+                    console.log('================' + key);
+                    var group = $('<optgroup label="' + key + '" />');
+                    $.each(value, function () {
+                        $('<option />').html(this.name).appendTo(group);
+                    });
+                    group.appendTo(input);
+                });
+                input.value = this.target.get('customConent1');
+                this.inputEl = input;
+            }
+            return this.inputEl;
+        },
+
+    });
+
+    comps.addType('ReUseVueComponent', {
+        model: defaultModel.extend({
+            init() {
+                this.listenTo(this, 'change:selectPartial', this.doStuff);
+            },
+            doStuff() {
+                var label, selected_value;
+                var folderUrl = localStorage.getItem("folderUrl");
+                $('#Div1').on('click', function () {
+                    label = $(this.options[this.selectedIndex]).closest('optgroup').prop('label');
+                    selected_value = $("#Div1 option:selected").text();
+                    let model = editor.getSelected();
+                    var split_selected_value = selected_value.split(".");
+                    if (split_selected_value[1] == "vue") {
+                        // let string = "component"
+                        //let string = '{component :is="' + split_selected_value[0] + '"}' + selected_value + '{/component}'
+                        //model.components('{component :is="' + split_selected_value[0] + '"}' + selected_value + '{/component}');
+                        model.components('<component :is="' + split_selected_value[0] + '">' + selected_value + '</component>');
+                    }
+                });
+            },
+            defaults: Object.assign({}, defaultModel.prototype.defaults, {
+                editable: true,
+                droppable: true,
+                traits: [{
+                    label: 'PartialName',
+                    name: 'selectPartial',
+                    type: 'customConent2',
+                    changeProp: 1,
+                }
+                ],
+            }),
+        }, {
+                isComponent: function (el) {
+                    if (el.tagName == 'REUSEVUECOMPONENT') {
+                        return {
+                            type: 'ReUseVueComponent'
+                        };
+                    }
+                },
+            }),
+        view: defaultType.view,
+        render: function () {
+            defaultType.view.prototype.render.apply(this, arguments);
+            this.el.placeholder = 'Text here';
+            return this;
+        },
+    });
+
+
+
+    comps.addType('component', {
+        // Define the Model
+        model: defaultModel.extend({
+            // Extend default properties
+            defaults: Object.assign({}, defaultModel.prototype.defaults, {
+                editable: true,
+                droppable: true,
+                traits: [
+                    {
+                        label: 'options',
+                        name: 'options',
+                        type: 'text'
+                    }
+                ],
+            }),
+
+        }, {
+                isComponent: function (el) {
+                    if (el.tagName == 'COMPONENT') {
+                        return {
+                            type: 'component'
+                        };
+                    }
+                },
+            }),
+
+        view: defaultType.view,
+
+        // The render() should return 'this'
+        render: function () {
+            // Extend the original render method
+            defaultType.view.prototype.render.apply(this, arguments);
+            this.el.placeholder = 'Text here'; // <- Doesn't affect the final HTML code
+            return this;
+        },
+    });
 
 
 

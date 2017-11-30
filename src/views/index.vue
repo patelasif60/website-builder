@@ -1533,9 +1533,8 @@ export default {
 
     // Create new Website
     addProjectFolder() {
-
       this.fullscreenLoading = true;
-
+      console.log("this.currentFile.path", this.currentFile.path)
       let newFolderName = this.currentFile.path.replace(/\\/g, "\/") + '/' + this.formAddProjectFolder.projectName;
       return axios.post(config.baseURL + '/flows-dir-listing', {
           foldername: newFolderName,
