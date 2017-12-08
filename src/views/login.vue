@@ -83,48 +83,64 @@ export default {
 	forgot () {
     	console.log('!!!forgot password request received!!!')
   	},
-    validate (formName) {
-      this.$refs[formName].validate((valid) => {
+    async validate (formName) {
+      this.$refs[formName].validate(async (valid) => {
         if (valid) {
           this.form.isLoading = true;
             // http://162.242.223.167:3001/api/login
-            axios.post('http://ec2-54-88-11-110.compute-1.amazonaws.com/api/login', {
+            await axios.post('http://ec2-54-88-11-110.compute-1.amazonaws.com/api/login', {
               password: this.form.pass,
               email: this.form.user
             }, {
               headers: {
                 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
               }
-            }).then(response => {
+            }).then(async response => {
               if (response.data) {
                 this.$session.start()
-                this.$session.set('token', response.data.token)
-                this.$session.set('username', this.form.user)
+                console.log("response",response)
+                this.$session.set('token', response.data.logintoken)
+                console.log("token",response.data.logintoken)
+                this.$session.set('email', this.form.user)
                 // Vue.http.headers.common['Authorization'] = 'Bearer ' + response.data.token
                 this.form.isLoading = false;
-                this.$router.push('/');
+                // this.$router.push('/');
+
+                await axios.get( config.baseURL + '/user-service?email=' + this.form.user + '&password=' + this.form.pass, {
+                }).then(response => {
+                  if (response.data) {
+                      console.log(response.data.private_token);
+                      console.log(response.data.id);
+                      this.$session.set('privateToken', response.data.private_token);
+                      this.$session.set('userId', response.data.id);
+                      this.$session.set('username', response.data.username);
+                      console.log("Username:", this.$session.get('username'));
+                      // Create user Folder
+                      //let newFolderName = this.currentFile.path.replace(/\\/g, "\/") + '/' + this.formAddProjectFolder.projectName;
+                      axios.post(config.baseURL+'/flows-dir-listing' , {
+                        foldername :'/var/www/html/websites/'+ this.$session.get('username'),
+                        type : 'folder'
+                      })
+                      .then((res) => {
+                        console.log('user Folder created!');
+                      })
+                      .catch((e)=>{
+                        console.log("Error from pages"+res)
+                      });
+                      this.$router.push('/');
+                  }
+                }).catch(error => {
+                  console.log(error);
+                  this.$notify.error({
+                    title: 'Error',
+                    message: error.response.data,
+                    offset: 100
+                  });
+                  this.form.isLoading = false;
+                })
               }
 
-              axios.get( config.baseURL + '/user-service?email=' + this.form.user + '&password=' + this.form.pass, {
-              }).then(response => {
-                if (response.data) {
-                    console.log(response.data.private_token);
-                    console.log(response.data.id);
-                    this.$session.set('privateToken', response.data.private_token);
-                    this.$session.set('userId', response.data.id);
-                    this.$session.set('username', response.data.username);
-                    console.log("Username:", this.$session.get('username'));
-                    this.$router.push('/');
-                }
-              }).catch(error => {
-                console.log(error);
-                this.$notify.error({
-                  title: 'Error',
-                  message: error.response.data,
-                  offset: 100
-                });
-                this.form.isLoading = false;
-              })
+              
 
             }).catch(error => {
               this.$notify.error({

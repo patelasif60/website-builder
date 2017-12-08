@@ -149,6 +149,69 @@
                     <el-button type="primary" @click="addProjectFolder()" v-loading.fullscreen.lock="fullscreenLoading">Create Project</el-button>
                 </span>
               </el-dialog>
+
+              <el-dialog title="SORRY! You have created Enough sites for choosen package. Want to Upgrade?" :visible.sync="buyNowDialog">
+                  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
+                  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+                  <link rel='stylesheet' href='https://s3-us-west-2.amazonaws.com/airflowbucket1/flowz-builder/css/froala_blocks.css'/>
+
+                    <div class="container">
+                      <div class="row mt-5 align-items-center">
+                        <div class="col-12 col-sm-10 col-md-8 col-md-8 m-auto col-lg-4 text-center">
+                          <div class="bg-dark pb-5 pt-5 pl-3 pr-3 br">
+                            <h2 class="font-weight-light">Hobby</h2>
+                            <p class="text-h2">
+                              <strong>$9 / month</strong>
+                            </p>
+                            <p class="text-h3">Offers you'll get for this package</p>
+                            <ul class="text-left mt-5 mb-5">
+                              <li>Website - 5</li>
+                              <li>Unlimited Storage</li>
+                            </ul>
+                            <p>
+                              <a href="#" class="btn mt-4">Buy</a>
+                            </p>
+                          </div>
+                        </div>
+                        <div class="col-12 col-sm-10 col-md-8 col-md-8 m-auto col-lg-4 text-center pt-4 pt-lg-0">
+                          <div class="bg-dark pb-5 pt-5 pl-3 pr-3 fdb-touch br">
+                            <h2 class="font-weight-light">Professional</h2>
+                            <p class="text-h2">
+                              <strong>$19 / month</strong>
+                            </p>
+                            <p class="text-h3">Offers you'll get for this package</p>
+                            <ul class="text-left mt-5 mb-5">
+                              <li>Website - 8</li>
+                              <li>Unlimited Storage</li>
+                            </ul>
+                            <p>
+                              <a href="#" class="btn mt-4">Buy</a>
+                            </p>
+                          </div>
+                        </div>
+                        <div class="col-12 col-sm-10 col-md-8 col-md-8 m-auto col-lg-4 text-center pt-4 pt-lg-0">
+                          <div class="bg-dark pb-5 pt-5 pl-3 pr-3 br">
+                            <h2 class="font-weight-light">Business</h2>
+                            <p class="text-h2">
+                              <strong>$49 / month</strong>
+                            </p>
+                            <p class="text-h3">Offers you'll get for this package</p>
+                            <ul class="text-left mt-5 mb-5">
+                              <li>Website - 13</li>
+                              <li>Unlimited Storage</li>
+                            </ul>
+                            <p>
+                              <a href="#" class="btn mt-4">Buy</a>
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                <span slot="footer" class="dialog-footer">
+                    <el-button @click="buyNowDialog = false">Cancel</el-button>
+                </span>
+              </el-dialog>
+
             </div>
 
             <div v-if="isHomePage === true">
@@ -216,6 +279,68 @@
                 <span slot="footer" class="dialog-footer">
                     <el-button @click="newProjectFolderDialog = false">Cancel</el-button>
                     <el-button type="primary" @click="addProjectFolder()" v-loading.fullscreen.lock="fullscreenLoading">Create Project</el-button>
+                </span>
+              </el-dialog>
+              <el-dialog title="SORRY! You have created Enough sites for choosen package. Want to Upgrade?" :visible.sync="buyNowDialog">
+                  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
+                  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+                  <link rel='stylesheet' href='https://s3-us-west-2.amazonaws.com/airflowbucket1/flowz-builder/css/froala_blocks.css'/>
+
+                  
+                    <div class="container">
+                      <div class="row mt-5 align-items-center">
+                        <div class="col-12 col-sm-10 col-md-8 col-md-8 m-auto col-lg-4 text-center">
+                          <div class="bg-dark pb-5 pt-5 pl-3 pr-3 br">
+                            <h2 class="font-weight-light">Hobby</h2>
+                            <p class="text-h2">
+                              <strong>$9 / month</strong>
+                            </p>
+                            <p class="text-h3">Offers you'll get for this package</p>
+                            <ul class="text-left mt-5 mb-5">
+                              <li>Website - 5</li>
+                              <li>Unlimited Storage</li>
+                            </ul>
+                            <p>
+                              <a href="#" class="btn mt-4">Buy</a>
+                            </p>
+                          </div>
+                        </div>
+                        <div class="col-12 col-sm-10 col-md-8 col-md-8 m-auto col-lg-4 text-center pt-4 pt-lg-0">
+                          <div class="bg-dark pb-5 pt-5 pl-3 pr-3 fdb-touch br">
+                            <h2 class="font-weight-light">Professional</h2>
+                            <p class="text-h2">
+                              <strong>$19 / month</strong>
+                            </p>
+                            <p class="text-h3">Offers you'll get for this package</p>
+                            <ul class="text-left mt-5 mb-5">
+                              <li>Website - 8</li>
+                              <li>Unlimited Storage</li>
+                            </ul>
+                            <p>
+                              <a href="#" class="btn mt-4">Buy</a>
+                            </p>
+                          </div>
+                        </div>
+                        <div class="col-12 col-sm-10 col-md-8 col-md-8 m-auto col-lg-4 text-center pt-4 pt-lg-0">
+                          <div class="bg-dark pb-5 pt-5 pl-3 pr-3 br">
+                            <h2 class="font-weight-light">Business</h2>
+                            <p class="text-h2">
+                              <strong>$49 / month</strong>
+                            </p>
+                            <p class="text-h3">Offers you'll get for this package</p>
+                            <ul class="text-left mt-5 mb-5">
+                              <li>Website - 13</li>
+                              <li>Unlimited Storage</li>
+                            </ul>
+                            <p>
+                              <a href="#" class="btn mt-4">Buy</a>
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                <span slot="footer" class="dialog-footer">
+                    <el-button @click="buyNowDialog = false">Cancel</el-button>
                 </span>
               </el-dialog>
             </div>
@@ -303,6 +428,9 @@ import LayoutStats from './LayoutStats'
 
 // Layout Stats
 import PageStats from './PageStats'
+
+// BuyPage 
+import buyPage from './BuyPage'
 
 // New File creation validator
 let checkFileName = (rule, value, callback) => {
@@ -393,7 +521,8 @@ export default {
       },
       dialogFormVisible: false,
       previewLoading: false,
-      dialogvalue: true
+      dialogvalue: true,
+      buyNowDialog: false
     }
   },
   components: {
@@ -409,7 +538,8 @@ export default {
     ProjectStats,
     PartialStats,
     LayoutStats,
-    PageStats
+    PageStats,
+    buyPage
   },
   created () {
     if(!this.$session.exists()){
@@ -537,12 +667,36 @@ export default {
       this.$router.push('/login')
     },
 
+    // checkWebsites(){
+    //   let username_session = this.$session.get('username');
+    //   axios.get(config.baseURL + '/flows-dir-listing?website='+ username_session)
+    //     .then(response => {
+    //       response.data.children = this.getTreeData(response.data);
+    //       console.log("response.data",response.data.children.length)
+    //       if (response.data.children.length == 5) {
+    //         this.buyNowDialog = true;
+    //       } else {
+    //         this.newProjectFolderDialog = true;
+    //       }
+    //     })
+    //     .catch(e => {
+    //       console.log(e);
+    //     });
+    // },
+
     // Get directory listing data
     getData() {
-      axios.get(config.baseURL + '/flows-dir-listing')
+      let username_session = this.$session.get('username');
+      console.log("username_session", username_session)
+      // axios.get(config.baseURL + '/flows-dir-listing')
+      axios.get(config.baseURL + '/flows-dir-listing?website='+ username_session)
         .then(response => {
           response.data.children = this.getTreeData(response.data);
-
+          console.log("response.data",response.data.children.length)
+          if (response.data.children.length > 5) {
+            $( "div" ).remove( ".sideOpener" );
+             this.componentId = 'buyPage';
+          }
           // let foldersVisibility = [];
           // let lengthOfFV;
 
@@ -1426,10 +1580,12 @@ export default {
     // Create new Folder
     addFolder() {
       let newFolderName = this.$store.state.fileUrl.replace(/\\/g, "\/") + '/' + this.formAddFolder.foldername;
-      return axios.post(config.baseURL + '/flows-dir-listing', {
+      let username_session = this.$session.get('username')
+      return axios.post(config.baseURL + '/flows-dir-listing?website=' + username_session, {
+      // return axios.post(config.baseURL + '/flows-dir-listing', {
           foldername: newFolderName,
           type: 'folder'
-        })
+      })
         .then(async(res) => {
           var storedTemplates = JSON.parse(localStorage.getItem("listOfTempaltes"));
           storedTemplates.push(this.formAddFolder.foldername)
@@ -1531,16 +1687,28 @@ export default {
     //     })
     // },
 
+    buyNow(){
+      return "hello";
+    },
     // Create new Website
     addProjectFolder() {
       this.fullscreenLoading = true;
-      console.log("this.currentFile.path", this.currentFile.path)
+      console.log("this.currentFile.path...........", this.currentFile.path)
+      let username_session = this.$session.get('username');
       let newFolderName = this.currentFile.path.replace(/\\/g, "\/") + '/' + this.formAddProjectFolder.projectName;
+      console.log("newFolderName", newFolderName)
+      let token = this.$session.get('token')
+      console.log("token", token)
       return axios.post(config.baseURL + '/flows-dir-listing', {
           foldername: newFolderName,
           type: 'folder'
-        })
+        },{
+            headers: {
+              'authorization': token
+            }
+            })
         .then((res) => {
+          console.log("res",res)
           this.newProjectFolderDialog = false
           this.addNewProjectFolderLoading = false;
 
@@ -1555,7 +1723,7 @@ export default {
 
                 localStorage.setItem("folderUrl", newFolderName);
                 var folder = localStorage.getItem("folderUrl");
-
+                console.log("newfolderName", newFolderName)
                 axios.post(config.baseURL + '/get-directory-list?folderUrl=' + newFolderName, {
 
                 }).then((response) => {
@@ -1565,22 +1733,12 @@ export default {
                   console.log(e)
                 })
 
-                // axios.post(config.baseURL + '/get-directory-list?folderUrl=' + newFolderName + '/Templates', {
-
-                // }).then((res) => {
-                //   localStorage.setItem("Templates", JSON.stringify(res.data));
-                //   let temp_list = localStorage.getItem("Templates");
-                // })
-                // .catch((e) => {
-                //   console.log(e)
-                // })
-
                 this.newRepoId = response.data.id;
                 this.repoName = response.data.name;
 
                 // Create essential folders
                 this.addOtherFolder(newFolderName)
-
+  
                 this.formAddProjectFolder.projectName = null;
               } else {
                 console.log(response);
@@ -1599,6 +1757,11 @@ export default {
 
         })
         .catch((e) => {
+          console.log("hello2")
+          // this.componentId = 'buyPage';
+          this.newProjectFolderDialog = false;
+          this.fullscreenLoading = false;
+          this.buyNowDialog = true;
           console.log(e)
         });
     },
@@ -4775,6 +4938,18 @@ export default {
                   </el-tooltip>
                 </span>
             </span>)  
+        } else if(node.level == 1){
+          return (<span>
+              <span class="nodelabel" on-click={ () => this.goToHomePage() }>
+                  <i class="fa fa-list-ul" style="padding: 10px; color: #333"></i>
+                  <span>Websites</span>
+              </span>
+              <span class="">
+                  <el-tooltip content="Create New Website" placement="top">
+                      <i class="fa fa-globe" style="position:absolute; right: 0; padding: 10px; float:right; padding-right:0; margin-right:5px; color: #4A8AF4;"  on-click={ () => this.newProjectFolderDialog = true }></i>
+                  </el-tooltip>
+              </span>
+          </span>)
         } else {
           // If it's a simple directory
           return(<span>
@@ -4853,17 +5028,7 @@ export default {
         
       }else{
         // Root Folder
-        return (<span>
-                  <span class="nodelabel" on-click={ () => this.goToHomePage() }>
-                      <i class="fa fa-list-ul" style="padding: 10px; color: #333"></i>
-                      <span>{node.label}</span>
-                  </span>
-                  <span class="">
-                      <el-tooltip content="Create New Website" placement="top">
-                          <i class="fa fa-globe" style="position:absolute; right: 0; padding: 10px; float:right; padding-right:0; margin-right:5px; color: #4A8AF4;"  on-click={ () => this.newProjectFolderDialog = true }></i>
-                      </el-tooltip>
-                  </span>
-              </span>)
+        return;
       }
     },
 

@@ -963,7 +963,7 @@ grapesjs.plugins.add('product-plugin', function (editor, options) {
     });
 
 
-    // Full Home Page Layout
+    // ReUseVueComponent
     bm.add('ReUseVueComponent', {
         label: 'ReUseVue Component',
         content: '<ReUseVueComponent style="display: block; width: 100%; min-height:20px"><div style="border:solid black 2px"></div></ReUseVueComponent>',
@@ -4271,11 +4271,11 @@ grapesjs.plugins.add('product-plugin', function (editor, options) {
     // ReUse Component
     // var storedTemplates = JSON.parse(localStorage.getItem("listOfTempaltes"));
     var folderUrl = localStorage.getItem("folderUrl");
-
+    let storedTemplates;
     let configFileUrl = 'http://localhost:3030/flows-dir-listing/0?path=' + folderUrl + '/assets/config.json';
     $.getJSON(configFileUrl, function (data) {
         var configData = JSON.parse(data);
-        console.log('Config Data:', configData);
+        //console.log('Config Data:', configData);
         storedTemplates = Object.keys(configData[2].layoutOptions[0]);
     });
 
@@ -4283,7 +4283,7 @@ grapesjs.plugins.add('product-plugin', function (editor, options) {
 
     setTimeout(function () {
         for (var i = 0; i < storedTemplates.length; i++) {
-            console.log("value...", storedTemplates[i])
+            //console.log("value...", storedTemplates[i])
             if (storedTemplates[i] == 'Layout' || storedTemplates[i] == 'pages' || storedTemplates[i] == '.git' || storedTemplates[i] == 'main-files' || storedTemplates[i] == 'assets') {
                 storedTemplates.splice(i, 1)
             }
@@ -4294,19 +4294,18 @@ grapesjs.plugins.add('product-plugin', function (editor, options) {
         // var folderUrl = localStorage.getItem("folderUrl");
         for (var i = 0; i <= storedTemplates.length - 1; i++) {
             var request = new XMLHttpRequest();
-            console.log("folderUrl", folderUrl)
             request.open("POST", 'http://localhost:3030/get-directory-list?folderUrl=' + folderUrl + '/' + "Partials", false);
             request.setRequestHeader("Content-type", "application/json");
             request.send();
             resp = JSON.parse(request.responseText);
-            console.log("resp", resp)
+            //console.log("resp", resp)
             for (let index = 0; index < resp.length; index++) {
                 request.open("POST", 'http://localhost:3030/get-directory-list?folderUrl=' + folderUrl + '/' + "Partials/" + resp[i], false);
                 request.setRequestHeader("Content-type", "application/json");
                 request.send();
                 resp2 = JSON.parse(request.responseText);
             }
-            console.log("resp2",resp2)
+            //console.log("resp2",resp2)
            
             if (resp.length != 0 && resp[i] != "Menu") {
                 if (resp2.length >= 2) {
@@ -4338,7 +4337,7 @@ grapesjs.plugins.add('product-plugin', function (editor, options) {
                 input.setAttribute("name", "Div1");
                 input.setAttribute("style", "background:#363636");
                 $.each(partialOptions, function (key, value) {
-                    console.log('================' + key);
+                    //console.log('================' + key);
                     var group = $('<optgroup label="' + key + '" />');
                     $.each(value, function () {
                         $('<option />').html(this.name).appendTo(group);
@@ -4413,7 +4412,7 @@ grapesjs.plugins.add('product-plugin', function (editor, options) {
     configFileUrl = 'http://localhost:3030/flows-dir-listing/0?path=' + folderUrl + '/assets/config.json';
     $.getJSON(configFileUrl, function (data) {
         var configData = JSON.parse(data);
-        console.log('Config Data:', configData);
+        //console.log('Config Data:', configData);
         storedTemplates = Object.keys(configData[2].layoutOptions[0]);
     });
 
@@ -4421,7 +4420,7 @@ grapesjs.plugins.add('product-plugin', function (editor, options) {
 
     setTimeout(function () {
         for (var i = 0; i < storedTemplates.length; i++) {
-            console.log("value...", storedTemplates[i])
+            //console.log("value...", storedTemplates[i])
             if (storedTemplates[i] == 'Layout' || storedTemplates[i] == 'pages' || storedTemplates[i] == '.git' || storedTemplates[i] == 'main-files' || storedTemplates[i] == 'assets') {
                 storedTemplates.splice(i, 1)
             }
@@ -4432,33 +4431,37 @@ grapesjs.plugins.add('product-plugin', function (editor, options) {
         // var folderUrl = localStorage.getItem("folderUrl");
         for (var i = 0; i <= storedTemplates.length - 1; i++) {
             var request = new XMLHttpRequest();
-            console.log("folderUrl", folderUrl)
+            //console.log("folderUrl", folderUrl)
             request.open("POST", 'http://localhost:3030/get-directory-list?folderUrl=' + folderUrl + '/' + "Partials", false);
             request.setRequestHeader("Content-type", "application/json");
             request.send();
             resp = JSON.parse(request.responseText);
-            console.log("resp", resp)
+            //console.log("resp", resp)
             for (let index = 0; index < resp.length; index++) {
                 request.open("POST", 'http://localhost:3030/get-directory-list?folderUrl=' + folderUrl + '/' + "Partials/" + resp[i], false);
                 request.setRequestHeader("Content-type", "application/json");
                 request.send();
                 resp2 = JSON.parse(request.responseText);
             }
+            let counter = 0;
             //for (let k = 0; k < resp2.length; k++) {
                 //console.log("resp2[k]",resp2[k])
                 //var split_selected_value = resp2[k].split(".");
                 //if (split_selected_value[1] == "vue") {
                     if (resp.length != 0 && resp[i] != "Menu") {
-                        console.log("resp",resp)
-                        let counter = 0;
+                        //console.log("resp",resp)
                         if (resp2.length >= 2) {
                                 for (let j = 0; j < resp2.length; j++) {
                                     var split_selected_value = resp2[j].split(".");
                                     if (split_selected_value[1] == "vue") {
-                                        console.log("inside")
+                                        //console.log("inside")
+                                        console.log("Value of cou",counter)
                                         if (counter == 0) {
+                                            console.log("inside counter condition")
                                             partialOptionsVue[resp[i]] = [{ 'name': resp2[j] }]
+                                            counter++;
                                         } else {
+                                            console.log("Outside counter condition")
                                             partialOptionsVue[resp[i]].push({ 'name': resp2[j] })
                                         }
                                 }
@@ -4490,7 +4493,7 @@ grapesjs.plugins.add('product-plugin', function (editor, options) {
                 input.setAttribute("name", "Div1");
                 input.setAttribute("style", "background:#363636");
                 $.each(partialOptionsVue, function (key, value) {
-                    console.log('================' + key);
+                    //console.log('================' + key);
                     var group = $('<optgroup label="' + key + '" />');
                     $.each(value, function () {
                         $('<option />').html(this.name).appendTo(group);
@@ -4556,6 +4559,56 @@ grapesjs.plugins.add('product-plugin', function (editor, options) {
 
 
 
+editor.TraitManager.addType('customConent3', {
+  events:{
+    'keyup': 'onChange',  // trigger parent onChange method on keyup
+  },
+
+  /**
+  * Returns the input element
+  * @return {HTMLElement}
+  */
+  getInputEl: function() {
+    if (!this.inputEl) {
+        var input = document.createElement('button');
+        var t = document.createTextNode("CLICK");
+        input.setAttribute("id", "button_");
+        input.setAttribute("onclick", "modal(projectnamename,partialname,filename)");
+        //gjs-input-holder
+        input.appendChild(t);
+        document.body.appendChild(input);
+        input.setAttribute("style", "background:#444444");
+        input.value = this.target.get('content');
+        this.inputEl = input;
+    }
+    return this.inputEl;
+  }
+});
+
+// $.fn.slideFadeToggle = function(easing, callback) {
+//     return this.animate({ opacity: 'toggle', height: 'toggle' }, "fast", easing, callback);
+// };
+
+// $(function() {
+//     $("#button_").on('click', function(event) {
+//         console.log("hello")
+//         $(this).addClass("selected").parent().append('Hello');
+//         $(".pop").slideFadeToggle()
+//         $("#email").focus();
+//         return false;
+//     });
+
+//     // $(".close").on('click', function() {
+//     //     $(".pop").slideFadeToggle();
+//     //     $("#contact").removeClass("selected");
+//     //     return false;
+//     // });
+// });
+
+
+
+
+
     comps.addType('component', {
         // Define the Model
         model: defaultModel.extend({
@@ -4568,7 +4621,10 @@ grapesjs.plugins.add('product-plugin', function (editor, options) {
                         label: 'options',
                         name: 'options',
                         type: 'text'
-                    }
+                    },{
+                    type: 'customConent3',
+                    changeProp: 1,
+                }
                 ],
             }),
 
