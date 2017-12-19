@@ -1,0 +1,156 @@
+<html>
+	<header>
+		<style>
+			datafieldgroup {
+				max-width: 500px;
+				border: 1px solid;
+				padding: 10px;
+				display: block;
+			}
+			.fieldGroupRepeater {
+				border: 1px dashed;
+				padding: 10px;
+				margin: 5px 0;
+			}
+			datafieldlist {
+				border: 2px solid;
+				display: block;
+				padding: 10px;
+				margin-left: 10px;
+			}
+			datafieldtext {
+				display: block;
+				border: 1px dashed;
+				margin: 5px;
+				width: 200px;
+			}
+		</style>
+		<head>
+			<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+		</head>
+	</header>
+	<body>
+	<datafieldgroup class="c4231" data-schema="newConnection : person">
+	  <div class="fieldGroupRepeater" id="c4234" >
+	    <datafieldtext class="c4280" data-text-field="name">Insert your text here
+	    </datafieldtext>
+	    <datafieldtext class="c4319" data-text-field="email">Insert your text here
+	    </datafieldtext>
+	    <datafieldlist class="c4433" data-list-field="address">
+	      <div class="fieldListRepeater" id="c4436" >
+					<datafieldtext class="c4482" data-text-field="city">Insert your text here
+					</datafieldtext>
+	   		</div>
+	    </datafieldlist>
+	    <datafieldlist class="c4566" data-list-field="address2">
+	      <div class="fieldListRepeater" id="c4569" >
+	      <datafieldtext class="c5082" data-text-field="test">Insert your text here
+		    </datafieldtext>
+				<datafieldlist class="c4625" data-list-field="address3">
+				  <div class="fieldListRepeater" id="c4628" >
+				    <datafieldtext class="c5082" data-text-field="homeaddress">Insert your text here
+				    </datafieldtext>
+				  </div>
+				</datafieldlist>
+	      </div>
+	    </datafieldlist>
+	  </div>
+	</datafieldgroup>
+
+
+		<script>
+       $(document).ready(function() {
+	           $("datafieldgroup").each(function(e){
+	             var thisObj = $(this);
+	             var schemaVal = $(this).data('schema').split(":");
+	             var connString = $.trim(schemaVal[0]);
+	             var schemaName = $.trim(schemaVal[1]);
+	             var apiUrl = "http://172.16.230.176:3080/connectiondata/"+connString+"?schemaname="+schemaName
+							 var data = "";
+							//  $.getJSON(apiUrl, function(data) {
+	             // var data = '[{"name":"Javid","email":"jrathod@officebrain.com","address":{"street":"Station Road","city":"Vadodara","address2":{"street":"Narmada Bridge","city":"Bharuch","address3":{"street":"Satellite","city":"Ahmedabad"},"address4":{"street":"Narola","city":"Surat"}}},"id":"0ed717c8-486a-4049-8d05-df20a6f0c6ca"},{"name":"Mohit","email":"mshah@officebrain.com","id":"0e2d74cd-43de-44a3-a12d-37a72cabbeb2"}]';
+	             //var data = '[{"name":"Javid","email":"jrathod@officebrain.com","id":"0ed717c8-486a-4049-8d05-df20a6f0c6ca","address":[{"street":"Twitter Office","city":"Delhi","address2":[{"street":"OB Office","city":"Punjab"},{"street":"FLOWZ Office","city":"UP"}]},{"street":"Google Office","city":"Surat","address2":{"street":"FB Office","city":"Mumbai"}}]},{"name":"Mohit","email":"mshah@officebrain.com","id":"0e2d74cd-43de-44a3-a12d-37a72cabbeb2"}]';
+							 //var data = '[{"name":"Javid","email":"jrathod@officebrain.com","id":"0ed717c8-486a-4049-8d05-df20a6f0c6ca","address":[{"street":"Twitter Office","city":"Delhi","address2":[{"street":"OB Office","city":"Punjab"},{"street":"FLOWZ Office","city":"UP"}]},{"street":"Google Office","city":"Surat","address2":{"street":"FB Office","city":"Mumbai"}}]},{"name":"Mohit","email":"mshah@officebrain.com","id":"0e2d74cd-43de-44a3-a12d-37a72cabbeb2","address":[{"street":"Twitter Office","city":"Delhi"}]}]';
+							 //console.log(data);
+							 var data = '[{"name":"Javid","email":"jrathod@officebrain.com","id":"0ed717c8-486a-4049-8d05-df20a6f0c6ca","address":[{"street":"Twitter Office","city":"Delhi","address2":[{"street":"OB Office","city":"Punjab"},{"street":"FLOWZ Office","city":"UP"}]},{"street":"Google Office","city":"Surat","address2":{"street":"FB Office","city":"Mumbai"}}]},{"name":"Mohit","email":"mshah@officebrain.com","id":"0e2d74cd-43de-44a3-a12d-37a72cabbeb2","address":[{"street":"Twitter Office","city":"Delhi"}]}]';
+							  var data = JSON.parse(data);
+							 //console.log(data);
+	             var fieldGroupHtml = $(thisObj).html();
+	             $(thisObj).html("");
+	             $(data).each(function(key,value){
+	               $(thisObj).append(fieldGroupHtml);
+	               var count = key+1;
+	               $(thisObj).find(".fieldGroupRepeater:nth-child("+count+")").find("datafieldtext").each(function(){
+	                 if($(this).parents("datafieldlist").length == 0){
+	                   var dataKey = $(this).data("text-field");
+	                   if(value[dataKey] !== undefined){
+	                      dataFieldTextUpdate($(this),value[dataKey]);
+	                   }
+	                 }
+	               });
+	               $(thisObj).find(".fieldGroupRepeater:nth-child("+count+")").find("datafieldlist").each(function(){
+	                 if($(this).parents("datafieldlist").length == 0){
+	                   var dataListKey = $(this).data("list-field");
+	                   if(value[dataListKey] !== undefined){
+	                      if(value[dataListKey] instanceof Array){
+	                        dataFieldListArray($(this),value[dataListKey],1);
+	                      }else{
+	                        dataFieldList($(this),value[dataListKey],1);
+	                      }
+	                   }
+	                  }
+	               });
+	             });
+	          //  });
+	       });
+
+				 function dataFieldTextUpdate(obj,value){
+					 $(obj).text(value);
+				 }
+				 function dataFieldList(obj,value,level){
+					 $(obj).find("datafieldtext").each(function(){
+						 if($(this).parents("datafieldlist").length <= level){
+							 var dataKey = $(this).data("text-field");
+							 dataFieldTextUpdate($(this),value[dataKey]);
+						 }
+					 });
+					 $(obj).find("datafieldlist").each(function(){
+						 var dataListKey = $(this).data("list-field");
+						 if(value[dataListKey] !== undefined){
+							 level = level+1;
+							 dataFieldList($(this),value[dataListKey],level);
+						 }
+					 });
+				 }
+				 function dataFieldListArray(obj,value,level){
+					 var fieldListHtml = $(obj).html();
+					 $(obj).html("");
+					 $(value).each(function(key,value){
+						 var count = key + 1;
+						 $(obj).append(fieldListHtml);
+						 $(obj).find(".fieldListRepeater:nth-child("+count+")").find("datafieldtext").each(function(){
+							 var dataKey = $(this).data("text-field");
+							 if(value[dataKey] !== undefined){
+									if($(obj).data('list-field') == $(this).closest('datafieldlist').data("list-field")){
+										dataFieldTextUpdate($(this),value[dataKey]);
+									}
+							 }
+						 });
+						 $(obj).find(".fieldListRepeater:nth-child("+count+")").find("datafieldlist").each(function(){
+								 var dataListKey = $(this).data("list-field");
+								 if(value[dataListKey] !== undefined){
+										if(value[dataListKey] instanceof Array){
+											level=level+1;
+											dataFieldListArray($(this),value[dataListKey],level);
+										}else{
+											level=level+1;
+											dataFieldList($(this),value[dataListKey],level);
+										}
+								 }
+						 });
+					 });
+				 }
+				});
+     </script>
+	</body>
+</html>
