@@ -351,10 +351,9 @@ export default {
       var externalCss = rawConfigs[1].projectSettings[1].ProjectExternalCss;
       var metaInfo = rawConfigs[1].projectSettings[1].ProjectMetaInfo;
       var ProjectMetacharset = rawConfigs[1].projectSettings[1].ProjectMetacharset
-      var tophead = '';
-      var endhead = '';
-      var topbody = '';
-      var endbody = '';
+      var projectscripts=rawConfigs[1].projectSettings[1].ProjectScripts
+
+      
       var getFromBetween = {
         results: [],
         string: "",
@@ -387,7 +386,13 @@ export default {
           return this.results;
         }
       };
-      if (ProjectMetacharset != '') {
+      
+      for (let i = 0; i < rawConfigs[1].pageSettings.length; i++) {
+      var tophead = '';
+      var endhead = '';
+      var topbody = '';
+      var endbody = '';
+        if (ProjectMetacharset != '') {
         tophead = tophead + '<meta charset="' + ProjectMetacharset + '">'
       }
 
@@ -425,10 +430,21 @@ export default {
 
         }
       }
-      for (let i = 0; i < rawConfigs[1].pageSettings.length; i++) {
+      if (projectscripts.length > 0) {
+            for (let a = 0; a < projectscripts.length; a++) {
+              if (projectscripts[a].linkposition == 'starthead') {
+                tophead = tophead + '<script type="text/javascript">' + projectscripts[a].script + '<\/script>'
+              } else if (projectscripts[a].linkposition == 'endhead') {
+                endhead = endhead + '<script type="text/javascript">' + projectscripts[a].script + '<\/script>'
+              } else if (projectscripts[a].linkposition == 'startbody') {
+                topbody = topbody + '<script type="text/javascript">' + projectscripts[a].script + '<\/script>'
+              } else if (projectscripts[a].linkposition == 'endbody') {
+                endbody = endbody + '<script type="text/javascript">' + projectscripts[a].script + '<\/script>'
+              }
+            }
+          }
 
         var partials = ''
-
         let responseConfigLoop = await axios.get(config.baseURL + '/project-configuration?userEmail=' + this.$session.get('email') + '&websiteName=' + this.repoName);
 
         var rawSettings = responseConfigLoop.data.data[0].configData;
@@ -437,7 +453,7 @@ export default {
         var Layout = ''
         var partialsPage = [];
         var vuepartials = [];
-
+        var pagescripts=[];
         var layoutdata = '';
         var pageexternalJs = [];
         var pageexternalCss = [];
@@ -453,6 +469,8 @@ export default {
         pageMetaInfo = rawSettings[1].pageSettings[i].PageMetaInfo;
         pageSeoTitle = rawSettings[1].pageSettings[i].PageSEOTitle;
         PageMetacharset = rawSettings[1].pageSettings[i].PageMetacharset;
+        pagescripts=rawSettings[1].pageSettings[i].PageScripts;
+
 
         if (PageMetacharset != '') {
           tophead = tophead + '<meta charset="' + PageMetacharset + '">'
@@ -490,6 +508,20 @@ export default {
             }
           }
         }
+        if (pagescripts.length > 0) {
+            for (let a = 0; a < pagescripts.length; a++) {
+              if (pagescripts[a].linkposition == 'starthead') {
+                tophead = tophead + '<script type="text/javascript">' + pagescripts[a].script + '<\/script>'
+              } else if (pagescripts[a].linkposition == 'endhead') {
+                endhead = endhead + '<script type="text/javascript">' + pagescripts[a].script + '<\/script>'
+              } else if (pagescripts[a].linkposition == 'startbody') {
+                topbody = topbody + '<script type="text/javascript">' + pagescripts[a].script + '<\/script>'
+              } else if (pagescripts[a].linkposition == 'endbody') {
+                endbody = endbody + '<script type="text/javascript">' + pagescripts[a].script + '<\/script>'
+              }
+            }
+          }
+
         if (vuepartials != undefined && vuepartials.length > 0) {
           var mainVuefile = await axios.get(config.baseURL + '/flows-dir-listing/0?path=' + folderUrl + '/assets/back_main.js');
           mainVuefile = mainVuefile.data
@@ -792,13 +824,6 @@ export default {
                                 }).catch((e) => {
                                   console.log(e)
                                 })
-                                // console.log(res);
-                                // await axios.post(config.baseURL + '/flows-dir-listing', {
-                                //         filename: folderUrl + '/Layout/' + Layout + '.layout',
-                                //         text: layoutdata.data,
-                                //         type: 'file'
-                                //     })
-                                //     .then(async (res) => {
                                 if (vuepartials != undefined && vuepartials.length > 0) {
                                   for (let x = 0; x < vuepartials.length; x++) {
 
@@ -917,7 +942,7 @@ export default {
           });
       }
     }
-},
+    },
   async mounted () {
 
     // console.log('Folder Url: ', localStorage.getItem('folderUrl'));

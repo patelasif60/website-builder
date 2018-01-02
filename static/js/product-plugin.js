@@ -1858,85 +1858,70 @@ grapesjs.plugins.add('product-plugin', function(editor, options) {
 
 
 
-
-
-// Reuse Component
-  var folderUrl = localStorage.getItem("folderUrl");
+ var folderUrl = localStorage.getItem("folderUrl");
   var useremail = localStorage.getItem("email");
-
+  let storedTemplates;
+  let configData;
+  let storedTemplates_data
   let foldername = folderUrl.split('/');
   foldername = foldername[(foldername.length - 1)];
 
   let configFileUrl = baseURL + '/project-configuration?userEmail=' + useremail + '&websiteName=' + foldername;
 
-  $.getJSON(configFileUrl, function(data) {
-    var configData = data.data[0].configData;
-    console.log('ReUseVue configData:', configData);
+  $.getJSON(configFileUrl, function (data) {
+    configData = data.data[0].configData;
+    console.log('ReUseVue co2nfigData:', configData);
     storedTemplates = Object.keys(configData[2].layoutOptions[0]);
   });
 
+
   var partialOptions = {};
 
-  setTimeout(function() {
+  setTimeout(function () {
     for (var i = 0; i < storedTemplates.length; i++) {
       if (storedTemplates[i] == 'Layout' || storedTemplates[i] == 'pages' || storedTemplates[i] == '.git' || storedTemplates[i] == 'main-files' || storedTemplates[i] == 'assets') {
-        storedTemplates.splice(i, 1)
+        storedTemplates = storedTemplates.splice(i, 1)
       }
     }
 
 
     for (var i = 0; i <= storedTemplates.length - 1; i++) {
-      var request = new XMLHttpRequest();
-      request.open("POST", baseURL + '/get-directory-list?folderUrl=' + folderUrl + '/' + "Partials", false);
-      request.setRequestHeader("Content-type", "application/json");
-      request.send();
-      resp = JSON.parse(request.responseText);
+      let resp2 = []
+      $.getJSON(configFileUrl, function (data) {
+        configData = data.data[0].configData;
+        // console.log('ReUseVue co2nfigData:', configData);
+        storedTemplates = Object.keys(configData[2].layoutOptions[0]);
+        for (let index = 0; index < storedTemplates.length; index++) {
+          let data_ = storedTemplates[index]
+          for (let index2 = 0; index2 < configData[2].layoutOptions[0][data_].length; index2++) {
+            if (storedTemplates[index].length != 0 && storedTemplates[index] != "Menu" && storedTemplates[index] != "Layout") {
+              if (configData[2].layoutOptions[0][data_].length >= 2) {
+                for (let j = 0; j < configData[2].layoutOptions[0][data_].length; j++) {
+                      if (j == 0) {
+                        partialOptions[storedTemplates[index]] = [{
+                          'name': configData[2].layoutOptions[0][data_][index2].value + '.partial'
+                        }]
 
-      for (let index = 0; index < resp.length; index++) {
-        request.open("POST", baseURL + '/get-directory-list?folderUrl=' + folderUrl + '/' + "Partials/" + resp[i], false);
-        request.setRequestHeader("Content-type", "application/json");
-        request.send();
-        resp2 = JSON.parse(request.responseText);
-      }
+                      } else {
+                        partialOptions[storedTemplates[index]].push({
+                          'name': configData[2].layoutOptions[0][data_][index2].value + '.partial'
+                        })
 
-      if (resp.length != 0 && resp[i] != "Menu") {
-        if (resp2.length >= 2) {
-          for (let j = 0; j < resp2.length; j++) {
-            if (j == 0) {
-              let string_con = resp2[j]
-              string_con = string_con.toString()
-              var res = string_con.split(".");
-              if (res[1] == "partial") {
-                partialOptions[resp[i]] = [{
-                  'name': resp2[j]
-                }]
-              }
-            } else {
-              let string_con = resp2[j]
-              string_con = string_con.toString()
-              var res = string_con.split(".");
-              if (res[1] == "partial") {
-                partialOptions[resp[i]].push({
-                  'name': resp2[j]
-                })
-              }
-            }
-          }
-        } else {
-          str = resp2
-          str = resp2.toString()
-          var res = str.split(".");
-          if (res[1] == "partial") {
-            partialOptions[resp[i]] = [{
-              'name': resp2
-            }]
+                      }
+                    }
+                  } else {
+                        partialOptions[storedTemplates[index]] = [{
+                      'name': configData[2].layoutOptions[0][data_][index2].value + '.partial'
+                    }]
+
+                  }
+                }
           }
         }
-      }
+      });
     }
   }, 1000);
-
-
+  
   editor.TraitManager.addType('customConent1', {
 
     getInputEl: function() {

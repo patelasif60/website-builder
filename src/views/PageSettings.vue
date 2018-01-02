@@ -200,6 +200,57 @@
                <!-- </el-form> -->
             </div>
          </div>
+      </div>
+      <div class="well" id='add-local-scripts'>
+        <div class="row">
+          <div class="col-md-12">
+               <div class="row">
+                  <div class="col-md-4">
+                     <h3> Scripts: </h3>
+                  </div>
+               </div>
+               <hr>
+               <el-form ref="form" :model="form">
+               
+                  <div >
+                     <el-form-item>
+                        <draggable v-model='localpagescripts' @start="drag=true" @end="drag=false">
+                          <div style="margin-bottom: 25px" v-for='(n, index) in localpagescripts' class="row">
+                             <!-- position  -->
+                             <div class="col-md-3" style="margin: 0; padding-left: 15px">
+                                <el-select v-model="n.linkposition" placeholder="Position">
+                                   <el-option
+                                      v-for="item in Allposition"
+                                      :key="item.value"
+                                      :label="item.label"
+                                      :value="item.value">
+                                   </el-option>
+                                </el-select>
+                             </div>
+                             <!-- link url -->
+                             <div class="col-md-6" style="margin: 0; padding: 0px">
+                                <el-input type="textarea" :rows="5" placeholder="script" v-model="n.script"></el-input>
+                             </div>
+                             <!-- Delete Variable -->
+                             <div class="col-md-1">
+                                <el-button class="pull-right" style="min-width: 100%;" type="danger" @click="deletelocalscripts(index)" icon="delete2"></el-button>
+                             </div>
+                             <div class="col-md-1">
+                                <el-button style="min-width: 100%;"><i class="fa fa-arrows"></i></el-button>
+                              
+                             </div>
+                             
+
+                          </div>
+                        </draggable>
+                     </el-form-item>
+                  </div>
+                 
+                  <!-- Create new variable -->
+                  <el-button type="primary" @click="addNewlocalscripts">New script</el-button>
+               </el-form>
+            </div>
+        </div>
       </div>        
         </div>
       </div>
@@ -248,6 +299,7 @@ export default {
         parent_id: []
       },
       AllData: [],
+      localpagescripts:[],
       PageLayout: '',
       PageFooter: '',
       PageHeader: '',
@@ -298,6 +350,10 @@ export default {
       this.isIndeterminate = checkedCount > 0 && checkedCount < this.csses.length;
       console.log('Checked items:', this.checkedCss);
     },
+    addNewlocalscripts(){
+      let newVariable = { linkposition:'',script:''};
+      this.localpagescripts.push(newVariable);
+    },
 
     addNewexternallinkJS() {
       let newVariable = { linktype: 'JS', linkposition: '', linkurl: ''};
@@ -320,6 +376,9 @@ export default {
     deletelinkMeta(deleteIndex) {
       this.externallinksMeta.splice(deleteIndex, 1);
     },
+    deletelocalscripts(deleteIndex){
+      this.localpagescripts.splice(deleteIndex,1);
+    },
 
     async layoutChange() {
       let url = this.$store.state.fileUrl.replace(/\\/g, "\/");
@@ -337,10 +396,10 @@ export default {
 
       let foldername = this.folderUrl.split('/');
       foldername = foldername[(foldername.length - 1)];
+      this.AllData = [];
 
       this.configData = await axios.get(config.baseURL + '/project-configuration?userEmail=' + this.$session.get('email') + '&websiteName=' + foldername);
 
-      this.AllData = [];
       // console.log(this.configData)     Object.keys(this.settings[2].layoutOptions[0]).length
       if (this.configData.status == 200 || this.configData.status == 204) {
 
@@ -431,12 +490,13 @@ export default {
         this.settings[1].pageSettings[this.currentFileIndex].PageMetaInfo=this.externallinksMeta;
         this.settings[1].pageSettings[this.currentFileIndex].PageSEOTitle=this.form.seoTitle;
         this.settings[1].pageSettings[this.currentFileIndex].PageMetacharset=this.Metacharset;
+        this.settings[1].pageSettings[this.currentFileIndex].PageScripts=this.localpagescripts;
         
         for (let j = 0; j < Object.keys(this.form.parent_id).length; j++) {
           if (this.form.parent_id[Object.keys(this.form.parent_id)[j]].partialsList != undefined) {
             var extraPartial = [];
             var hbsvalue;
-            hbsvalue = this.form.parent_id[Object.keys(this.form.parent_id)[j]].value
+            hbsvalue = this.form.parent_id[Object.keys(this.form.parent_id)[j]].label
 
             extraPartial.push(Object.keys(this.form.parent_id)[j])
             var temp1 = (this.form.parent_id[Object.keys(this.form.parent_id)[j]].defaultList)
@@ -471,7 +531,7 @@ export default {
             if (this.form.parent_id[temp] != undefined) {
 
               // console.log("no value defined, hence DEFAULT set:")
-              obj[temp] = this.form.parent_id[temp].value;
+              obj[temp] = this.form.parent_id[temp].label;
               change = false;
             } else {
               let self = this;
@@ -638,6 +698,11 @@ export default {
       } else {
         this.externallinksJS = [];
       }
+      if('PageScripts' in this.settings[1].pageSettings[this.currentFileIndex]){
+        this.localpagescripts = this.settings[1].pageSettings[this.currentFileIndex].PageScripts;
+      } else {
+        this.localpagescripts = [];
+      }
 
       for (var i = 0; i < this.form.layouts.length; i++) {
         if (this.form.layouts[i].label === this.form.Layout) {
@@ -689,10 +754,10 @@ export default {
               }
               else{
                 for(let j=0;j<this.AllData[i].length;j++){
-                  console.log('Object.keys(this.AllData[i][j]):',this.AllData[i][j].value)
+                  console.log('Object.keys(this.AllData[i][j]):',this.AllData[i][j].label)
                   for(let k=0;k<this.form.extrapartial.length;k++){
                     if(Object.keys(this.form.extrapartial[k])==nameP){
-                      if(this.form.extrapartial[k][Object.keys(this.form.extrapartial[k])]==this.AllData[i][j].value){
+                      if(this.form.extrapartial[k][Object.keys(this.form.extrapartial[k])]==this.AllData[i][j].label){
                         console.log("inside")
                         this.form.parent_id[nameP]=this.AllData[i][j]
                         break;
