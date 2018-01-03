@@ -1197,10 +1197,7 @@ export default {
       let splitUrl = url.split('/');
 
       let websiteName = splitUrl[(splitUrl.length -1)];
-
-
       // this.configData = await axios.get( config.baseURL + '/flows-dir-listing/0?path=' + url + '/assets/config.json');
-
       var configData = await axios.get(config.baseURL + '/project-configuration?userEmail=' + this.$session.get('email') + '&websiteName=' + websiteName );
 
       configData=JSON.parse(JSON.stringify(configData.data.data[0].configData))
@@ -2075,6 +2072,7 @@ export default {
           partialsPage[j] = obj
 
         }
+        var temp=''
         for (var z = 0; z < partialsPage.length; z++) {
           let key = Object.keys(partialsPage[z])[0];
           let value = partialsPage[z]
@@ -2082,15 +2080,15 @@ export default {
           key = key.trim();
           if (value[key2].match('partial')) {
             key = key.split('.')[0]
-            var temp = "Handlebars.registerPartial('" + key + "', fs.readFileSync('" + folderUrl + "/temp/" + Object.keys(back_partials[z])[0] + "_" + value[key2] + "').toString())\n"
+             temp = "Handlebars.registerPartial('" + key + "', fs.readFileSync('" + folderUrl + "/temp/" + Object.keys(back_partials[z])[0] + "_" + value[key2] + "').toString())\n"
           } else {
-            var temp = "Handlebars.registerPartial('" + key + "', fs.readFileSync('" + folderUrl + "/temp/" + Object.keys(back_partials[z])[0] + "_" + value[key2] + ".html').toString())\n"
+             temp = "Handlebars.registerPartial('" + key + "', fs.readFileSync('" + folderUrl + "/temp/" + Object.keys(back_partials[z])[0] + "_" + value[key2] + ".html').toString())\n"
           }
           partials = partials + temp;
         }
 
         responseMetal = responseMetal.substr(0, indexPartial + 14) + partials + responseMetal.substr(indexPartial + 14);
-        console.log('final responseMetal:', responseMetal)
+        // console.log('final responseMetal:', responseMetal)
         var mainMetal = folderUrl + '/assets/metalsmith.js'
         var value = true;
         await axios.post(config.baseURL + '/flows-dir-listing', {
@@ -2167,11 +2165,12 @@ export default {
 
                             await axios.delete(config.baseURL + '/flows-dir-listing/0?filename=' + folderUrl + '/Preview')
                               .then(async (res) => {
-                                await axios.delete(config.baseURL + '/flows-dir-listing/0?filename=' + folderUrl + '/temp').catch((e) => {
+                                
+                                await axios.delete(config.baseURL + '/flows-dir-listing/0?filename=' + folderUrl + '/Layout/' + Layout + '_temp.layout').then(async(res) => {
+                                  // console.log('deleted extra layout file:', res)
+                                  await axios.delete(config.baseURL + '/flows-dir-listing/0?filename=' + folderUrl + '/temp').catch((e) => {
                                   console.log(e)
                                 })
-                                await axios.delete(config.baseURL + '/flows-dir-listing/0?filename=' + folderUrl + '/Layout/' + Layout + '_temp.layout').then((res) => {
-                                  // console.log('deleted extra layout file:', res)
                                 }).catch((e) => {
                                   console.log(e)
                                 })
