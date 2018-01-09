@@ -18,6 +18,87 @@ grapesjs.plugins.add('product-plugin', function(editor, options) {
   //     }
   // });
 
+  bm.add('Bootstrap-Block-12', {
+    label: 'Bootstrap-Block-12',
+    content: '<div class="row" style="padding: 5px;"><div class="col-md-12" style="padding: 10px;"></div></div>',
+    attributes: {
+      class: 'fa fa-html5',
+      title: 'Bootstrap-Block-12'
+    },
+    category: 'Bootstrap-Block'
+  });
+
+  bm.add('Bootstrap-Block-6-6', {
+    label: 'Bootstrap-Block-6-6',
+    content: '<div class="row" style="padding: 5px;"><div class="col-md-6" style="padding: 10px;"></div><div class="col-md-6" style="padding: 10px;"></div></div>',
+    attributes: {
+      class: 'fa fa-html5',
+      title: 'Bootstrap-Block-6-6'
+    },
+    category: 'Bootstrap-Block'
+  });
+
+  bm.add('Bootstrap-Block-4-4-4', {
+    label: 'Bootstrap-Block-4-4-4',
+    content: '<div class="row" style="padding: 5px;"><div class="col-md-4" style="padding: 10px;"></div><div class="col-md-4" style="padding: 10px;"></div><div class="col-md-4" style="padding: 10px;"></div></div>',
+    attributes: {
+      class: 'fa fa-html5',
+      title: 'Bootstrap-Block-4-4-4'
+    },
+    category: 'Bootstrap-Block'
+  });
+
+  bm.add('Bootstrap-Block-3-3-3-3', {
+    label: 'Bootstrap-Block-3-3-3-3',
+    content: '<div class="row" style="padding: 5px;"><div class="col-md-3" style="padding: 10px;"></div><div class="col-md-3" style="padding: 10px;"></div><div class="col-md-3" style="padding: 10px;"></div><div class="col-md-3" style="padding: 10px;"></div></div>',
+    attributes: {
+      class: 'fa fa-html5',
+      title: 'Bootstrap-Block-3-3-3-3'
+    },
+    category: 'Bootstrap-Block'
+  });
+
+  bm.add('Bootstrap-Block-2-2-2-2-2-2', {
+    label: 'Bootstrap-Block-2-2-2-2-2-2',
+    content: '<div class="row" style="padding: 5px;"><div class="col-md-2" style="padding: 10px;"></div><div class="col-md-2" style="padding: 10px;"></div><div class="col-md-2" style="padding: 10px;"></div><div class="col-md-2" style="padding: 10px;"></div><div class="col-md-2" style="padding: 10px;"></div><div class="col-md-2" style="padding: 10px;"></div></div>',
+    attributes: {
+      class: 'fa fa-html5',
+      title: 'Bootstrap-Block-2-2-2-2-2-2'
+    },
+    category: 'Bootstrap-Block'
+  });
+
+  bm.add('Bootstrap-Block-2-8-2', {
+    label: 'Bootstrap-Block-2-8-2',
+    content: '<div class="row" style="padding: 5px;"><div class="col-md-2" style="padding: 10px;"></div><div class="col-md-8" style="padding: 10px;"></div><div class="col-md-2" style="padding: 10px;"></div></div>',
+    attributes: {
+      class: 'fa fa-html5',
+      title: 'Bootstrap-Block-2-8-2'
+    },
+    category: 'Bootstrap-Block'
+  });
+
+  bm.add('Bootstrap-Block-4-8', {
+    label: 'Bootstrap-Block-4-8',
+    content: '<div class="row" style="padding: 5px;"><div class="col-md-4" style="padding: 10px;"></div><div class="col-md-8" style="padding: 10px;"></div></div>',
+    attributes: {
+      class: 'fa fa-html5',
+      title: 'Bootstrap-Block-4-8'
+    },
+    category: 'Bootstrap-Block'
+  });
+
+    bm.add('Bootstrap-Block-8-4', {
+      label: 'Bootstrap-Block-8-4',
+      content: '<div class="row" style="padding: 5px;"><div class="col-md-8" style="padding: 10px;"></div><div class="col-md-4" style="padding: 10px;"></div></div>',
+      attributes: {
+        class: 'fa fa-html5',
+        title: 'Bootstrap-Block-8-4'
+      },
+      category: 'Bootstrap-Block'
+    });
+
+
   bm.add('g-form-template', {
     label: 'Form Full',
     content: '<div class="g-form"> <div class="g-form-panel"> <label>name</label> <input type="text" name="name"/> <label>age</label> <input type="text" name="age"/> <label>address</label> <div attr-id="address" style="padding: 15px;"> <div class="g-form"> <div class="g-form-panel"> <label>Add 1</label> <input type="text" name="add1"/> <label> city </label> <div attr-id="cities" style="padding: 15px;"> <div class="g-form"> <div class="g-form-panel"> <label>city test</label> <input type="text" name="city"/> <button onclick="handleDelete(event)">Delete</button> </div><div class="g-form-group-button"> <button onclick="handleAdd(event)">Add</button> </div></div></div><button onclick="handleDelete(event)">Delete</button> </div><div class="g-form-group-button"> <button onclick="handleAdd(event)">Add</button> </div></div></div></div><div class="g-form-group-button"> <button onclick="handleAdd(event)">Add</button> </div></div>',
@@ -399,7 +480,7 @@ grapesjs.plugins.add('product-plugin', function(editor, options) {
 
   // Global Variables
 
-  // Global Image Variable 
+  // Global Image Variable
   bm.add('globalImageVariable', {
     label: 'Image Variable',
     category: 'Global Variables',
@@ -409,7 +490,7 @@ grapesjs.plugins.add('product-plugin', function(editor, options) {
     content: '<globalImage style="padding: 5px; display: inline-block;"><img src="http://placehold.it/250x100" alt="Global Image" /></globalImage>'
   });
 
-  // Global Link Variable 
+  // Global Link Variable
   bm.add('globalLinkVariable', {
     label: 'Link Variable',
     category: 'Global Variables',
@@ -419,7 +500,7 @@ grapesjs.plugins.add('product-plugin', function(editor, options) {
     content: '<globalLink style="padding: 5px; display: inline-block;"><a href="#">Hyperlink</a></globalLink>'
   });
 
-  // Global HTML Variable 
+  // Global HTML Variable
   bm.add('globalHtmlVariable', {
     label: 'HTML Variable',
     category: 'Global Variables',
@@ -429,7 +510,7 @@ grapesjs.plugins.add('product-plugin', function(editor, options) {
     content: '<globalHtmlVariable style="padding: 2px; display: inline-block;">HTML Code</globalHtmlVariable>',
   });
 
-  // Global Text Variable 
+  // Global Text Variable
   bm.add('globalTextVariable', {
     label: 'Text Variable',
     category: 'Global Variables',
@@ -498,7 +579,7 @@ grapesjs.plugins.add('product-plugin', function(editor, options) {
     },
     category: 'Data Field Group'
   });
-  
+
   bm.add('DataFieldObject', {
     label: 'Data Field Object',
     content: '<DataFieldObject style="display: block; width: 100%; min-height:350px"><template scope="item" style="border:solid black 2px;display: block; width: 100%; min-height:330px"></template></DataFieldObject>',
@@ -2030,7 +2111,7 @@ grapesjs.plugins.add('product-plugin', function(editor, options) {
     storedTemplates = Object.keys(configData[2].layoutOptions[0]);
   });
 
-  
+
 
   var partialOptions = {};
 
@@ -2336,7 +2417,7 @@ comps.addType('ShoppingCart', {
         droppable: true,
         traits: [
            {
-            type: 'checkbox',        
+            type: 'checkbox',
             label: 'Paypal',
             name: 'Paypal',
           },
@@ -2349,7 +2430,7 @@ comps.addType('ShoppingCart', {
             name: 'x_api_login_paypal',
           },
           {
-            type: 'checkbox',        
+            type: 'checkbox',
             label: 'Stripe',
             name: 'Stripe',
           },
@@ -2360,7 +2441,7 @@ comps.addType('ShoppingCart', {
           {
             label: 'Authorize DotNet',
             name: 'AuthorizeDotNet',
-            type: 'checkbox',        
+            type: 'checkbox',
           },
           {
             label: 'Token',
