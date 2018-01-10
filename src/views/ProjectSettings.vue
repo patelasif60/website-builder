@@ -565,7 +565,86 @@
             </div>
         </div>
       </div>
-
+      <div class="collapsingDivWrapper row">
+        <div class="col-md-12">
+              <a href="javascript:void(0)" id="togglePaymentgateway" class="card color-div toggleableDivHeader">Payment gateway</a>
+        </div>
+      </div>
+      <div id="togglePaymentgatewayContent" class="toggleableDivHeaderContent" style="display: none;">
+        <div class="row">
+        <div class="col-md-12">
+        <div class="row">
+            <div class="col-md-4">
+               <h3> Gateways: </h3>
+            </div>
+         </div>
+         <hr>
+          <el-form ref="form" :model="form">
+               
+            <div >
+               <el-form-item>
+                  <draggable v-model='paymentgateway' @start="drag=true" @end="drag=false">
+                  <div style="margin-bottom: 25px" v-for='(n, index) in paymentgateway'>
+                    <div class="row">
+                    <div class="col-md-1" style="margin: 0; padding-left: 15px">
+                       <el-checkbox v-model="n.checked"></el-checkbox>
+                    </div>
+                    <!-- name of gateway-->
+                      <div class="col-md-2" style="margin: 0; padding-left: 0px">
+                        <el-input type="text"  placeholder="Name" v-model="n.name"></el-input>
+                      </div>
+                       <!-- gateway  -->
+                       <div class="col-md-2" style="margin: 0; padding-left: 0px">
+                          <el-select v-model="n.gateway" placeholder="Gateways" @change="gatewaychange(n,index)">
+                             <el-option
+                                v-for="item in Allgateway"
+                                :key="item.value"
+                                :label="item.name"
+                                :value="item.name">
+                             </el-option>
+                          </el-select>
+                       </div>
+                       <!-- gateway description -->
+                       <div class="col-md-5" style="margin: 0; padding: 0px">
+                          <el-input type="textarea" placeholder="Description" v-model="n.description"></el-input>
+                       </div>
+                       <!-- Delete Variable -->
+                       <div class="col-md-1">
+                          <el-button class="pull-right" style="min-width: 100%;" type="danger" @click="deletepaymentgateway(index)" icon="delete2"></el-button>
+                       </div>
+                       <div class="col-md-1">
+                          <el-button style="min-width: 100%;"><i class="fa fa-arrows"></i></el-button>
+                        
+                       </div>
+                    </div>
+                    <!-- <div> -->
+                    <div class="row">
+                      <div class="col-md-4">
+                         <h5> Fields: </h5>
+                      </div>
+                   </div>
+                   <div class="row">
+                      <div v-for='i,k in Paymentfields[index]'>
+                      <el-form ref="form" label-width="120px">
+                      <el-form-item style="margin: 0; padding-left:5px"  v-bind:label='Paymentfields[index][k]'>
+                          <el-input type='text' v-model='n.fields[k][i]' ></el-input>
+                      </el-form-item>
+                      </el-form>
+                       </div>
+                    </div>
+                    <!-- </div> -->
+                    <hr>
+                    </div>
+                  </draggable>
+               </el-form-item>
+            </div>
+           
+            <!-- Create new variable -->
+            <el-button type="primary" @click="addNewpaymentgateway">New Gateway</el-button>
+         </el-form>
+        </div>
+        </div>
+      </div>
       <!-- List of Commits Section -->
       <div class="collapsingDivWrapper row">
           <div class="col-md-12">
@@ -641,6 +720,7 @@ export default {
   },
   data () {
     return {
+      Paymentfields:[],
       form: {
         name: '',
         brandName: '',
@@ -713,7 +793,7 @@ export default {
       },
       checkedList: [],
       fullscreenLoading: false,
-
+       Allgateway:[],
       Allposition:[
         {
           label:'Start of <head> Tag',value:'starthead'
@@ -729,6 +809,7 @@ export default {
       externallinksCSS:[],
       localscripts:[],
       localstyles:[],
+      paymentgateway:[],
       externallinksMeta:[{
         name: 'Edit Me',
         content: 'Update Me'
@@ -740,13 +821,30 @@ export default {
     draggable
   },
   methods: {
+     gatewaychange(n,index){
+      // console.log(n,index)
+     this.paymentgateway[index].fields=[]
+
+     for(let i=0;i<this.Allgateway.length;i++){
+      if(this.Allgateway[i].name==n.gateway){
+        
+        for(let j=0;j<this.Allgateway[i].keys.length;j++){
+          var temp={}
+        temp[this.Allgateway[i].keys[j]]=''
+        this.paymentgateway[index].fields.push(temp)
+        }
+        this.Paymentfields[index]=this.Allgateway[i].keys
+      }
+     }
+     var ter=this.paymentgateway[index].description
+     this.paymentgateway[index].description=' '
+     this.paymentgateway[index].description=ter
+     // console.log(this.paymentgateway,this.Paymentfields)
+    },
     handleChange(file, fileList) {
         this.fileList3 = fileList.slice(-3);
         console.log('fileList3:',this.fileList3)
-        // var extract = require('extract-zip')
-        // extract(source, {dir: target}, function (err) {
-        //  // extraction is complete. make sure to handle the err
-        // })
+        
       },
     async globalImageUploading(currentImageVariableIndex, file) {
       
@@ -803,7 +901,12 @@ export default {
       let newVariable = { linktype: 'CSS', linkposition: '', linkurl: ''};
       this.externallinksCSS.push(newVariable);
     },
-
+    addNewpaymentgateway(){
+      let newVariable = {checked:true, name:'',gateway:'',fields:[],description:'',};
+      this.paymentgateway.push(newVariable);
+      this.Paymentfields.push([])
+      
+    },
     addNewexternallinkMeta() {
       let newVariable = { name:'',content:''};
       this.externallinksMeta.push(newVariable);
@@ -1042,10 +1145,11 @@ export default {
         }   
 
       },
-      recursivecall(name, partials, defaultListtemp,configData) {
-          console.log('inside recursivecall')
-        for (let i = 0; i < configData[1].pageSettings.length; i++) {
-          let temp = configData[1].pageSettings[i].PageName
+
+    recursivecall(name, partials, defaultListtemp,configData) {
+      console.log('inside recursivecall')
+      for (let i = 0; i < this.globalConfigData[1].pageSettings.length; i++) {
+          let temp = this.globalConfigData[1].pageSettings[i].PageName
           temp = temp.split('.')[0]
           if (name == temp) {
             for (let y = 0; y < defaultListtemp.length; y++) {
@@ -1058,11 +1162,13 @@ export default {
                   }
                 }
                 var partemp = defaultListtemp[y]
-                if (configData[2].layoutOptions[0][Object.keys(partemp)[0]] != undefined) {
-                  for (let k = 0; k < configData[2].layoutOptions[0][Object.keys(partemp)[0]].length; k++) {
-                    if (configData[2].layoutOptions[0][Object.keys(partemp)[0]][k].value == partemp[Object.keys(partemp)[0]]) {
-                      if (configData[2].layoutOptions[0][Object.keys(partemp)[0]][k].defaultList != undefined) {
-                        recursivecall(name, partials, configData[2].layoutOptions[0][Object.keys(partemp)[0]][k].defaultList,configData)
+                if (this.globalConfigData[2].layoutOptions[0][Object.keys(partemp)[0]] != undefined) {
+                  for (let k = 0; k < this.globalConfigData[2].layoutOptions[0][Object.keys(partemp)[0]].length; k++) {
+                    if (this.globalConfigData[2].layoutOptions[0][Object.keys(partemp)[0]][k].value == partemp[Object.keys(partemp)[0]]) 
+                    {
+                      // console.log('partemp[Object.keys(partemp)[0]]:',partemp[Object.keys(partemp)[0]])
+                      if (this.globalConfigData[2].layoutOptions[0][Object.keys(partemp)[0]][k].defaultList != undefined) {
+                        this.recursivecall(name, partials, this.globalConfigData[2].layoutOptions[0][Object.keys(partemp)[0]][k].defaultList)
                       }
                     }
                   }
@@ -1071,13 +1177,13 @@ export default {
               if (checkinner != true) {
                 defaultListtemp[y][Object.keys(defaultListtemp[y])[0]] = defaultListtemp[y][Object.keys(defaultListtemp[y])[0]].split('.')[0]
 
-                configData[1].pageSettings[i].partials.push(defaultListtemp[y]);
+                this.globalConfigData[1].pageSettings[i].partials.push(defaultListtemp[y]);
 
               }
             }
           }
         }
-      },
+    },
 
     async refreshPlugins() {
       this.refreshPluginsLoading = true;
@@ -1262,19 +1368,19 @@ export default {
 
       // this.configData = await axios.get( config.baseURL + '/flows-dir-listing/0?path=' + url + '/assets/config.json');
 
-      var configData = await axios.get(config.baseURL + '/project-configuration?userEmail=' + this.$session.get('email') + '&websiteName=' + websiteName );
+      var configData = await axios.get(config.baseURL + '/project-configuration?userEmail=' + this.$session.get('email') + '&websiteName=' + this.repoName );
 
       configData=JSON.parse(JSON.stringify(configData.data.data[0].configData))
-      // console.log('new config file:',configData);
+      console.log('new config file:',configData);
       // console.log('now partial');
       for(let q=0;q<Object.keys(configData[2].layoutOptions[0]).length;q++){
-        // console.log('partial:',Object.keys(configData[2].layoutOptions[0])[q])
+        console.log('partial:',Object.keys(configData[2].layoutOptions[0])[q])
         if(Object.keys(configData[2].layoutOptions[0])[q]!=('Layout')){
           if(Object.keys(configData[2].layoutOptions[0])[q]!=('Menu')){
            for(let p=0;p<configData[2].layoutOptions[0][Object.keys(configData[2].layoutOptions[0])[q]].length;p++){
             var namepartial=configData[2].layoutOptions[0][Object.keys(configData[2].layoutOptions[0])[q]][p].value
             // console.log('name:',namepartial)
-             var contentpage=await axios.get(config.baseURL + '/flows-dir-listing/0?path=/var/www/html/websites/' + this.repoName+'/Partials/'+Object.keys(configData[2].layoutOptions[0])[q]+'/'+namepartial+'.partial');
+             var contentpage=await axios.get(config.baseURL + '/flows-dir-listing/0?path=/var/www/html/websites/' + this.$session.get('userDetailId') +'/'+ this.repoName+'/Partials/'+Object.keys(configData[2].layoutOptions[0])[q]+'/'+namepartial+'.partial');
              // console.log('content of partial:',contentpage.data)
              // console.log("inside !=pages directory")
                 var content=''
@@ -1287,8 +1393,8 @@ export default {
                     var temp;
                     temp = resultParam[i].trim()
                     result[i] = result[i].trim()
-                    result[i]=result[i].replace(/&nbsp;/g, ' ').trim()
-                    temp = temp.replace(/&nbsp;/g, ' ')
+                    result[i]=result[i].replace(/&nbsp;/g, '').trim()
+                    temp = temp.replace(/&nbsp;/g, '')
                     temp = temp.replace(/\s+/g, ' ');
                     temp = temp.split(' ')
                     for (let j = 0; j < temp.length; j++) {
@@ -1397,7 +1503,7 @@ export default {
         // console.log('namepage:',namepage)
         // console.log('this.repoName:',this.repoName)
         console.log(config.baseURL + '/flows-dir-listing?website=' + this.repoName+'/Pages/'+namepage)
-        var contentpage=await axios.get(config.baseURL + '/flows-dir-listing/0?path=/var/www/html/websites/' + this.repoName+'/Pages/'+namepage);
+        var contentpage=await axios.get(config.baseURL + '/flows-dir-listing/0?path=/var/www/html/websites/'+ this.$session.get('userDetailId') +'/' + this.repoName+'/Pages/'+namepage);
         // console.log('contentpage:',contentpage)
 
         // console.log("inside ==pages directory")
@@ -1416,8 +1522,8 @@ export default {
             var temp;
             temp = resultParam[i].trim()
             result1[i] = result1[i].trim()
-            result1[i]=result1[i].replace(/&nbsp;/g, ' ').trim()
-            temp = temp.replace(/&nbsp;/g, ' ')
+            result1[i]=result1[i].replace(/&nbsp;/g, '').trim()
+            temp = temp.replace(/&nbsp;/g, '')
             temp = temp.replace(/\s+/g, ' ');
             temp = temp.trim();
             temp = temp.split(' ')
@@ -1453,7 +1559,7 @@ export default {
             temp = temp.split('.')[0]
             // console.log('temp:',temp)
             if (name == temp) {
-              console.log('temp:',temp)
+              // console.log('temp:',temp)
               var partials = configData[1].pageSettings[i].partials
               for (let k = 0; k < result1.length; k++) {
                 let checkpartial = false
@@ -1461,7 +1567,7 @@ export default {
                 for (let r = 0; r < partials.length; r++) {
                   if (Object.keys(partials[r])[0] == result1[k]) {
                     checkpartial = true
-                    console.log("checkpartial==true")
+                    // console.log('checkpartialtrue')
                     var temp1 = DefaultParams[k][result1[k]]
                     var temp2 = partials[r][result1[k]]
                     if (temp1.split('.')[0] == temp2.split('.')[0]) {
@@ -1482,7 +1588,7 @@ export default {
 
                 }
                 if (checkpartial != true) {
-                  console.log("checkpartial!=true")
+                  // console.log("checkpartial!=true")
                   var obj = {}
                   obj[result1[k]] = DefaultParams[k][result1[k]].split('.')[0]
                   for (let z = 0; z < configData[2].layoutOptions[0][result1[k]].length; z++) {
@@ -1584,6 +1690,10 @@ export default {
     deleteEcommerceVariable(deleteIndex) {
       this.ecommerceVariables.splice(deleteIndex, 1);
     },
+    deletepaymentgateway(deleteIndex) {
+      this.paymentgateway.splice(deleteIndex,1);
+      this.Paymentfields.splice(deleteIndex,1);
+    },
     deletelocalscripts(deleteIndex){
       this.localscripts.splice(deleteIndex,1);
     },
@@ -1673,7 +1783,8 @@ export default {
                               "ProjectMetaInfo": this.externallinksMeta,
                               "ProjectMetacharset":this.Metacharset,
                               "ProjectScripts":this.localscripts,
-                              "ProjectStyles":this.localstyles
+                              "ProjectStyles":this.localstyles,
+                              "PaymentGateways":this.paymentgateway
                             }];
 
       this.settings[1].projectSettings = ProjectSettings;
@@ -2028,7 +2139,8 @@ export default {
                   var temp;
                   temp = resultParam[q].trim()
                   result[q] = result[q].trim()
-                  temp = temp.replace(/&nbsp;/g, ' ')
+                  result[q]=result[q].replace(/&nbsp;/g, '').trim()
+                  temp = temp.replace(/&nbsp;/g, '')
                   temp = temp.replace(/\s+/g, ' ');
                   temp = temp.trim();
                   temp = temp.split(' ')
@@ -2074,6 +2186,10 @@ export default {
               })
             }
             let result = (getFromBetween.get(layoutdata.data, "{{>", "}}"));
+            var changeresult=JSON.parse(JSON.stringify(result))
+            for(let s=0;s<changeresult.length;s++){
+              layoutdata.data=layoutdata.data.replace(changeresult[s],changeresult[s].replace(/&nbsp;/g,'').replace(/\"\s+\b/g, '"').replace(/\'\s+\b/g, "'").replace(/\b\s+\'/g, "'").replace(/\b\s+\"/g, '"').replace(/\s+/g, " ").replace(/\s*$/g,"").replace(/\s*=\s*/g,'='))
+            }
             DefaultParams = [];
             if (result.length > 0) {
               var resultParam = result
@@ -2081,58 +2197,60 @@ export default {
                 var temp;
                 temp = resultParam[w].trim()
                 result[w] = result[w].trim()
-                temp = temp.replace(/&nbsp;/g, ' ')
-                temp = temp.replace(/\s+/g, ' ');
-                temp = temp.trim();
+                // result[w]=result[w].replace(/&nbsp;/g, '').trim()
+                // temp = temp.replace(/&nbsp;/g, '')
+                // temp = temp.replace(/\s+/g, ' ');
+                // temp = temp.trim();
                 temp = temp.split(' ')
                 for (let j = 0; j < temp.length; j++) {
-                  if ((temp[j].indexOf('id') != -1 || temp[j].indexOf('=') != -1)) {
-                    if (temp[j + 1] != undefined) {
-                      result[w] = temp[0];
-                      if (temp[j + 1].indexOf('.') > -1) {
-                        let x = temp[j + 1]
-                        x = temp[j + 1].split(/'/)[1];
-                        let obj = {}
-                        obj[temp[0]] = x
-                        DefaultParams.push(obj)
-                        break;
+                   temp[j] = temp[j].trim();
+                    if ((temp[j].indexOf('id') != -1 || temp[j].indexOf('=') != -1)) {
+                      if ((temp[j].indexOf('=') > -1) && (temp[j + 1] == undefined) && temp[j].indexOf("'")>-1) {
+                        result[w] = temp[0];
+                        if (temp[j]) {
+                          let x = temp[j]
+                          x = temp[j].split("'")[1]+'.partial';
+                          let obj = {}
+                          obj[temp[0]] = x
+                          DefaultParams.push(obj)
+                          break;
+                        }
                       }
-                    } else if ((temp[j].indexOf('.') > -1) && (temp[j + 1] == undefined)) {
-                      result[w] = temp[0];
-                      if (temp[j]) {
-                        let x = temp[j]
-                        x = temp[j].split(/'/)[1];
-                        let obj = {}
-                        obj[temp[0]] = x
-                        DefaultParams.push(obj)
-                        break;
+                      if ((temp[j].indexOf('=') > -1) && (temp[j + 1] == undefined) && temp[j].indexOf('"')>-1) {
+                        result[w] = temp[0];
+                        if (temp[j]) {
+                          let x = temp[j]
+                          x = temp[j].split('"')[1]+'.partial';
+                          let obj = {}
+                          obj[temp[0]] = x
+                          DefaultParams.push(obj)
+                          break;
+                        }
                       }
                     }
                   }
-                }
-              }
+                  }
               for (let j = 0; j < result.length; j++) {
                 for (let w = 0; w < back_partials.length; w++) {
                   if (Object.keys(back_partials[w])[0] == result[j]) {
 
-                    temp1 = '{{> ' + Object.keys(back_partials[w])[0] + ' }}'
-                    if (layoutdata.data.search(temp1) > 0) {
+                      temp1 = '{{> ' + Object.keys(back_partials[w])[0] + '}}'
+                      if (layoutdata.data.search(temp1) > 0) {
 
-                      temp2 = '{{> ' + Object.keys(back_partials[w])[0] + '_' + back_partials[w][Object.keys(back_partials[w])[0]] + ' }}'
-                    } else {
-                      temp1 = '{{> ' + Object.keys(back_partials[w])[0] + " id='" + DefaultParams[j][Object.keys(back_partials[w])[0]] + "' }}"
+                        temp2 = '{{> ' + Object.keys(back_partials[w])[0] + '_' + back_partials[w][Object.keys(back_partials[w])[0]] + '}}'
+                      } else {
+                        temp1 = "{{> " + Object.keys(back_partials[w])[0] + " id='" + DefaultParams[j][Object.keys(back_partials[w])[0]].split('.')[0] + "'}}"
 
-                      temp2 = '{{> ' + Object.keys(back_partials[w])[0] + '_' + back_partials[w][Object.keys(back_partials[w])[0]] + " id='" + DefaultParams[j][Object.keys(back_partials[w])[0]] + "' }}"
+                        temp2 = "{{> " + Object.keys(back_partials[w])[0] + '_' + back_partials[w][Object.keys(back_partials[w])[0]] + " id='" + DefaultParams[j][Object.keys(back_partials[w])[0]].split('.')[0] + "'}}"
+                      }
+                      if (layoutdata.data.split(temp1).join(temp2)) {
+                        console.log('replacing in layout file successfully')
+                        layoutdata.data = layoutdata.data.split(temp1).join(temp2)
+                        break;
+                      } else {
+                        console.log('replacing in layout file failed')
+                      }
                     }
-                    // console.log('temp1:', temp1)
-                    // console.log('temp2:', temp2)
-                    if (layoutdata.data.split(temp1).join(temp2)) {
-                      // console.log('replacing in layout file successfully')
-                      layoutdata.data = layoutdata.data.split(temp1).join(temp2)
-                    } else {
-                      // console.log('replacing in layout file failed')
-                    }
-                  }
                 }
 
               }
@@ -2175,11 +2293,12 @@ export default {
           let value = partialsPage[z]
           let key2 = key;
           key = key.trim();
+          var temp=''
           if (value[key2].match('partial')) {
             key = key.split('.')[0]
-            var temp = "Handlebars.registerPartial('" + key + "', fs.readFileSync('" + folderUrl + "/temp/" + Object.keys(back_partials[z])[0] + "_" + value[key2] + "').toString())\n"
+             temp = "Handlebars.registerPartial('" + key + "', fs.readFileSync('" + folderUrl + "/temp/" + Object.keys(back_partials[z])[0] + "_" + value[key2] + "').toString())\n"
           } else {
-            var temp = "Handlebars.registerPartial('" + key + "', fs.readFileSync('" + folderUrl + "/temp/" + Object.keys(back_partials[z])[0] + "_" + value[key2] + ".html').toString())\n"
+             temp = "Handlebars.registerPartial('" + key + "', fs.readFileSync('" + folderUrl + "/temp/" + Object.keys(back_partials[z])[0] + "_" + value[key2] + ".html').toString())\n"
           }
           partials = partials + temp;
         }
@@ -2365,13 +2484,9 @@ export default {
 
           })
 
-        this.fullscreenLoading = false;
+        
         // Open in new window
-        if(process.env.NODE_ENV !== 'development'){
-          window.open('http://' + this.$session.get('userDetailId') + '.' + this.repoName + '.'+ config.ipAddress);
-        } else {
-          window.open(config.ipAddress +'/websites/'+ this.repoName + '/public/');
-        }  
+         
         
         // Publish with Zeit Now
         // axios.post(config.baseURL + '/publish-now', {
@@ -2398,6 +2513,12 @@ export default {
         //     this.previewLoader = false;
         //   });
       }
+      this.fullscreenLoading = false;
+      if(process.env.NODE_ENV !== 'development'){
+          window.open('http://' + this.$session.get('userDetailId') + '.' + this.repoName + '.'+ config.ipAddress);
+        } else {
+          window.open(config.ipAddress +'/websites/'+ this.$session.get('userDetailId') +'/'+ this.repoName + '/public/');
+        } 
     },
 
     handleRemove(file, fileList) {
@@ -2424,6 +2545,10 @@ export default {
     },
 
     async init () {
+
+      var gateways= await axios.get( 'http://api.flowzcluster.tk/payment/availablegateway');
+     // console.log('gateways',gateways.data)
+     this.Allgateway=gateways.data.gateways
       this.folderUrl = this.$store.state.fileUrl.replace(/\\/g, "\/");
       let url = this.$store.state.fileUrl.replace(/\\/g, "\/");
 
@@ -2456,10 +2581,18 @@ export default {
         this.Metacharset=this.settings[1].projectSettings[1].ProjectMetacharset;
         this.localscripts=this.settings[1].projectSettings[1].ProjectScripts;
         this.localstyles=this.settings[1].projectSettings[1].ProjectStyles;
+        this.paymentgateway=this.settings[1].projectSettings[1].PaymentGateways;
       } else {
         console.log('Cannot get configurations!');
       } 
-
+      for(let i=0;i<this.paymentgateway.length;i++){
+          var temp=[]
+        for(let j=0;j<this.paymentgateway[i].fields.length;j++){
+          temp.push(Object.keys(this.paymentgateway[i].fields[j])[0])
+        }
+        // console.log('temp',temp)
+          this.Paymentfields[i]=temp
+      }
       // replace all image tag source with index as name attribute to get the image file preview
       
       for (var i = 0; i < this.globalVariables.length; i++){
@@ -2595,6 +2728,15 @@ export default {
                 $("#toggleLocalscripts").text("Global Scripts")
             }
         });
+        $("#togglePaymentgateway").click(function() {
+            $("#togglePaymentgatewayContent").slideToggle("slow");
+            if ($("#togglePaymentgateway").text() == "Payment gateway") {
+                $("#togglePaymentgateway").html("Payment gateway")
+            } else {
+                $("#togglePaymentgateway").text("Payment gateway")
+            }
+        });
+
         $("#toggleLocalstyles").click(function() {
             $("#toggleLocalstylesContent").slideToggle("slow");
             if ($("#toggleLocalstyles").text() == "Global Styles") {

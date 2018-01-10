@@ -24,7 +24,7 @@
                      </el-form-item>
                      <div id="demo">
                         <div v-for='(n,index) in partialsList'>
-                           <el-form-item :label="n ">
+                           <el-form-item :label="n">
                               <el-select @visible-change="layoutChange()" v-model="form.parent_id[n]" placeholder="Please select " >
                                  <el-option v-for="item in AllData[index]" 
                                     :key="item.value"

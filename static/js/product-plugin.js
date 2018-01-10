@@ -1,7 +1,7 @@
 // Change baseURL when going live
-// const baseURL = 'http://localhost:3032';
+const baseURL = 'http://localhost:3032';
 // const baseURL = 'http://devapi.flowz.com/serverapi';
-const baseURL = 'http://api.flowz.com/serverapi';
+// const baseURL = 'http://api.flowz.com/serverapi';
 
 grapesjs.plugins.add('product-plugin', function(editor, options) {
   var bm = editor.BlockManager;
@@ -530,13 +530,23 @@ grapesjs.plugins.add('product-plugin', function(editor, options) {
   });
 
 
-  bm.add('ShoppingCart', {
-        label: 'Shopping Cart',
-  content:'<ShoppingCart  style="display: block; width: 100%;padding:15px; vertical-align: middle;"><div id="ShoppingCart_append"><i class="fa fa-shopping-cart"></i> <label style="margin: inherit;">Shopping Cart</label></div></ShoppingCart>',
-  attributes: {
-              class:'fa fa-shopping-cart',
-              title: 'Shopping cart',
-        },
+  // bm.add('ShoppingCart', {
+  //       label: 'Shopping Cart',
+  // content:'<ShoppingCart  style="display: block; width: 100%;padding:15px; vertical-align: middle;"><div id="ShoppingCart_append"><i class="fa fa-shopping-cart"></i> <label style="margin: inherit;">Shopping Cart</label></div></ShoppingCart>',
+  // attributes: {
+  //             class:'fa fa-shopping-cart',
+  //             title: 'Shopping cart',
+  //       },
+  //   category: 'Payment Components'
+  // });
+
+  bm.add('PaymentGateway', {
+    label: 'PaymentGateway',
+    content: '<paymentgateway style="display: block; padding: 10px; min-height: 20px;">PaymentGateways</paymentgateway>',
+    attributes: {
+       class:'fa fa-shopping-cart',
+       title: 'Shopping cart',
+    },
     category: 'Payment Components'
   });
 
@@ -2040,11 +2050,11 @@ grapesjs.plugins.add('product-plugin', function(editor, options) {
                 for (let j = 0; j < configData[2].layoutOptions[0][data_].length; j++) {
                   if (j == 0) {
                     partialOptions[storedTemplates[index]] = [{
-                      'name': configData[2].layoutOptions[0][data_][index2].value + '.partial'
+                      'name': configData[2].layoutOptions[0][data_][j].value + '.partial'
                     }]
                   } else {
                     partialOptions[storedTemplates[index]].push({
-                      'name': configData[2].layoutOptions[0][data_][index2].value + '.partial'
+                      'name': configData[2].layoutOptions[0][data_][j].value + '.partial'
                     })
                   }
                 }
