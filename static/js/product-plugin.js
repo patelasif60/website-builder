@@ -22,7 +22,7 @@ grapesjs.plugins.add('product-plugin', function(editor, options) {
     label: 'Bootstrap-Block-12',
     content: '<div class="row" style="padding: 5px;"><div class="col-md-12" style="padding: 10px;"></div></div>',
     attributes: {
-      class: 'fa fa-html5',
+      class: 'fa fa-th',
       title: 'Bootstrap-Block-12'
     },
     category: 'Bootstrap-Block'
@@ -32,7 +32,7 @@ grapesjs.plugins.add('product-plugin', function(editor, options) {
     label: 'Bootstrap-Block-6-6',
     content: '<div class="row" style="padding: 5px;"><div class="col-md-6" style="padding: 10px;"></div><div class="col-md-6" style="padding: 10px;"></div></div>',
     attributes: {
-      class: 'fa fa-html5',
+      class: 'fa fa-th',
       title: 'Bootstrap-Block-6-6'
     },
     category: 'Bootstrap-Block'
@@ -42,7 +42,7 @@ grapesjs.plugins.add('product-plugin', function(editor, options) {
     label: 'Bootstrap-Block-4-4-4',
     content: '<div class="row" style="padding: 5px;"><div class="col-md-4" style="padding: 10px;"></div><div class="col-md-4" style="padding: 10px;"></div><div class="col-md-4" style="padding: 10px;"></div></div>',
     attributes: {
-      class: 'fa fa-html5',
+      class: 'fa fa-th',
       title: 'Bootstrap-Block-4-4-4'
     },
     category: 'Bootstrap-Block'
@@ -52,7 +52,7 @@ grapesjs.plugins.add('product-plugin', function(editor, options) {
     label: 'Bootstrap-Block-3-3-3-3',
     content: '<div class="row" style="padding: 5px;"><div class="col-md-3" style="padding: 10px;"></div><div class="col-md-3" style="padding: 10px;"></div><div class="col-md-3" style="padding: 10px;"></div><div class="col-md-3" style="padding: 10px;"></div></div>',
     attributes: {
-      class: 'fa fa-html5',
+      class: 'fa fa-th',
       title: 'Bootstrap-Block-3-3-3-3'
     },
     category: 'Bootstrap-Block'
@@ -62,7 +62,7 @@ grapesjs.plugins.add('product-plugin', function(editor, options) {
     label: 'Bootstrap-Block-2-2-2-2-2-2',
     content: '<div class="row" style="padding: 5px;"><div class="col-md-2" style="padding: 10px;"></div><div class="col-md-2" style="padding: 10px;"></div><div class="col-md-2" style="padding: 10px;"></div><div class="col-md-2" style="padding: 10px;"></div><div class="col-md-2" style="padding: 10px;"></div><div class="col-md-2" style="padding: 10px;"></div></div>',
     attributes: {
-      class: 'fa fa-html5',
+      class: 'fa fa-th',
       title: 'Bootstrap-Block-2-2-2-2-2-2'
     },
     category: 'Bootstrap-Block'
@@ -72,7 +72,7 @@ grapesjs.plugins.add('product-plugin', function(editor, options) {
     label: 'Bootstrap-Block-2-8-2',
     content: '<div class="row" style="padding: 5px;"><div class="col-md-2" style="padding: 10px;"></div><div class="col-md-8" style="padding: 10px;"></div><div class="col-md-2" style="padding: 10px;"></div></div>',
     attributes: {
-      class: 'fa fa-html5',
+      class: 'fa fa-th',
       title: 'Bootstrap-Block-2-8-2'
     },
     category: 'Bootstrap-Block'
@@ -82,7 +82,7 @@ grapesjs.plugins.add('product-plugin', function(editor, options) {
     label: 'Bootstrap-Block-4-8',
     content: '<div class="row" style="padding: 5px;"><div class="col-md-4" style="padding: 10px;"></div><div class="col-md-8" style="padding: 10px;"></div></div>',
     attributes: {
-      class: 'fa fa-html5',
+      class: 'fa fa-th',
       title: 'Bootstrap-Block-4-8'
     },
     category: 'Bootstrap-Block'
@@ -92,7 +92,7 @@ grapesjs.plugins.add('product-plugin', function(editor, options) {
       label: 'Bootstrap-Block-8-4',
       content: '<div class="row" style="padding: 5px;"><div class="col-md-8" style="padding: 10px;"></div><div class="col-md-4" style="padding: 10px;"></div></div>',
       attributes: {
-        class: 'fa fa-html5',
+        class: 'fa fa-th',
         title: 'Bootstrap-Block-8-4'
       },
       category: 'Bootstrap-Block'
