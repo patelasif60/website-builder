@@ -1723,6 +1723,7 @@ export default {
                     }
                   }
                   configData[1].pageSettings[i].partials.push(obj);
+                  r=r-1;
                 }
               }
             } else if (name != temp) {
