@@ -734,10 +734,10 @@
             this.loadingTree = false;
             this.$message({
               showClose: true,
-              message: 'Some error while getting tree data',
+              message: 'Error while getting tree data'+e,
               type: 'error'
             });
-            //console.log(e);
+            console.log(e);
           });
       },
 
@@ -1304,7 +1304,7 @@
                   message: 'Failed! Please try again.',
                   type: 'error'
               });
-              //console.log(e)
+              console.log(e)
           });
 
           } else {
@@ -1402,7 +1402,7 @@
                   this.saveConfigFile(folderUrl)
 
                   }).catch((e)=>{
-                    //console.log(e)
+                    console.log(e)
                   })
                   
                 }
@@ -1413,7 +1413,7 @@
                   message: 'Folder creation failed. Try again.',
                   type: 'error'
                 });
-                //console.log(e)
+                console.log(e)
               })
                 }
             
@@ -1537,7 +1537,7 @@
                     
                       })
                       .catch((e) => {
-                          //console.log(e)
+                          console.log(e)
                       })
                     }
                     else if(newfilename.search('/Partials')!=-1 && newfilename.search('/Menu')!=-1){
@@ -1586,7 +1586,7 @@
                         
                           })
                           .catch((e) => {
-                              //console.log(e)
+                              console.log(e)
                           })
                     }
                     else if(newfilename.search('/Pages')!=-1){
@@ -1667,7 +1667,7 @@
                         }
                       })
                       .catch((e) => {
-                          //console.log(e)
+                          console.log(e)
                       })
                     }
                     else if(newfilename.search('/Layout')!=-1){
@@ -1716,7 +1716,7 @@
                         
                       })
                       .catch((e) => {
-                          //console.log(e)
+                          console.log(e)
                       })
                     }
                 }
@@ -1815,7 +1815,7 @@
                       .then((res) => {
                       })
                       .catch((e) => {
-                        //console.log(e)
+                        console.log(e)
                       })
                       return;
                     }
@@ -1829,7 +1829,7 @@
 
               })
               .catch((e) => {
-                //console.log(e);
+                console.log(e);
                 // this.componentId = 'buyPage';
                 this.newProjectFolderDialog = false;
                 this.fullscreenLoading = false;
@@ -1864,11 +1864,11 @@
             .then((res) => {
             })
             .catch((e)=>{
-              //console.log("Error from Client-Plugins"+res)
+              console.log("Error from Client-Plugins"+e)
             }); 
           })
           .catch((e)=>{
-            //console.log("Error from Assests"+res)
+            console.log("Error from Assests"+e)
           });
 
           // Create Main-Files Folder
@@ -1879,12 +1879,12 @@
           .then((res) => {
           })
           .catch((e)=>{
-            //console.log("Error from pages"+res)
+            console.log("Error from pages"+e)
           });
 
         })
         .catch((e)=>{
-          //console.log("Error from Assests"+res)
+          console.log("Error from Assests"+e)
         });
 
         // Create Partials Folder
@@ -1901,7 +1901,7 @@
             .then((res) => {
             })
             .catch((e)=>{
-              //console.log("Error From Headers"+res)
+              console.log("Error From Headers"+e)
             });
 
             // Create menus Folder
@@ -1924,7 +1924,7 @@
             .then((res) => {
             })
             .catch((e)=>{
-              //console.log("Error from Footers"+res)
+              console.log("Error from Footers"+e)
             });
 
             // Create Templates Folder
@@ -1947,13 +1947,13 @@
             .then((res) => {
             })
             .catch((e)=>{
-              //console.log("Error from pages"+res)
+              console.log("Error from pages"+e)
             });
 
 
         })
         .catch((e)=>{
-          //console.log("Error From Headers"+res)
+          console.log("Error From Headers"+e)
         });
 
         // Create Layouts Folder
@@ -1965,7 +1965,7 @@
         .then((res) => {
         })
         .catch((e)=>{
-          //console.log("Error From Layout"+res)
+          console.log("Error From Layout"+e)
         });
 
         // Create Pages Folder
@@ -1976,7 +1976,7 @@
         .then((res) => {
         })
         .catch((e)=>{
-          //console.log("Error from pages"+res)
+          console.log("Error from pages"+res)
         });
 
         let self = this;
@@ -2153,8 +2153,8 @@
             message: 'Failed! Please try again.',
             type: 'error'
           });
+          console.log(e)
           return;
-          //console.log(e)
         })
 
         // Create project-details.json file
@@ -2170,7 +2170,7 @@
         .then((res) => {
         })
         .catch((e) => {
-            //console.log(e)
+            console.log(e)
         });
 
         // Create main.css file
@@ -2183,7 +2183,7 @@
         .then((res) => {
         })
         .catch((e) => {
-            //console.log(e)
+            console.log(e)
         });
 
         // Create main.js file
@@ -2196,7 +2196,7 @@
         .then((res) => {
         })
         .catch((e) => {
-            //console.log(e)
+            console.log(e)
         });
 
         // Create default.json for menu file
@@ -2209,7 +2209,7 @@
         .then((res) => {
         })
         .catch((e) => {
-            //console.log(e)
+            console.log(e)
         });
 
         // Brand Logo
@@ -2223,7 +2223,7 @@
         .then((res) => {   
         })
         .catch((e) => {
-            //console.log(e)
+            console.log(e)
         })
 
         // Create index.html file
@@ -2247,7 +2247,7 @@
         .then((res) => {
         })
         .catch((e) => {
-            //console.log(e)
+            console.log(e)
         });
 
         // Create metalsmith file
@@ -2268,7 +2268,7 @@
         .then((res) => {
         })
         .catch((e) => {
-            //console.log(e)
+            console.log(e)
         });
 
 
@@ -2285,7 +2285,7 @@
         .then((res) => {
         })
         .catch((e) => {
-            //console.log(e)
+            console.log(e)
         });
 
 
@@ -2303,7 +2303,7 @@
         .then((res) => {
         })
         .catch((e) => {
-            //console.log(e)
+            console.log(e)
         });
 
         // Create demo header file
@@ -2319,7 +2319,7 @@
         .then((res) => {
         })
         .catch((e) => {
-            //console.log(e)
+            console.log(e)
         });
 
         // Create demo footer file
@@ -2335,7 +2335,7 @@
         .then((res) => {
         })
         .catch((e) => {
-            //console.log(e)
+            console.log(e)
         });
 
         // Create default sidebar file file
@@ -2348,7 +2348,7 @@
         .then((res) => {
         })
         .catch((e) => {
-            //console.log(e)
+            console.log(e)
         });
 
 
@@ -2367,11 +2367,11 @@
         .then((res) => {
         })
         .catch((e) => {
-            //console.log(e)
+            console.log(e)
         })
       })
       .catch((e) => {
-          //console.log(e)
+          console.log(e)
       })
 
 
@@ -2385,7 +2385,7 @@
         .then((res) => {
         })
         .catch((e) => {
-            //console.log(e)
+            console.log(e)
         });
 
         // // Product Listing Plugin
@@ -2430,11 +2430,11 @@
           .then((res) => {   
           })
           .catch((e) => {
-              //console.log(e)
+              console.log(e)
           })
         })
         .catch((e) => {
-            //console.log(e)
+            console.log(e)
         });
 
         // Slider Plugin
@@ -2452,11 +2452,11 @@
           .then((res) => {  
           })
           .catch((e) => {
-              //console.log(e)
+              console.log(e)
           })
         })
         .catch((e) => {
-            //console.log(e)
+            console.log(e)
         });
 
         // Shopping cart js
@@ -2474,11 +2474,11 @@
           .then((res) => {   
           })
           .catch((e) => {
-              //console.log(e)
+              console.log(e)
           })
         })
         .catch((e) => {
-            //console.log(e)
+            console.log(e)
         });
 
         // Client Global variables Plugin
@@ -2516,17 +2516,17 @@
                 },1000);  
               }
             }).catch(error => {
-              //console.log("Some error occured: ", error);
+              console.log(" error occured: ", error);
             }) 
 
             
           })
           .catch((e) => {
-              //console.log(e)
+              console.log(e)
           })
         })
         .catch((e) => {
-            //console.log(e)
+            console.log(e)
         });
       },
 
@@ -2547,7 +2547,7 @@
             type: 'error'
           });
           this.saveFileLoading = false;
-          //console.log(e)
+          console.log(e)
         })
       },
 
@@ -2636,7 +2636,7 @@
           let folderUrl = configFileUrl.replace(fileName, '');
           let projectName = folderUrl.split('/');
           projectName = projectName[(projectName.length - 1)];
-          let responseConfig = await axios.get(config.baseURL + '/project-configuration?userEmail=' + Cookies.get('email') + '&websiteName=' + projectName);
+          let responseConfig = await axios.get(config.baseURL + '/project-configuration?userEmail=' + Cookies.get('email') + '&websiteName=' + projectName).catch((e)=>{console.log(e)});
           let rawConfigs = responseConfig.data.data[0].configData;
           this.globalConfigData = rawConfigs;
           axios.post(config.baseURL + '/flows-dir-listing', {
@@ -2685,7 +2685,7 @@
                 var content = '';
                 let name = this.currentFile.path.replace(/\\/g, "\/").substring(this.currentFile.path.replace(/\\/g, "\/").indexOf('Layout/') + 7, this.currentFile.path.replace(/\\/g, "\/").indexOf('.layout'));
 
-                content = await axios.get(config.baseURL + '/flows-dir-listing/0?path=' + folderUrl + '/Layout/' + name + '.layout');
+                content = await axios.get(config.baseURL + '/flows-dir-listing/0?path=' + folderUrl + '/Layout/' + name + '.layout').catch((e)=>{console.log(e)});
                 content = content.data
                 var result = (getFromBetween.get(content, "{{>", "}}"));
                 var changeresult=JSON.parse(JSON.stringify(result))
@@ -2930,11 +2930,11 @@
 
                           })
                           .catch((e) => {
-                            //console.log(e)
+                            console.log(e)
                           })
                       })
                       .catch((e) => {
-                        //console.log(e)
+                        console.log(e)
                       })
                   }
                   //now change pagesetting where ever this layout is being used.
@@ -3430,7 +3430,7 @@
                 message: 'File not saved! Please try again.',
                 type: 'error'
               });
-              //console.log(e)
+              console.log(e)
             })
           this.form.checked = [];
           this.form.namearray = [];
@@ -3439,7 +3439,8 @@
       // Ends Save File
 
       recursivecall(name, partials, defaultListtemp) {
-        for (let i = 0; i < this.globalConfigData[1].pageSettings.length; i++) {
+        try{
+         for (let i = 0; i < this.globalConfigData[1].pageSettings.length; i++) {
           let temp = this.globalConfigData[1].pageSettings[i].PageName
           temp = temp.split('.')[0]
           if (name == temp) {
@@ -3471,7 +3472,12 @@
               }
             }
           }
+        } 
         }
+        catch(err){
+          console.log(err)
+        }
+        
       },
 
       // Generate Preview
@@ -3697,7 +3703,7 @@
           var contentpartials = self.$store.state.content;
           if (self.form.vuepartials != undefined && self.form.vuepartials.length > 0) {
 
-            var mainVuefile = await axios.get(config.baseURL + '/flows-dir-listing/0?path=' + folderUrl + '/public/assets/back_main.js');
+            var mainVuefile = await axios.get(config.baseURL + '/flows-dir-listing/0?path=' + folderUrl + '/public/assets/back_main.js').catch((e)=>{console.log(e)});
             mainVuefile = mainVuefile.data
 
             for (let x = 0; x < self.form.vuepartials.length; x++) {
@@ -3716,11 +3722,11 @@
 
                     })
                     .catch((e) => {
-                      //console.log(e)
+                      console.log(e)
                     })
                 })
                 .catch((e) => {
-                  //console.log(e)
+                  console.log(e)
                 })
             }
           }
@@ -3735,7 +3741,7 @@
               })
           }
 
-          let layoutdata = await axios.get(config.baseURL + '/flows-dir-listing/0?path=' + folderUrl + '/Layout/' + self.form.Layout + '.layout');
+          let layoutdata = await axios.get(config.baseURL + '/flows-dir-listing/0?path=' + folderUrl + '/Layout/' + self.form.Layout + '.layout').catch((e)=>{console.log(e)});
           var backlayoutdata = JSON.parse(JSON.stringify(layoutdata));
           this.backuplayout = backlayoutdata.data;
           let newFolderName = folderUrl + '/temp';
@@ -3744,7 +3750,9 @@
               type: 'folder'
             }).then(async (res) => {
               for (let i = 0; i < back_partials.length; i++) {
-                let responsepartials = await axios.get(config.baseURL + '/flows-dir-listing/0?path=' + folderUrl + '/Partials/' + Object.keys(back_partials[i]) + '/' + back_partials[i][Object.keys(back_partials[i])] + '.partial');
+                let responsepartials = await axios.get(config.baseURL + '/flows-dir-listing/0?path=' + folderUrl + '/Partials/' + Object.keys(back_partials[i]) + '/' + back_partials[i][Object.keys(back_partials[i])] + '.partial').catch((e)=>{
+                  console.log(e)
+                });
                 responsepartials = responsepartials.data
                 let result = (getFromBetween.get(responsepartials, "{{>", "}}"));
                 var DefaultParams = [];
@@ -3797,7 +3805,7 @@
                   text: responsepartials,
                   type: 'file'
                 }).catch((e) => {
-                  //console.log(e)
+                  console.log(e)
                 })
               }
 
@@ -3875,7 +3883,7 @@
               //console.log(e)
             })
 
-          let responseMetal = await axios.get(config.baseURL + '/flows-dir-listing/0?path=' + folderUrl + '/public/assets/metalsmith.js');
+          let responseMetal = await axios.get(config.baseURL + '/flows-dir-listing/0?path=' + folderUrl + '/public/assets/metalsmith.js').catch((e)=>{console.log(e)});
 
           var index = responseMetal.data.search('.source')
 
@@ -3932,7 +3940,7 @@
                 //console.log(res)
 
               }).catch((e) => {
-                //console.log(e)
+                console.log(e)
               })
 
               let vueBodyStart = '';
@@ -4025,17 +4033,17 @@
 
                               axios.delete(config.baseURL + '/flows-dir-listing/0?filename=' + folderUrl + '/Preview')
                                 .then(async (res) => {
-                                  await axios.delete(config.baseURL + '/flows-dir-listing/0?filename=' + folderUrl + '/temp')
+                                  await axios.delete(config.baseURL + '/flows-dir-listing/0?filename=' + folderUrl + '/temp').catch((e)=>{console.log(e)})
                                   await axios.delete(config.baseURL + '/flows-dir-listing/0?filename=' + folderUrl + '/Layout/' + self.form.Layout + '_temp.layout').then((res) => {
                                   }).catch((e) => {
-                                    //console.log(e)
+                                    console.log(e)
                                   })
                                   if (self.form.vuepartials != undefined && self.form.vuepartials.length > 0) {
                                     for (let x = 0; x < self.form.vuepartials.length; x++) {
                                       axios.delete(config.baseURL + '/flows-dir-listing/0?filename=' + config.pluginsPath + '/public/' + self.form.vuepartials[x].value.split('.')[0] + '.js').then((res) => {
                                         })
                                         .catch((e) => {
-                                          //console.log(e)
+                                          console.log(e)
                                         })
                                     }
                                   }
@@ -4043,14 +4051,14 @@
                                     axios.delete(config.baseURL + '/flows-dir-listing/0?filename=' + folderUrl + '/Layout/Blank.layout')
                                       .catch((e) => {
                                         self.fullscreenLoading = false;
-                                        //console.log("Error while deleting blank.layout file")
+                                        console.log("Error while deleting blank.layout file")
                                       })
                                   }
 
                                 })
                                 .catch((e) => {
                                   self.fullscreenLoading = false;
-                                  //console.log(e)
+                                  console.log(e)
                                 })
 
                             })
@@ -4067,10 +4075,10 @@
 
                               axios.delete(config.baseURL + '/flows-dir-listing/0?filename=' + folderUrl + '/Layout/' + self.form.Layout + '_metal.layout').then((res) => {
                               }).catch((e) => {
-                                //console.log(e)
+                                console.log(e)
                               })
-                              axios.delete(config.baseURL + '/flows-dir-listing/0?filename=' + folderUrl + '/Preview')
-                              axios.delete(config.baseURL + '/flows-dir-listing/0?filename=' + folderUrl + '/temp')
+                              axios.delete(config.baseURL + '/flows-dir-listing/0?filename=' + folderUrl + '/Preview').catch((e)=>{console.log(e)})
+                              axios.delete(config.baseURL + '/flows-dir-listing/0?filename=' + folderUrl + '/temp').catch((e)=>{console.log(e)})
                               //console.log(e)
                             })
 
@@ -4088,11 +4096,11 @@
 
                           axios.delete(config.baseURL + '/flows-dir-listing/0?filename=' + folderUrl + '/Layout/' + self.form.Layout + '_metal.layout').then((res) => {
                           }).catch((e) => {
-                            //console.log(e)
+                            console.log(e)
                           })
-                          axios.delete(config.baseURL + '/flows-dir-listing/0?filename=' + folderUrl + '/Preview')
-                          axios.delete(config.baseURL + '/flows-dir-listing/0?filename=' + folderUrl + '/temp')
-                          //console.log('Error while creating MetalSmith JS file' + err)
+                          axios.delete(config.baseURL + '/flows-dir-listing/0?filename=' + folderUrl + '/Preview').catch((e)=>{console.log(e)})
+                          axios.delete(config.baseURL + '/flows-dir-listing/0?filename=' + folderUrl + '/temp').catch((e)=>{console.log(e)})
+                          console.log( err)
 
                         })
 
@@ -4111,12 +4119,12 @@
 
                       axios.delete(config.baseURL + '/flows-dir-listing/0?filename=' + folderUrl + '/Layout/' + self.form.Layout + '_metal.layout').then((res) => {
                       }).catch((e) => {
-                        //console.log(e)
+                        console.log(e)
                       })
                       // axios.delete(config.baseURL + '/flows-dir-listing/0?filename=' + folderUrl + '/Preview')
                       // axios.delete(config.baseURL + '/flows-dir-listing/0?filename=' + folderUrl + '/temp')
                       self.saveFileLoading = false
-                      //console.log(e)
+                      console.log(e)
                     })
                 })
                 .catch((e) => {
@@ -4133,9 +4141,9 @@
                   axios.delete(config.baseURL + '/flows-dir-listing/0?filename=' + folderUrl + '/Layout/' + self.form.Layout + '_metal.layout').then((res) => {
                     
                   }).catch((e) => {
-                    //console.log(e)
+                    console.log(e)
                   })
-                  //console.log(e);
+                  console.log(e);
                 })
             })
             .catch((e) => {
@@ -4151,10 +4159,10 @@
               axios.delete(config.baseURL + '/flows-dir-listing/0?filename=' + folderUrl + '/Layout/' + self.form.Layout + '_metal.layout').then((res) => {
                 
               }).catch((e) => {
-                //console.log(e)
+                console.log(e)
               })
 
-              //console.log('Error while creating MetalSmith JS file' + e)
+              console.log( e)
             })
 
         }, 2000);
@@ -4333,7 +4341,7 @@
           this.componentId = 'Dashboard';
           this.isHomePage = true;
         }).catch((dismiss) => {
-          //console.log('error', dismiss)
+          console.log('error', dismiss)
         })
       },
 
@@ -4402,11 +4410,11 @@
 
           })
           .catch((e) => {
-            //console.log(e)
+            console.log(e)
           })
         })
         .catch((e)=>{
-          //console.log(e)
+          console.log(e)
         })
       },
 
@@ -4461,19 +4469,19 @@
                   }, 500);
                 })
                 .catch((e) => {
-                  //console.log(e)
+                  console.log(e)
                 });
 
               this.currentFile = null
               this.componentId = 'Dashboard';
             })
             .catch((e) => {
-              //console.log(e)
+              console.log(e)
             })
           this.componentId = 'Dashboard';
           this.isHomePage = true;
         }).catch((dismiss) => {
-          //console.log('error', dismiss)
+          console.log('error', dismiss)
         })
       },
 

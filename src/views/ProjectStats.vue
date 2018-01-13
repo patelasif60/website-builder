@@ -227,7 +227,7 @@ export default {
           type: 'success'
         });
       }).catch(error => {
-        //console.log("Some error occured: ", error);
+        console.log("error occured: ", error);
       })
     },
 

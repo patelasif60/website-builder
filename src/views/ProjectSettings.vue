@@ -976,7 +976,7 @@ export default {
             //console.log(res.data);
           })
           .catch((e) => { 
-            //console.log(e)
+            console.log(e)
           })
       };
 
@@ -1083,7 +1083,7 @@ export default {
               message: 'Failed! Please try again.',
               type: 'error'
           });
-          //console.log(e)
+          console.log(e)
       });
 
       // Create Plugin Folder and its variants
@@ -1221,7 +1221,7 @@ export default {
             //console.log(variantName + ', Partial Variant Created!');
           })
           .catch((e) => {
-              //console.log(e)
+              console.log(e)
           });
 
         }
@@ -1233,7 +1233,7 @@ export default {
 
       })
       .catch((e)=>{
-        //console.log("Error"+e)
+        console.log("Error"+e)
       });
 
       this.addPluginLoading = false;
@@ -1261,7 +1261,7 @@ export default {
                   message: 'Failed! Please try again.',
                   type: 'error'
               });
-              //console.log(e)
+              console.log(e)
           });
 
           } else {
@@ -1275,7 +1275,8 @@ export default {
 
     recursivecall(name, partials, defaultListtemp,configData) {
       //console.log('inside recursivecall')
-      for (let i = 0; i < configData[1].pageSettings.length; i++) {
+      try{
+        for (let i = 0; i < configData[1].pageSettings.length; i++) {
         let temp = configData[1].pageSettings[i].PageName
         temp = temp.split('.')[0]
         if (name == temp) {
@@ -1308,6 +1309,11 @@ export default {
           }
         }
       }
+      }
+      catch(err){
+        console.log(err)
+      }
+      
     },
 
     async refreshPlugins() {
@@ -1448,7 +1454,7 @@ export default {
               type: 'error'
           });
           this.refreshPluginsLoading = false;
-          //console.log(e)
+          console.log(e)
       });
 
       var getFromBetween = {
@@ -1494,7 +1500,7 @@ export default {
 
       // this.configData = await axios.get( config.baseURL + '/flows-dir-listing/0?path=' + url + '/assets/config.json');
 
-      var configData = await axios.get(config.baseURL + '/project-configuration?userEmail=' + Cookies.get('email') + '&websiteName=' + websiteName );
+      var configData = await axios.get(config.baseURL + '/project-configuration?userEmail=' + Cookies.get('email') + '&websiteName=' + websiteName ).catch((e)=>{console.log(e)});
 
       configData=JSON.parse(JSON.stringify(configData.data.data[0].configData))
       //// console.log('new config file:',configData);
@@ -1506,7 +1512,7 @@ export default {
            for(let p=0;p<configData[2].layoutOptions[0][Object.keys(configData[2].layoutOptions[0])[q]].length;p++){
             var namepartial=configData[2].layoutOptions[0][Object.keys(configData[2].layoutOptions[0])[q]][p].value
             //// console.log('name:',namepartial)
-             var contentpage=await axios.get(config.baseURL + '/flows-dir-listing/0?path=/var/www/html/websites/' + Cookies.get('userDetailId') + '/' + this.repoName+'/Partials/'+Object.keys(configData[2].layoutOptions[0])[q]+'/'+namepartial+'.partial');
+             var contentpage=await axios.get(config.baseURL + '/flows-dir-listing/0?path=/var/www/html/websites/' + Cookies.get('userDetailId') + '/' + this.repoName+'/Partials/'+Object.keys(configData[2].layoutOptions[0])[q]+'/'+namepartial+'.partial').catch((e)=>{console.log(e)});
              //// console.log('content of partial:',contentpage.data)
              //// console.log("inside !=pages directory")
                 var content=''
@@ -1629,7 +1635,7 @@ export default {
         //// console.log('namepage:',namepage)
         //// console.log('this.repoName:',this.repoName)
         //console.log(config.baseURL + '/flows-dir-listing?website=' + this.repoName+'/Pages/'+namepage)
-        var contentpage=await axios.get(config.baseURL + '/flows-dir-listing/0?path=/var/www/html/websites/' + this.userDetailId + '/' + this.repoName + '/Pages/'+namepage);
+        var contentpage=await axios.get(config.baseURL + '/flows-dir-listing/0?path=/var/www/html/websites/' + this.userDetailId + '/' + this.repoName + '/Pages/'+namepage).catch((e)=>{console.log(e)});
         //// console.log('contentpage:',contentpage)
 
         //// console.log("inside ==pages directory")
@@ -1736,70 +1742,70 @@ export default {
           this.saveConfigFile(this.repoName,configData);
         }
         // this.configData=JSON.parse(JSON.stringify(this.configData.data.data[0].configData))
-        var vueresult = (getFromBetween.get(content1, ":pathname=", ">"));
-        if (vueresult.length > 0) {
-          for (let i = 0; i < vueresult.length; i++) {
-            var tempvue = vueresult[i]
-            var tempvue = tempvue.trim().split(' ')
-            if (tempvue[2] != undefined) {
-              var vuetemp = {
-                partialsName: tempvue[0].replace(/"/g, ''),
-                value: tempvue[1].split('=')[1].replace(/"/g, '') + '.vue',
-                options: tempvue[2].split('=')[1].replace(/"/g, '')
-              }
-            } else {
-              var vuetemp = {
-                partialsName: tempvue[0].replace(/"/g, ''),
-                value: tempvue[1].split('=')[1].replace(/"/g, '') + '.vue'
-              }
-            }
+        // var vueresult = (getFromBetween.get(content1, ":pathname=", ">"));
+        // if (vueresult.length > 0) {
+        //   for (let i = 0; i < vueresult.length; i++) {
+        //     var tempvue = vueresult[i]
+        //     var tempvue = tempvue.trim().split(' ')
+        //     if (tempvue[2] != undefined) {
+        //       var vuetemp = {
+        //         partialsName: tempvue[0].replace(/"/g, ''),
+        //         value: tempvue[1].split('=')[1].replace(/"/g, '') + '.vue',
+        //         options: tempvue[2].split('=')[1].replace(/"/g, '')
+        //       }
+        //     } else {
+        //       var vuetemp = {
+        //         partialsName: tempvue[0].replace(/"/g, ''),
+        //         value: tempvue[1].split('=')[1].replace(/"/g, '') + '.vue'
+        //       }
+        //     }
 
-            for (let i = 0; i < configData[1].pageSettings.length; i++) {
-              let temp = configData[1].pageSettings[i].PageName
-              temp = temp.split('.')[0]
-              if (name == temp) {
-                if (configData[1].pageSettings[i].VueComponents != undefined) {
-                  let checkvue = false
-                  for (let j = 0; j < configData[1].pageSettings[i].VueComponents.length; j++) {
-                    if (configData[1].pageSettings[i].VueComponents[j].partialsName == tempvue[0].replace(/"/g, '')) {
-                      if (configData[1].pageSettings[i].VueComponents[j].value.split('.')[0] == tempvue[1].split('=')[1].replace(/"/g, '')) {
-                        checkvue = true;
-                        if (configData[1].pageSettings[i].VueComponents[j].options != '') {
-                          if (tempvue[2] != undefined) {
+        //     for (let i = 0; i < configData[1].pageSettings.length; i++) {
+        //       let temp = configData[1].pageSettings[i].PageName
+        //       temp = temp.split('.')[0]
+        //       if (name == temp) {
+        //         if (configData[1].pageSettings[i].VueComponents != undefined) {
+        //           let checkvue = false
+        //           for (let j = 0; j < configData[1].pageSettings[i].VueComponents.length; j++) {
+        //             if (configData[1].pageSettings[i].VueComponents[j].partialsName == tempvue[0].replace(/"/g, '')) {
+        //               if (configData[1].pageSettings[i].VueComponents[j].value.split('.')[0] == tempvue[1].split('=')[1].replace(/"/g, '')) {
+        //                 checkvue = true;
+        //                 if (configData[1].pageSettings[i].VueComponents[j].options != '') {
+        //                   if (tempvue[2] != undefined) {
 
-                            configData[1].pageSettings[i].VueComponents[j].options = tempvue[2].split('=')[1].replace(/"/g, '')
-                          } else {
-                            configData[1].pageSettings[i].VueComponents[j].options = ''
-                          }
-                        } else {
-                          if (tempvue[2] != undefined) {
+        //                     configData[1].pageSettings[i].VueComponents[j].options = tempvue[2].split('=')[1].replace(/"/g, '')
+        //                   } else {
+        //                     configData[1].pageSettings[i].VueComponents[j].options = ''
+        //                   }
+        //                 } else {
+        //                   if (tempvue[2] != undefined) {
 
-                            configData[1].pageSettings[i].VueComponents[j]['options'] = ''
-                            configData[1].pageSettings[i].VueComponents[j].options = tempvue[2].split('=')[1].replace(/"/g, '')
-                          } else {
+        //                     configData[1].pageSettings[i].VueComponents[j]['options'] = ''
+        //                     configData[1].pageSettings[i].VueComponents[j].options = tempvue[2].split('=')[1].replace(/"/g, '')
+        //                   } else {
 
-                          }
-                        }
-                      } else {
-                        //console.log("value not matched")
+        //                   }
+        //                 }
+        //               } else {
+        //                 //console.log("value not matched")
 
-                      }
+        //               }
 
-                    }
-                  }
-                  if (checkvue != true) {
+        //             }
+        //           }
+        //           if (checkvue != true) {
 
-                    configData[1].pageSettings[i].VueComponents.push(vuetemp)
-                  }
-                } else {
-                  configData[1].pageSettings[i]['VueComponents'] = []
-                  configData[1].pageSettings[i].VueComponents.push(vuetemp)
-                }
-              }
-            }
-          }
-          this.saveConfigFile(this.repoName,configData);
-        }
+        //             configData[1].pageSettings[i].VueComponents.push(vuetemp)
+        //           }
+        //         } else {
+        //           configData[1].pageSettings[i]['VueComponents'] = []
+        //           configData[1].pageSettings[i].VueComponents.push(vuetemp)
+        //         }
+        //       }
+        //     }
+        //   }
+        //   this.saveConfigFile(this.repoName,configData);
+        // }
 
           this.saveConfigFile(this.repoName,configData);
         // }
@@ -1829,11 +1835,11 @@ export default {
             message: 'Failed! Please try again.',
             type: 'error'
           });
-          //console.log(e)
+          console.log(e)
         })
 
       }).catch((err) => {
-        //console.log('Some error occured.', err);
+        console.log( err);
       });
     },
 
@@ -1887,8 +1893,8 @@ export default {
           type: 'success',
           message: 'Delete completed'
         });
-      }).catch(() => {
-        
+      }).catch((err) => {
+        console.log(err)
       });
     },
 
@@ -1927,7 +1933,7 @@ export default {
         //console.log('Brand Logo Uploaded: ', res.data);
       })
       .catch((e) => { 
-        //console.log('Some error occured. Here is full log: ', e)
+        console.log('error occured. Here is full log: ', e)
       });
     },
 
@@ -1985,7 +1991,7 @@ export default {
                 message: 'Failed! Please try again.',
                 type: 'error'
             });
-            //console.log(e)
+            console.log(e)
         });
 
       } else {
@@ -2009,7 +2015,7 @@ export default {
       }).then(response => {
         this.saveProjectSettings();
       }).catch(error => {
-        //console.log("Some error occured: ", error);
+        console.log(error);
       })
     },
 
@@ -2035,7 +2041,7 @@ export default {
           this.init();
         }
       }).catch(error => {
-        //console.log("Some error occured: ", error);
+        console.log( error);
       }) 
     },
 
@@ -2050,7 +2056,7 @@ export default {
       await this.commitProject();
 
       var folderUrl = this.$store.state.fileUrl.replace(/\\/g, "\/");
-      var responseConfig = await axios.get(config.baseURL + '/project-configuration?userEmail=' + Cookies.get('email') + '&websiteName=' + this.repoName);
+      var responseConfig = await axios.get(config.baseURL + '/project-configuration?userEmail=' + Cookies.get('email') + '&websiteName=' + this.repoName).catch((e)=>{console.log(e)});
       var rawConfigs = responseConfig.data.data[0].configData;
       var partialstotal = []
       var externalJs = rawConfigs[1].projectSettings[1].ProjectExternalJs;
@@ -2165,7 +2171,7 @@ export default {
           }
 
         var partials = ''
-        let responseConfigLoop = await axios.get(config.baseURL + '/project-configuration?userEmail=' + Cookies.get('email') + '&websiteName=' + this.repoName);
+        let responseConfigLoop = await axios.get(config.baseURL + '/project-configuration?userEmail=' + Cookies.get('email') + '&websiteName=' + this.repoName).catch((e)=>{console.log(e)});
 
         var rawSettings = responseConfigLoop.data.data[0].configData;
         var nameF = rawSettings[1].pageSettings[i].PageName.split('.')[0]
@@ -2277,11 +2283,11 @@ export default {
                     //console.log("called webpack_file api successfully:")
                   })
                   .catch((e) => {
-                    //console.log(e)
+                    console.log(e)
                   })
               })
               .catch((e) => {
-                //console.log(e)
+                console.log(e)
               })
 
           }
@@ -2293,12 +2299,12 @@ export default {
               type: 'file'
             })
             .catch((e) => {
-              //console.log("error while blank file creation")
+              console.log("error while blank file creation")
             })
         }
         layoutdata = await axios.get(config.baseURL + '/flows-dir-listing/0?path=' + folderUrl + '/Layout/' + Layout + '.layout');
         var responseMetal = ''
-        let contentpartials = await axios.get(config.baseURL + '/flows-dir-listing/0?path=' + folderUrl + '/Pages/' + nameF + '.html');
+        let contentpartials = await axios.get(config.baseURL + '/flows-dir-listing/0?path=' + folderUrl + '/Pages/' + nameF + '.html').catch((e)=>{console.log(e)});
         contentpartials = contentpartials.data
         var backlayoutdata = JSON.parse(JSON.stringify(layoutdata));
         let newFolderName = folderUrl + '/temp';
@@ -2307,7 +2313,7 @@ export default {
             type: 'folder'
           }).then(async (res) => {
             for (let p = 0; p < back_partials.length; p++) {
-              let responsepartials = await axios.get(config.baseURL + '/flows-dir-listing/0?path=' + folderUrl + '/Partials/' + Object.keys(back_partials[p]) + '/' + back_partials[p][Object.keys(back_partials[p])] + '.partial');
+              let responsepartials = await axios.get(config.baseURL + '/flows-dir-listing/0?path=' + folderUrl + '/Partials/' + Object.keys(back_partials[p]) + '/' + back_partials[p][Object.keys(back_partials[p])] + '.partial').catch((e)=>{console.log(e)});
               responsepartials = responsepartials.data
               let result = (getFromBetween.get(responsepartials, "{{>", "}}"));
               var DefaultParams = [];
@@ -2359,7 +2365,7 @@ export default {
                 text: responsepartials,
                 type: 'file'
               }).catch((e) => {
-                //console.log(e)
+                console.log(e)
               })
             }
             let result = (getFromBetween.get(layoutdata.data, "{{>", "}}"));
@@ -2429,7 +2435,7 @@ export default {
 
           })
           .catch((e) => {
-            //console.log(e)
+            console.log(e)
           })
 
         responseMetal = "var Metalsmith=require('" + config.metalpath + "metalsmith');\nvar markdown=require('" + config.metalpath + "metalsmith-markdown');\nvar layouts=require('" + config.metalpath + "metalsmith-layouts');\nvar permalinks=require('" + config.metalpath + "metalsmith-permalinks');\nvar inPlace = require('" + config.metalpath + "metalsmith-in-place')\nvar fs=require('" + config.metalpath + "file-system');\nvar Handlebars=require('" + config.metalpath + "handlebars');\n Metalsmith(__dirname)\n.metadata({\ntitle: \"Demo Title\",\ndescription: \"Some Description\",\ngenerator: \"Metalsmith\",\nurl: \"http://www.metalsmith.io/\"})\n.source('')\n.destination('" + folderUrl + "/public')\n.clean(false)\n.use(markdown())\n.use(inPlace(true))\n.use(layouts({engine:'handlebars',directory:'" + folderUrl + "///Layout'}))\n.build(function(err,files)\n{if(err){\nconsole.log(err)\n}});"
@@ -2566,12 +2572,12 @@ export default {
                             await axios.delete(config.baseURL + '/flows-dir-listing/0?filename=' + folderUrl + '/Preview')
                               .then(async (res) => {
                                 await axios.delete(config.baseURL + '/flows-dir-listing/0?filename=' + folderUrl + '/temp').catch((e) => {
-                                  //console.log(e)
+                                  console.log(e)
                                 })
                                 await axios.delete(config.baseURL + '/flows-dir-listing/0?filename=' + folderUrl + '/Layout/' + Layout + '_temp.layout').then((res) => {
-                                  //// console.log('deleted extra layout file:', res)
+                                  // console.log('deleted extra layout file:', res)
                                 }).catch((e) => {
-                                  //console.log(e)
+                                  console.log(e)
                                 })
                                 if (vuepartials != undefined && vuepartials.length > 0) {
                                   for (let x = 0; x < vuepartials.length; x++) {
@@ -2580,7 +2586,7 @@ export default {
                                         //console.log(res)
                                       })
                                       .catch((e) => {
-                                        //console.log(e)
+                                        console.log(e)
                                       })
                                   }
                                 }
@@ -2588,7 +2594,7 @@ export default {
                                 if (Layout == 'Blank') {
                                   await axios.delete(config.baseURL + '/flows-dir-listing/0?filename=' + folderUrl + '/Layout/Blank.layout')
                                     .catch((e) => {
-                                      //console.log("error while deleting blank.layout file")
+                                      console.log("error while deleting blank.layout file")
                                     })
                                 }
 
@@ -2596,7 +2602,7 @@ export default {
 
                               })
                               .catch((e) => {
-                                //console.log(e)
+                                console.log(e)
                               })
                           })
 
@@ -2611,11 +2617,15 @@ export default {
                           type: 'file'
                         })
                         axios.delete(config.baseURL + '/flows-dir-listing/0?filename=' + folderUrl + '/temp').catch((e) => {
-                          //console.log(e)
+                          console.log(e)
                         })
-                        axios.delete(config.baseURL + '/flows-dir-listing/0?filename=' + folderUrl + '/Preview')
-                        //console.log(e)
-                        axios.delete(config.baseURL + '/flows-dir-listing/0?filename=' + folderUrl + '/Layout/' + Layout + '_temp.layout')
+                        axios.delete(config.baseURL + '/flows-dir-listing/0?filename=' + folderUrl + '/Preview').catch((e) => {
+                          console.log(e)
+                        })
+                        
+                        axios.delete(config.baseURL + '/flows-dir-listing/0?filename=' + folderUrl + '/Layout/' + Layout + '_temp.layout').catch((e) => {
+                          console.log(e)
+                        })
                       })
                   })
                   .catch((e) => {
@@ -2626,12 +2636,16 @@ export default {
                       text: responseMetal,
                       type: 'file'
                     })
-                    axios.delete(config.baseURL + '/flows-dir-listing/0?filename=' + folderUrl + '/Layout/' + Layout + '_temp.layout')
-                    axios.delete(config.baseURL + '/flows-dir-listing/0?filename=' + folderUrl + '/temp').catch((e) => {
-                      //console.log(e)
-                    })
-                    axios.delete(config.baseURL + '/flows-dir-listing/0?filename=' + folderUrl + '/Preview')
-                    //console.log(e)
+                   axios.delete(config.baseURL + '/flows-dir-listing/0?filename=' + folderUrl + '/temp').catch((e) => {
+                          console.log(e)
+                        })
+                        axios.delete(config.baseURL + '/flows-dir-listing/0?filename=' + folderUrl + '/Preview').catch((e) => {
+                          console.log(e)
+                        })
+                        
+                        axios.delete(config.baseURL + '/flows-dir-listing/0?filename=' + folderUrl + '/Layout/' + Layout + '_temp.layout').catch((e) => {
+                          console.log(e)
+                        })
                   })
 
               })
@@ -2644,11 +2658,16 @@ export default {
                   text: responseMetal,
                   type: 'file'
                 })
-                axios.delete(config.baseURL + '/flows-dir-listing/0?filename=' + folderUrl + '/Layout/' + Layout + '_temp.layout')
                 axios.delete(config.baseURL + '/flows-dir-listing/0?filename=' + folderUrl + '/temp').catch((e) => {
-                  //console.log(e)
-                })
-                axios.delete(config.baseURL + '/flows-dir-listing/0?filename=' + folderUrl + '/Preview')
+                          console.log(e)
+                        })
+                        axios.delete(config.baseURL + '/flows-dir-listing/0?filename=' + folderUrl + '/Preview').catch((e) => {
+                          console.log(e)
+                        })
+                        
+                        axios.delete(config.baseURL + '/flows-dir-listing/0?filename=' + folderUrl + '/Layout/' + Layout + '_temp.layout').catch((e) => {
+                          console.log(e)
+                        })
               })
 
           })
@@ -2661,9 +2680,9 @@ export default {
               text: responseMetal,
               type: 'file'
             })
-            axios.delete(config.baseURL + '/flows-dir-listing/0?filename=' + folderUrl + '/Layout/' + Layout + '_temp.layout')
+            axios.delete(config.baseURL + '/flows-dir-listing/0?filename=' + folderUrl + '/Layout/' + Layout + '_temp.layout').catch((e)=>{console.log(e)})
             axios.delete(config.baseURL + '/flows-dir-listing/0?filename=' + folderUrl + '/temp').catch((e) => {
-              //console.log(e)
+              console.log(e)
             })
 
           })
@@ -2717,7 +2736,7 @@ export default {
             message: 'Failed! Please try again.',
             type: 'error'
           });
-          //console.log(e)
+          console.log(e)
         })
 
       } else {
@@ -2759,7 +2778,7 @@ export default {
 
     async init () {
 
-      var gateways= await axios.get('http://api.flowzcluster.tk/payment/availablegateway');
+      var gateways= await axios.get('http://api.flowzcluster.tk/payment/availablegateway').catch((e)=>{console.log(e)});
       this.Allgateway = gateways.data.gateways;
 
       this.folderUrl = this.$store.state.fileUrl.replace(/\\/g, "\/");
@@ -2774,7 +2793,7 @@ export default {
       //console.log('website name:', websiteName);
       // this.configData = await axios.get( config.baseURL + '/flows-dir-listing/0?path=' + url + '/assets/config.json');
 
-      this.configData = await axios.get(config.baseURL + '/project-configuration?userEmail=' + Cookies.get('email') + '&websiteName=' + websiteName );
+      this.configData = await axios.get(config.baseURL + '/project-configuration?userEmail=' + Cookies.get('email') + '&websiteName=' + websiteName ).catch((e)=>{console.log(e)});
 
       if(this.configData.status == 200 || this.configData.status == 204){
 
@@ -2821,7 +2840,7 @@ export default {
           }).then(response => {
             $('[name = ' + _imageIndex + ']').attr('src', response.data);
           }).catch(error => {
-            //console.log("Some error occured while fetching image: ", error);
+            console.log( error);
           });
 
         }
@@ -2839,7 +2858,7 @@ export default {
           });
         }
       }).catch(error => {
-        //console.log("Some error occured: ", error);
+        console.log( error);
       });
       
 

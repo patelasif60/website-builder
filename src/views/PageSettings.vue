@@ -613,7 +613,7 @@ export default {
                 message: 'Failed! Please try again.',
                 type: 'error'
               });
-              //console.log(e)
+              console.log(e)
             });
 
         } else {
